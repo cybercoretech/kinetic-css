@@ -23,7 +23,7 @@ test("root package exports existing CSS files", async () => {
 
 test("JavaScript package exports only its runtime entry point", async () => {
   const pkg = await readJson("packages/js/package.json");
-  assert.equal(pkg.name, "@kinetic/js");
+  assert.equal(pkg.name, "@cybercoretech/js");
   assert.equal(pkg.main, "./src/index.js");
   assert.deepEqual(pkg.exports, { ".": "./src/index.js" });
   assert.deepEqual(pkg.files, ["src/index.js"]);
@@ -70,7 +70,7 @@ test("DialogController mounts, opens, closes, and destroys", async () => {
 
 test("TypeScript package exposes its declaration file", async () => {
   const pkg = await readJson("packages/ts/package.json");
-  assert.equal(pkg.name, "@kinetic/ts");
+  assert.equal(pkg.name, "@cybercoretech/ts");
   assert.equal(pkg.types, "src/index.d.ts");
 
   const declaration = await readFile(

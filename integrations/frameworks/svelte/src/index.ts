@@ -1,7 +1,7 @@
 // @kinetic/svelte - Svelte stores and actions for Kinetic CSS
 import { onDestroy, onMount } from 'svelte';
 import { KineticCore, KineticConfig } from '@kinetic/core';
-import { DialogController } from '@kinetic/js';
+import { DialogController } from '@cybercoretech/js';
 
 export function createKinetic(config?: KineticConfig) {
   const core = new KineticCore(config);

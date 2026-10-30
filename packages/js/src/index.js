@@ -1,4 +1,4 @@
-// @kinetic/js - JavaScript runtime controllers for Kinetic CSS
+// @cybercoretech/js - JavaScript runtime controllers for Kinetic CSS
 
 export class DialogController {
   constructor(selector, core = undefined) {
