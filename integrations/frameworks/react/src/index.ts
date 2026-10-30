@@ -1,7 +1,7 @@
 // @kinetic/react - React bindings using KAS controllers
 import React, { useEffect, useRef } from 'react';
-import { KineticCore, KineticConfig } from '@kinetic-css/core';
-import { DialogController } from '@kinetic-css/javascript';
+import { KineticCore, KineticConfig } from '@kinetic/core';
+import { DialogController } from '@kinetic/js';
 
 export function useKinetic(config?: KineticConfig) {
   const coreRef = useRef<KineticCore | null>(null);

@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/lit",
+  "version": "0.4.0",
+  "description": "Lit web components and directives for Kinetic CSS",
+  "main": "src/index.ts",
+  "license": "MIT"
+}

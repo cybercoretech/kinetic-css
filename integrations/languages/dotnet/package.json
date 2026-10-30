@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/dotnet",
+  "version": "0.4.0",
+  "description": "ASP.NET Razor tag helpers and view components for Kinetic CSS",
+  "main": "KineticTagHelpers.cs",
+  "license": "MIT"
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@kinetic-css/core",
+  "name": "@kinetic/core",
   "version": "0.3.0",
   "description": "Kinetic API Standard (KAS) Reference Core",
   "main": "src/index.ts",

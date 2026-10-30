@@ -1,0 +1,19 @@
+{
+  "name": "@kinetic/states",
+  "version": "0.2.0",
+  "description": "Standardized component state system (loading, disabled, selected, invalid, focused, interactive) for Kinetic CSS",
+  "main": "css/kinetic-states.css",
+  "style": "css/kinetic-states.css",
+  "files": [
+    "css",
+    "src"
+  ],
+  "keywords": [
+    "kinetic-css",
+    "states",
+    "loading",
+    "disabled",
+    "ui"
+  ],
+  "license": "MIT"
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@kinetic/accessibility",
+  "name": "@kinetic/a11y",
   "version": "0.3.0",
   "description": "Accessibility utilities, focus management, and screen reader announcements for Kinetic CSS",
   "main": "src/index.ts",

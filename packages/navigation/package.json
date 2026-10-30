@@ -1,0 +1,19 @@
+{
+  "name": "@kinetic/navigation",
+  "version": "0.2.0",
+  "description": "Advanced navigation components including menus, mega menus, and breadcrumbs for Kinetic CSS",
+  "main": "css/kinetic-navigation.css",
+  "style": "css/kinetic-navigation.css",
+  "files": [
+    "css",
+    "src"
+  ],
+  "keywords": [
+    "kinetic-css",
+    "navigation",
+    "menus",
+    "mega-menu",
+    "breadcrumbs"
+  ],
+  "license": "MIT"
+}

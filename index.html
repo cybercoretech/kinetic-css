@@ -1,223 +1,549 @@
 <!doctype html>
-<html lang="en" data-k-density="comfortable">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#080d15">
-  <meta name="description" content="Kinetic CSS — fluid-first, container-aware responsive CSS framework. No JavaScript, no compiler, no build step.">
-  <title>Kinetic CSS — fluid by nature · v0.2.0</title>
-  <link rel="icon" type="image/svg+xml" href="assets/icons/kinetic-mark.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-  <link rel="manifest" href="assets/site.webmanifest">
+  <title>Kinetic CSS — fluid by nature</title>
+  <meta name="description" content="Fluid-first, container-aware responsive CSS framework. No JavaScript, no compiler, no build step.">
+  <meta name="theme-color" content="#05070b">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://cybercoretech.github.io/kinetic-css/">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Kinetic CSS — fluid by nature">
   <meta property="og:description" content="Fluid-first, container-aware responsive CSS framework. No JavaScript, no compiler, no build step.">
-  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cybercoretech.github.io/kinetic-css/">
   <meta property="og:image" content="https://cybercoretech.github.io/kinetic-css/assets/og/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Kinetic CSS — fluid by nature">
-  <meta name="twitter:description" content="Fluid-first, container-aware responsive CSS framework.">
-  <meta name="twitter:image" content="https://cybercoretech.github.io/kinetic-css/assets/og/og-image.png">
+  <link rel="icon" href="assets/icons/kinetic-mark.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
   <link rel="stylesheet" href="css/kinetic.css">
   <link rel="stylesheet" href="css/kinetic-theme.css">
   <style>
-    .hero { padding-block: clamp(4rem, 12vw, 9rem); }
-    .hero__mark { font-size: clamp(2.5rem, 12vw, 7rem); font-weight: 850; letter-spacing: -.05em; line-height: .9; font-family: 'Montserrat', sans-serif; }
+    :root {
+      --bg: #05070b;
+      --panel: #0b1017;
+      --panel-2: #0f1620;
+      --line: #1a2431;
+      --line-hi: #283647;
+      --fg: #d7e0e9;
+      --white: #f2f6fa;
+      --muted: #7d8a99;
+      --dim: #556273;
+      --cyan: #2ee6f6;
+      --pink: #ff2e97;
+      --acid: #b6ff3b;
+      --orange: #ffb347;
+      --purple: #9b6bff;
+      --green: #6ee7a8;
+      --radius: 10px;
+      --max: 1148px;
+      --gutter: 16px;
+      --mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+    html { scrollbar-color: #2b3b4f var(--bg); scrollbar-width: thin; }
+    * { scrollbar-color: #2b3b4f transparent; scrollbar-width: thin; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(46,230,246,.55), rgba(155,107,255,.55) 50%, rgba(255,46,151,.55)); border-radius: 10px; border: 3px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--cyan), var(--purple) 50%, var(--pink)); }
+    ::-webkit-scrollbar-corner { background: var(--bg); }
+
+    body {
+      margin: 0;
+      color: var(--fg);
+      font: 400 14px/1.65 var(--mono);
+      font-feature-settings: "calt" 1, "liga" 1;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      background: var(--bg);
+    }
+
+    a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--white); }
+    code, kbd, pre { font-family: var(--mono); }
+    code { font-size: .92em; color: var(--white); background: rgba(46,230,246,.08); border: 1px solid rgba(46,230,246,.16); padding: .05em .35em; border-radius: 4px; }
+    kbd { font-size: .85em; padding: .05em .4em; border: 1px solid var(--line-hi); border-bottom-width: 2px; border-radius: 4px; background: var(--panel-2); color: var(--white); }
+    img { max-width: 100%; height: auto; display: block; }
+    :focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 4px; }
+    .skip { position: absolute; left: -999px; top: 8px; background: var(--cyan); color: #000; padding: 6px 10px; border-radius: 6px; z-index: 100; }
+    .skip:focus { left: 8px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .comment { color: var(--dim); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: .5em; justify-content: center;
+      font: 500 13px/1 var(--mono); padding: 11px 15px; border-radius: 7px; text-decoration: none; cursor: pointer;
+      border: 1px solid transparent; transition: transform .15s, box-shadow .2s, background .2s, border-color .2s, color .2s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { color: #031015; background: var(--cyan); box-shadow: 0 0 0 1px rgba(46,230,246,.5), 0 8px 26px -10px rgba(46,230,246,.8); }
+    .btn-primary:hover { color: #031015; box-shadow: 0 0 0 1px var(--cyan), 0 10px 32px -8px rgba(46,230,246,1); }
+    .btn-ghost { color: var(--fg); background: rgba(11,16,23,.7); border-color: var(--line-hi); }
+    .btn-ghost:hover { color: var(--white); border-color: var(--pink); box-shadow: 0 0 20px -8px rgba(255,46,151,.8); }
+    .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 6px; }
+
+    .bar {
+      position: sticky; top: 0; z-index: 50; height: 52px;
+      display: flex; align-items: center; gap: 16px; padding: 0 var(--gutter);
+      background: rgba(5,7,11,.82); backdrop-filter: blur(12px) saturate(140%);
+      border-bottom: 1px solid var(--line);
+    }
+    .wordmark { display: inline-flex; align-items: center; font: 700 15px/1 var(--mono); letter-spacing: .14em; text-decoration: none; }
+    .wm-k { color: var(--cyan); } .wm-i { color: var(--pink); } .wm-n { color: var(--acid); } .wm-e { color: var(--purple); } .wm-t { color: var(--orange); } .wm-c { color: var(--green); } .wm-rest { color: var(--white); }
+    .bar-path { color: var(--dim); font-size: 12px; }
+    .bar-path b { color: var(--green); font-weight: 500; }
+    .bar-path b::before { content: "⎇ "; }
+    .bar-gh { font-size: 12px; color: var(--fg); text-decoration: none; padding: 6px 10px; border: 1px solid var(--line-hi); border-radius: 6px; }
+    .bar-gh:hover { color: var(--white); border-color: var(--cyan); }
+    .theme-select {
+      font-size: 12px; color: var(--fg); background: var(--panel-2); border: 1px solid var(--line-hi); border-radius: 6px;
+      padding: 6px 12px; cursor: pointer; font-family: var(--mono);
+    }
+    .theme-select:hover { border-color: var(--cyan); color: var(--white); }
+    .theme-select option { background: var(--panel-2); color: var(--fg); }
+    .bar-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+    .burger { width: 38px; height: 34px; display: grid; place-content: center; gap: 4px; background: transparent; border: 1px solid var(--line-hi); border-radius: 6px; cursor: pointer; }
+    .burger span { display: block; width: 16px; height: 2px; background: var(--fg); border-radius: 2px; transition: transform .2s, opacity .2s; }
+    .burger:hover { border-color: var(--cyan); }
+    .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    @media (max-width: 640px) { .bar-path { display: none; } }
+
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 70; width: min(340px, 88vw);
+      display: flex; flex-direction: column; background: rgba(8,12,18,.97); border-left: 1px solid var(--line-hi);
+      box-shadow: -30px 0 60px -20px rgba(0,0,0,.9), -1px 0 30px -12px rgba(46,230,246,.35);
+      transform: translateX(105%); transition: transform .28s cubic-bezier(.2,.8,.2,1);
+    }
+    .drawer.open { transform: none; }
+    .drawer-head { display: flex; align-items: center; justify-content: space-between; height: 52px; padding: 0 14px; border-bottom: 1px solid var(--line); }
+    .drawer-close { background: none; border: 1px solid var(--line-hi); color: var(--fg); border-radius: 6px; width: 32px; height: 30px; cursor: pointer; }
+    .drawer-body { flex: 1; overflow: auto; padding: 10px 6px; }
+    .drawer-group { margin: 6px 0 14px; }
+    .drawer-group > p { margin: 0 10px 4px; font-size: 11px; color: var(--dim); text-transform: lowercase; }
+    .drawer-group a { display: flex; gap: 10px; align-items: baseline; padding: 7px 10px; border-radius: 6px; color: var(--fg); text-decoration: none; font-size: 13px; }
+    .drawer-group a:hover, .drawer-group a[aria-current="true"] { background: rgba(46,230,246,.08); color: var(--white); }
+    .drawer-group a .ico { width: 16px; color: var(--cyan); text-align: center; }
+    .drawer-group a small { margin-left: auto; color: var(--dim); font-size: 11px; }
+    .drawer-foot { margin: 0; padding: 10px 14px; border-top: 1px solid var(--line); color: var(--dim); font-size: 11px; }
+    .scrim { position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,.45); backdrop-filter: blur(2px); }
+
+    .hero {
+      max-width: var(--max); margin: 0 auto; padding: clamp(36px, 7vw, 76px) var(--gutter) 24px;
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px 36px; align-items: start;
+    }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; font-size: 12px; color: var(--cyan); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 10px var(--acid); animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .35; } }
+    h1, h2, h3 { font-family: var(--mono); color: var(--white); margin: 0; line-height: 1.12; letter-spacing: -.02em; }
+    h1 { font-size: clamp(32px, 5vw, 54px); font-weight: 700; }
+    h1 em { font-style: normal; background: linear-gradient(90deg, var(--cyan), var(--purple) 55%, var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lede { font-size: 14.5px; color: #aebbc8; max-width: 52ch; margin: 16px 0 22px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-term { border: 1px solid var(--line-hi); border-radius: var(--radius); background: rgba(7,10,15,.92); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(0,0,0,.9), 0 0 40px -18px rgba(255,46,151,.45); }
+    .term-bar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #0a0f16; border-bottom: 1px solid var(--line); font-size: 11px; color: var(--dim); }
+    .term-bar i { width: 9px; height: 9px; border-radius: 50%; background: #263243; }
+    .term-bar i:nth-child(1) { background: #ff2e97aa; }
+    .term-bar i:nth-child(2) { background: #ffb347aa; }
+    .term-bar i:nth-child(3) { background: #2ee6f6aa; }
+    .term-bar span { margin-left: 8px; }
+    .term { margin: 0; padding: 14px 16px; font-size: 12.5px; line-height: 1.85; color: #c8d3de; white-space: pre-wrap; }
+    .term b { font-weight: 600; } .term .p { color: var(--pink); } .term .ok { color: var(--green); } .term .warn { color: var(--orange); }
+    .term s { text-decoration: none; color: var(--muted); }
+    .caret { display: inline-block; width: 8px; height: 14px; vertical-align: -2px; background: var(--cyan); animation: blink 1.06s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+
+    .section { max-width: var(--max); margin: 0 auto; padding: clamp(56px, 8vw, 92px) var(--gutter) 0; }
+    .section-head { max-width: 72ch; margin-bottom: 24px; }
+    .kicker { margin: 0 0 8px; font-size: 12px; color: var(--pink); }
+    h2 { font-size: clamp(24px, 3.2vw, 34px); font-weight: 700; }
+    .section-head p:not(.kicker) { color: #a8b5c2; margin: 12px 0 0; }
+    .section-head b { color: var(--white); font-weight: 600; }
+
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 960px) { .features { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
+    .card {
+      position: relative; text-align: left; font: inherit; color: inherit; cursor: pointer; width: 100%;
+      padding: 18px 18px 16px; border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(15,22,32,.92), rgba(11,16,23,.92)); border: 1px solid var(--line);
+      transition: border-color .25s, box-shadow .25s, transform .25s; transform-style: preserve-3d;
+    }
+    .card:hover, .card:focus-visible { border-color: rgba(46,230,246,.5); box-shadow: 0 18px 40px -24px rgba(46,230,246,.6); }
+    .card:nth-child(even):hover { border-color: rgba(255,46,151,.5); box-shadow: 0 18px 40px -24px rgba(255,46,151,.6); }
+    .card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .glyph { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 7px; font-size: 14px; font-weight: 600; color: var(--cyan); background: rgba(46,230,246,.08); border: 1px solid rgba(46,230,246,.25); }
+    .card:nth-child(even) .glyph { color: var(--pink); background: rgba(255,46,151,.08); border-color: rgba(255,46,151,.25); }
+    .card h3 { font-size: 14.5px; font-weight: 600; }
+    .card p { margin: 0; color: #9eabb9; font-size: 13px; }
+    .card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 11.5px; color: var(--dim); }
+    .card-foot .open { color: var(--cyan); }
+    .status { display: inline-flex; align-items: center; gap: 6px; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .status.partial::before { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+
+    .code { border: 1px solid var(--line-hi); border-radius: var(--radius); background: var(--panel); overflow: hidden; }
+    .code-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: #0a0f16; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+    .code pre { margin: 0; padding: 14px 16px; font-size: 12.5px; line-height: 1.75; color: #c8d3de; overflow-x: auto; }
+    .code .ln { color: var(--dim); user-select: none; margin-right: 16px; }
+
+    .theme-explorer { display: grid; grid-template-columns: 290px 1fr; border: 1px solid var(--line-hi); border-radius: var(--radius); overflow: hidden; background: rgba(8,12,18,.92); min-height: 520px; }
+    @media (max-width: 820px) { .theme-explorer { grid-template-columns: 1fr; } .tree { max-height: 300px; border-right: 0 !important; border-bottom: 1px solid var(--line); } }
+    .tree { overflow: auto; max-height: 560px; padding: 8px 0; border-right: 1px solid var(--line); font-size: 12.5px; }
+    .tree-title { padding: 4px 14px 8px; font-size: 11px; color: var(--dim); }
+    .folder > button { width: 100%; display: flex; align-items: center; gap: 8px; padding: 5px 12px; background: none; border: 0; color: var(--fg); font: inherit; cursor: pointer; text-align: left; }
+    .folder > button:hover { background: rgba(255,255,255,.03); }
+    .folder > button .chev { width: 10px; color: var(--muted); transition: transform .15s; }
+    .folder > button[aria-expanded="true"] .chev { transform: rotate(90deg); }
+    .folder > button .fico { color: var(--orange); }
+    .folder > button small { margin-left: auto; color: var(--dim); }
+    .folder ul { list-style: none; margin: 0; padding: 0; }
+    .folder ul[hidden] { display: none; }
+    .leaf { width: 100%; display: flex; align-items: center; gap: 8px; padding: 4px 12px 4px 38px; background: none; border: 0; border-left: 2px solid transparent; color: #aab6c3; font: inherit; cursor: pointer; text-align: left; }
+    .leaf:hover { background: rgba(255,255,255,.03); color: var(--white); }
+    .leaf[aria-selected="true"] { background: rgba(46,230,246,.08); border-left-color: var(--cyan); color: var(--white); }
+    .leaf .sw { width: 12px; height: 12px; border-radius: 3px; flex: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+    .leaf .ext { color: var(--dim); }
+    .preview { display: flex; flex-direction: column; min-width: 0; }
+    .pv-tabs { display: flex; align-items: end; gap: 2px; padding: 6px 8px 0; border-bottom: 1px solid; }
+    .pv-tab { padding: 6px 12px; font-size: 12px; border-radius: 6px 6px 0 0; border: 1px solid; border-bottom: 0; }
+    .pv-code { margin: 0; flex: 1; padding: 12px 0; font-size: 13px; line-height: 1.75; overflow: auto; }
+    .pv-code .row { display: flex; padding-right: 16px; }
+    .pv-code .row.cur { box-shadow: inset 2px 0 0 currentColor; }
+    .pv-code .num { width: 46px; flex: none; text-align: right; padding-right: 16px; user-select: none; }
+    .pv-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 14px; border-top: 1px solid var(--line); background: #090d13; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--muted); }
+    .chip i { width: 14px; height: 14px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.15); }
+    .pv-meta .btn { margin-left: auto; }
+    .pv-title { display: flex; justify-content: space-between; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: #090d13; font-size: 12px; color: var(--muted); }
+    .pv-title b { color: var(--white); font-weight: 600; }
+
+    .footer { margin-top: clamp(56px, 8vw, 92px); padding: 24px var(--gutter); border-top: 1px solid var(--line); max-width: var(--max); margin-left: auto; margin-right: auto; }
   </style>
 </head>
 <body>
-  <header class="k-shell k-region">
-    <nav class="k-nav" aria-label="Main navigation">
-      <strong>KINETIC<span class="k-accent">/</span></strong>
-      <div class="k-nav__links"><a href="#principles">Principles</a><a href="#components">Components</a><a href="#patterns">Patterns</a><a href="#ecosystem">Ecosystem</a><a href="README.md">Docs</a><a href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></div>
-    </nav>
-  </header>
-  <main>
-    <section class="k-shell hero k-stack">
-      <span class="k-badge k-badge--accent">Fluid-first CSS · v0.2.0</span>
-      <h1 class="hero__mark">MOVE<br>WITH SPACE.</h1>
-      <p class="k-prose k-muted">A responsive framework that adapts to the space a component actually has — not just the size of the screen. No JavaScript, no compiler, no build step. Modern CSS: cascade layers, custom properties, <code>clamp()</code>, container queries, <code>light-dark()</code>, and OKLCH colors.</p>
-      <div class="k-cluster"><a class="k-button k-button--primary" href="#components">Explore the system</a><a class="k-button k-button--outline" href="README.md">Read the docs</a><a class="k-button k-button--outline" href="starter/index.html">Starter template</a></div>
-      <img src="assets/icons/kinetic-hero.svg" alt="Kinetic CSS hero graphic" style="max-inline-size: 24rem; block-size: auto; border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow-md); margin-block-start: var(--k-space-4)">
-    </section>
-    <section id="principles" class="k-region" style="background:var(--k-surface-raised)">
-      <div class="k-shell k-stack"><h2>Responsive by context.</h2><div class="k-grid" style="--k-min:16rem">
-        <article class="k-card k-stack"><span class="k-badge">01 / FLUID</span><h3>Continuous scale</h3><p class="k-muted">Typography and spacing move smoothly between viewport sizes. No pile of arbitrary breakpoints.</p></article>
-        <article class="k-card k-stack"><span class="k-badge">02 / CONTAINER</span><h3>Local intelligence</h3><p class="k-muted">Cards and navigation can react to their own available width using CSS container queries.</p></article>
-        <article class="k-card k-stack"><span class="k-badge">03 / DENSITY</span><h3>One system, three feels</h3><p class="k-muted">Switch between compact, comfortable, and spacious without rewriting component styles.</p></article>
-      </div></div>
-    </section>
-    <section id="components" class="k-shell k-region k-stack">
-      <h2>Built-in primitives</h2>
-      <div class="k-split">
-        <article class="k-card k-card--adaptive" data-k-lift><div class="k-stack"><span class="k-badge k-badge--accent">ADAPTIVE CARD</span><h3>Same markup. Different layout.</h3></div><p class="k-muted">Resize this card's container: at 34rem it becomes a two-column composition. The page breakpoint is irrelevant.</p></article>
-        <form class="k-card k-stack" action="#" method="get"><h3>Form controls</h3><label class="k-field">Email address<input class="k-input" type="email" placeholder="you@example.com"></label><label class="k-field">Subscribe to the newsletter<input class="k-checkbox" type="checkbox" checked></label><button class="k-button k-button--primary" type="button">Get updates</button></form>
-      </div>
-      <div class="k-card k-stack">
-        <h3>Tabs — CSS only</h3>
-        <div class="k-tabs" role="tablist">
-          <input type="radio" name="k-demo-tabs" id="ktab-1" checked>
-          <label class="k-tabs__tab" for="ktab-1">One</label>
-          <div class="k-tabs__panel">Panel one: fluid spacing and type scale.</div>
-          <input type="radio" name="k-demo-tabs" id="ktab-2">
-          <label class="k-tabs__tab" for="ktab-2">Two</label>
-          <div class="k-tabs__panel">Panel two: swap without JS.</div>
-        </div>
-      </div>
-      <div class="k-grid" style="--k-min: 20rem">
-        <details class="k-accordion">
-          <summary>Framework release checklist</summary>
-          <div class="k-accordion__panel">
-            <p class="k-muted">v0.2.0 adds application patterns: dialogs, tabs, accordions, menus, tooltips. Typography and spacing adapt fluidly.</p>
-          </div>
-        </details>
-        <details class="k-menu">
-          <summary>Components</summary>
-          <div class="k-menu__panel">
-            <div class="k-menu__item"><a href="#components">Cards & buttons</a></div>
-            <div class="k-menu__item"><a href="#components">Layout</a></div>
-            <div class="k-menu__item"><a href="#principles">Principles</a></div>
-          </div>
-        </details>
-      </div>
-      <div class="k-cluster">
-        <button class="k-button k-button--outline" data-k-tooltip="Copied to clipboard">Copy</button>
-        <dialog class="k-dialog" id="k-demo-dialog">
-          <h2>Dialog</h2>
-          <p class="k-dialog__body">Native <code>&lt;dialog&gt;</code> with Kinetic surface, radius, and shadow tokens.</p>
-          <div class="k-dialog__actions"><button class="k-button k-button--primary" data-k-close>Got it</button></div>
-        </dialog>
-      </div>
-      <div class="k-alert k-alert--info" role="status">
-        <p class="k-alert__title">Heads up</p>
-        <div class="k-alert__body"><p>v0.2.0 ships application patterns alongside the fluid defaults. Override tokens to re-skin.</p></div>
-      </div>
-      <div class="k-table-wrap">
-        <table class="k-table">
-          <thead><tr><th>Status</th><th>Version</th><th>Changed</th></tr></thead>
-          <tbody>
-            <tr><td><span class="k-badge">live</span></td><td>0.2.0</td><td>2026-10-30</td></tr>
-            <tr><td><span class="k-badge">live</span></td><td>0.1.0</td><td>2026-10-30</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="k-cluster">
-        <span class="k-spinner" role="status" aria-label="loading"></span>
-        <div class="k-skeleton" style="inline-size: 12rem;"></div>
-        <div class="k-progress" style="inline-size: 10rem;"><div class="k-progress__bar" style="width: 64%;"></div></div>
-        <span class="k-avatar">K</span>
-      </div>
-    </section>
-    <section id="patterns" class="k-shell k-region k-stack">
-      <h2>Application patterns</h2>
-      <div class="k-grid" style="--k-min: 20rem">
-        <div class="k-card k-stack">
-          <h3>Tabs — CSS only</h3>
-          <div class="k-tabs" role="tablist">
-            <input type="radio" name="k-demo-tabs" id="ktab-1" checked>
-            <label class="k-tabs__tab" for="ktab-1">One</label>
-            <div class="k-tabs__panel">Panel one: fluid spacing and type scale.</div>
-            <input type="radio" name="k-demo-tabs" id="ktab-2">
-            <label class="k-tabs__tab" for="ktab-2">Two</label>
-            <div class="k-tabs__panel">Panel two: swap without JS.</div>
-          </div>
-        </div>
-        <div class="k-card k-stack">
-          <h3>Pagination</h3>
-          <div class="k-pagination k-pagination--centered">
-            <div class="k-pagination__list">
-              <a href="#" class="k-pagination__item" aria-label="Previous"><span aria-hidden="true">«</span></a>
-              <a href="#" class="k-pagination__item k-pagination__item--active">1</a>
-              <a href="#" class="k-pagination__item">2</a>
-              <a href="#" class="k-pagination__item">3</a>
-              <a href="#" class="k-pagination__item" aria-label="Next"><span aria-hidden="true">»</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="k-grid" style="--k-min: 20rem; margin-block-start: var(--k-space-4)">
-        <div class="k-card k-stack">
-          <h3>Carousel</h3>
-          <div class="k-carousel">
-            <div class="k-carousel__slide"><h3>Slide 1</h3><p class="k-muted">First slide content.</p></div>
-            <div class="k-carousel__slide"><h3>Slide 2</h3><p class="k-muted">Second slide content.</p></div>
-            <div class="k-carousel__slide"><h3>Slide 3</h3><p class="k-muted">Third slide content.</p></div>
-          </div>
-        </div>
-        <div class="k-card k-stack">
-          <h3>Toast</h3>
-          <div class="k-toast-container">
-            <div class="k-toast k-alert k-alert--success" data-state="open">Operation successful</div>
-          </div>
-        </div>
-      </div>
-      <div class="k-grid" style="--k-min: 20rem; margin-block-start: var(--k-space-4)">
-        <div class="k-card k-stack">
-          <h3>Sidebar layout</h3>
-          <div class="k-layout" style="--k-sidebar-w: 12rem">
-            <aside class="k-sidebar"><span class="k-sidebar__label">Sidebar</span></aside>
-            <main class="k-layout__main"><h3>Main content</h3><p class="k-muted">Responsive by container query.</p></main>
-          </div>
-        </div>
-        <div class="k-card k-stack">
-          <h3>Form validation</h3>
-          <form class="k-form">
-            <label class="k-field">Email<input class="k-input k-invalid" type="email" value="bad" placeholder="you@example.com"></label>
-            <span class="k-field__error">Please enter a valid email.</span>
-            <label class="k-field">Name<input class="k-input k-valid" type="text" value="Kinetic"></label>
-          </form>
-        </div>
-      </div>
-    </section>
-    <section id="ecosystem" class="k-region" style="background:var(--k-surface-raised)">
-      <div class="k-shell k-stack">
-        <h2>Three packages. One framework.</h2>
-        <p class="k-prose k-muted">Kinetic CSS core plus independently installable JavaScript and TypeScript add-on packs.</p>
-        <div class="k-grid" style="--k-min: 18rem">
-          <article class="k-card k-stack">
-            <span class="k-badge k-badge--accent">CORE</span>
-            <h3>Kinetic CSS</h3>
-            <p class="k-muted">Responsive layouts, design tokens, components, density modes, themes. Zero dependencies.</p>
-            <code class="k-muted" style="font-size: .75rem">npm install kinetic-css</code>
-          </article>
-          <article class="k-card k-stack">
-            <span class="k-badge">JS ADD-ON</span>
-            <h3>Kinetic JS</h3>
-            <p class="k-muted">Dialogs, tabs, dropdowns, toasts, theme switching, form validation, scroll utilities.</p>
-            <code class="k-muted" style="font-size: .75rem">npm install kinetic-js</code>
-          </article>
-          <article class="k-card k-stack">
-            <span class="k-badge">TS ADD-ON</span>
-            <h3>Kinetic TS</h3>
-            <p class="k-muted">Typed APIs, type-safe event handling, typed theme configuration, ESM modules, tree-shaking.</p>
-            <code class="k-muted" style="font-size: .75rem">npm install kinetic-ts</code>
-          </article>
-        </div>
-        <div class="k-cluster" style="margin-block-start: var(--k-space-4)">
-          <a class="k-button k-button--primary" href="starter/index.html">Starter template</a>
-          <a class="k-button k-button--outline" href="docs/README.md">Documentation</a>
-          <a class="k-button k-button--outline" href="README.md">README</a>
-        </div>
-      </div>
-    </section>
-    <section id="quickstart" class="k-shell k-region k-stack">
-      <h2>Get started in 30 seconds.</h2>
-      <div class="k-grid" style="--k-min: 18rem">
-        <div class="k-card k-stack">
-          <h3>CDN</h3>
-          <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css"&gt;
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic-theme.css"&gt;</code></pre>
-        </div>
-        <div class="k-card k-stack">
-          <h3>npm</h3>
-          <pre><code>npm install kinetic-css
-# optional
-npm install kinetic-js kinetic-ts
+  <a class="skip" href="#main">Skip to content</a>
 
-# or use the starter template:
-cp -r starter/ /your/project/
+  <header class="bar">
+    <a class="wordmark" href="#top" aria-label="Kinetic CSS home">
+      <span class="wm-fallback"><span class="wm-k">K</span><span class="wm-i">I</span><span class="wm-n">N</span><span class="wm-e">E</span><span class="wm-t">T</span><span class="wm-c">I</span><span class="wm-c">C</span><span class="wm-rest"> CSS</span></span>
+    </a>
+    <span class="bar-path" aria-hidden="true">~/cybercore/kinetic-css <b>main</b></span>
+    <div class="bar-right">
+      <select class="theme-select" id="theme-select" aria-label="Select theme">
+        <option value="">DEFAULT THEME</option>
+      </select>
+      <a class="bar-gh" href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span><span class="sr"> (opens in a new tab)</span></a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="drawer" id="drawer" aria-label="Site" hidden>
+    <div class="drawer-head"><span class="comment">// navigate</span><button class="drawer-close" type="button" aria-label="Close menu">✕</button></div>
+    <div class="drawer-body" id="drawer-body"></div>
+    <p class="drawer-foot"><kbd>Esc</kbd> to close</p>
+  </nav>
+  <div class="scrim" hidden></div>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span>cybercore / kinetic-css · v0.2.0</p>
+        <h1>Fluid by <em>nature.</em></h1>
+        <p class="lede">A responsive framework that adapts to the space a component actually has — not just the size of the screen. No JavaScript. No compiler. No build step. Modern CSS: cascade layers, custom properties, clamp(), container queries, light-dark(), and OKLCH colors.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#demo">▶ explore the system</a>
+          <a class="btn btn-ghost" href="#install">npm install kinetic-css</a>
+        </div>
+      </div>
+      <div class="hero-term" aria-label="Example session">
+        <div class="term-bar"><i></i><i></i><i></i><span>zsh — kinetic-css</span></div>
+        <pre class="term"><span class="tl"><b class="p">❯</b> npm install kinetic-css</span>
+<span class="tl"><b class="ok">✓</b> kinetic-css@0.2.0 installed</span>
+<span class="tl"><b class="p">❯</b> &lt;link rel="stylesheet" href="css/kinetic.css"&gt;</span>
+<span class="tl"><b class="ok">✓</b> fluid scale active</span>
+<span class="tl"><b class="ok">✓</b> container queries enabled</span>
+<span class="tl"><b class="ok">✓</b> density modes: compact · comfortable · spacious</span>
+<span class="tl"><b class="p">❯</b> <span class="caret"></span></span></pre>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-h">
+      <header class="section-head">
+        <p class="kicker">// 01 · principles</p>
+        <h2 id="features-h">Responsive by context.</h2>
+        <p>Kinetic CSS is built on three core ideas that change how responsive design works.</p>
+      </header>
+      <div class="features">
+        <button class="card" type="button">
+          <div class="card-top"><span class="glyph">01</span><h3>Fluid Scale</h3></div>
+          <p>Typography and spacing move smoothly between viewport sizes using clamp(). No pile of arbitrary breakpoints.</p>
+          <div class="card-foot"><span class="status">working</span><span class="open">details →</span></div>
+        </button>
+        <button class="card" type="button">
+          <div class="card-top"><span class="glyph">02</span><h3>Container Queries</h3></div>
+          <p>Cards and navigation react to their own available width. The same component works in a sidebar, grid, or full-width page.</p>
+          <div class="card-foot"><span class="status">working</span><span class="open">details →</span></div>
+        </button>
+        <button class="card" type="button">
+          <div class="card-top"><span class="glyph">03</span><h3>Density Modes</h3></div>
+          <p>Switch between compact, comfortable, and spacious with one attribute. No rewriting component styles.</p>
+          <div class="card-foot"><span class="status">working</span><span class="open">details →</span></div>
+        </button>
+      </div>
+    </section>
+
+    <section class="section" id="themes" aria-labelledby="themes-h">
+      <header class="section-head">
+        <p class="kicker">// 02 · cybercore themes</p>
+        <h2 id="themes-h">Tune it to your signal.</h2>
+        <p>Kinetic CSS reads the canonical Cybercore theme files: <b id="theme-total">301</b> palettes in <b id="family-total">8</b> families. Browse them like a project tree; the preview shows each theme's real colours.</p>
+      </header>
+      <div class="theme-explorer">
+        <div class="tree" id="theme-tree" role="tree" aria-label="Themes by family"></div>
+        <div class="preview" id="theme-preview" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section" id="install" aria-labelledby="install-h">
+      <header class="section-head">
+        <p class="kicker">// 03 · install</p>
+        <h2 id="install-h">Get started in 30 seconds.</h2>
+        <p>Three ways to add Kinetic CSS to your project. Choose what works for you.</p>
+      </header>
+      <div class="code">
+        <div class="code-bar"><span>npm</span><button class="btn btn-ghost btn-sm" type="button" onclick="navigator.clipboard.writeText('npm install kinetic-css')">copy</button></div>
+        <pre><span class="ln">1</span>npm install kinetic-css</pre>
+      </div>
+      <div class="code" style="margin-top: 12px;">
+        <div class="code-bar"><span>cdn</span><button class="btn btn-ghost btn-sm" type="button" onclick="navigator.clipboard.writeText('&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css&quot;&gt;')">copy</button></div>
+        <pre><span class="ln">1</span>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css"&gt;</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <cybercore-contact repo="kinetic-css">
+      <p><a href="mailto:dev@cybercoretech.net">dev@cybercoretech.net</a> · security reports: <a href="mailto:security@cybercoretech.net">security@cybercoretech.net</a> · <a href="https://github.com/cybercoretech" target="_blank" rel="noopener">GitHub</a> · <a href="https://discord.gg/vBMcK5wAx" target="_blank" rel="noopener">Discord</a></p>
+    </cybercore-contact>
+  </footer>
+
+  <script type="module" src="https://cybercoretech.github.io/kit/contact.js"></script>
+  <script type="module">
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+    const h = (tag, attrs = {}, ...kids) => {
+      const n = document.createElement(tag);
+      for (const [k, v] of Object.entries(attrs)) {
+        if (k === 'class') n.className = v;
+        else if (k === 'html') n.innerHTML = v;
+        else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+        else if (v !== false && v != null) n.setAttribute(k, v === true ? '' : v);
+      }
+      n.append(...kids.flat().filter((k) => k != null));
+      return n;
+    };
+
+    const NAV = [
+      { label: 'this page', items: [
+        { ico: '#', text: 'top', href: '#top' },
+        { ico: '01', text: 'principles', href: '#features' },
+        { ico: '02', text: 'themes', href: '#themes' },
+        { ico: '03', text: 'install', href: '#install' },
+      ] },
+      { label: 'project', items: [
+        { ico: '↗', text: 'github repository', href: 'https://github.com/cybercoretech/kinetic-css', ext: true, note: 'new tab' },
+        { ico: '↗', text: 'issues', href: 'https://github.com/cybercoretech/kinetic-css/issues', ext: true, note: 'new tab' },
+        { ico: '↗', text: 'cybercore tech', href: 'https://cybercoretech.net/', ext: true, note: 'new tab' },
+      ] },
+    ];
+
+    const drawer = $('#drawer'), scrim = $('.scrim'), burger = $('.burger');
+    $('#drawer-body').append(...NAV.map((g) => h('div', { class: 'drawer-group' }, h('p', {}, `// ${g.label}`),
+      ...g.items.map((it) => h('a', { href: it.href, ...(it.ext ? { target: '_blank', rel: 'noopener' } : {}) },
+        h('span', { class: 'ico', 'aria-hidden': 'true' }, it.ico), it.text, it.note ? h('small', {}, it.note) : null)))));
+
+    function setDrawer(open) {
+      if (open) { drawer.hidden = false; scrim.hidden = false; requestAnimationFrame(() => drawer.classList.add('open')); }
+      else { drawer.classList.remove('open'); scrim.hidden = true; setTimeout(() => { if (!drawer.classList.contains('open')) drawer.hidden = true; }, 300); }
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) $('a', drawer)?.focus(); else burger.focus({ preventScroll: true });
+    }
+    burger.addEventListener('click', () => setDrawer(burger.getAttribute('aria-expanded') !== 'true'));
+    $('.drawer-close').addEventListener('click', () => setDrawer(false));
+    scrim.addEventListener('click', () => setDrawer(false));
+    drawer.addEventListener('click', (e) => { if (e.target.closest('a[href^="#"]')) setDrawer(false); });
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('open')) setDrawer(false); });
+
+    // Theme dropdown in navbar
+    $('#theme-select').addEventListener('change', (e) => {
+      const themeId = e.target.value;
+      if (themeId) {
+        const t = themes.find((x) => x.id === themeId);
+        if (t) applyThemeToPage(t);
+      } else {
+        // Reset to default
+        const root = document.documentElement;
+        root.style.removeProperty('--bg');
+        root.style.removeProperty('--panel');
+        root.style.removeProperty('--panel-2');
+        root.style.removeProperty('--line');
+        root.style.removeProperty('--line-hi');
+        root.style.removeProperty('--fg');
+        root.style.removeProperty('--white');
+        root.style.removeProperty('--muted');
+        root.style.removeProperty('--dim');
+        root.style.removeProperty('--cyan');
+        root.style.removeProperty('--pink');
+        root.style.removeProperty('--acid');
+        root.style.removeProperty('--orange');
+        root.style.removeProperty('--purple');
+        root.style.removeProperty('--green');
+      }
+    });
+
+    // Theme explorer
+    const FAMILY_LABEL = { cyberpunk: 'cyberpunk', cyberdyne: 'cyberdyne', synthwave: 'synthwave', neosynth: 'neosynth', dystopian: 'dystopian', default: 'classics', 'omarchy-live': 'omarchy-live' };
+    const FAMILY_ORDER = ['cyberpunk', 'cyberdyne', 'synthwave', 'neosynth', 'dystopian', 'omarchy-live', 'default'];
+    let themes = [], selectedTheme = 'cyberpunk-chrome';
+    const tree = $('#theme-tree'), preview = $('#theme-preview');
+
+    async function loadThemes() {
+      try {
+        const res = await fetch('themes.json');
+        themes = await res.json();
+        $('#theme-total').textContent = themes.length;
+        $('#family-total').textContent = FAMILY_ORDER.length;
+        
+        // Populate theme dropdown
+        const select = $('#theme-select');
+        select.innerHTML = '<option value="">DEFAULT THEME</option>';
+        themes.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t.id;
+          opt.textContent = t.name;
+          select.appendChild(opt);
+        });
+        
+        renderTree();
+        selectTheme(selectedTheme);
+      } catch (e) {
+        console.error('Failed to load themes:', e);
+      }
+    }
+
+    function renderTree() {
+      const byFamily = {};
+      themes.forEach(t => {
+        if (!byFamily[t.family]) byFamily[t.family] = [];
+        byFamily[t.family].push(t);
+      });
+
+      tree.innerHTML = '';
+      FAMILY_ORDER.forEach(family => {
+        const list = byFamily[family] || [];
+        if (list.length === 0) return;
+        const folder = h('div', { class: 'folder' },
+          h('button', { type: 'button', 'aria-expanded': 'true', onclick: (e) => toggleFolder(e.currentTarget) },
+            h('span', { class: 'chev' }, '▶'),
+            h('span', { class: 'fico' }, '◆'),
+            h('span', {}, FAMILY_LABEL[family] || family),
+            h('small', {}, String(list.length))
+          ),
+          h('ul', {}, list.map(t => h('li', {},
+            h('button', { class: 'leaf', type: 'button', 'data-id': t.id, onclick: () => selectTheme(t.id, true) },
+              h('span', { class: 'sw', style: `background: linear-gradient(135deg, ${t.accents.primary}, ${t.accents.secondary})` }),
+              h('span', {}, t.name),
+              h('span', { class: 'ext' }, '.json')
+            )
+          )))
+        );
+        tree.appendChild(folder);
+      });
+    }
+
+    function toggleFolder(btn, open) {
+      const list = btn.nextElementSibling;
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(open !== undefined ? open : !isExpanded));
+      list.hidden = btn.getAttribute('aria-expanded') !== 'true';
+    }
+
+    function selectTheme(id, focus = false) {
+      selectedTheme = id;
+      const t = themes.find((x) => x.id === id);
+      if (!t) return;
+      $$('.leaf', tree).forEach((l) => l.setAttribute('aria-selected', String(l.dataset.id === id)));
+      const leaf = $(`.leaf[data-id="${CSS.escape(id)}"]`, tree);
+      const list = leaf?.closest('ul');
+      if (list?.hidden) toggleFolder(list.previousElementSibling, true);
+      if (focus) leaf?.focus();
+      renderPreview(t);
+      
+      // Apply theme to page
+      applyThemeToPage(t);
+    }
+    
+    function applyThemeToPage(theme) {
+      if (!theme) return;
+      const root = document.documentElement;
+      root.style.setProperty('--bg', theme.surfaces.window);
+      root.style.setProperty('--panel', theme.surfaces.shell);
+      root.style.setProperty('--panel-2', theme.surfaces.raised);
+      root.style.setProperty('--line', theme.surfaces.border);
+      root.style.setProperty('--line-hi', theme.surfaces.border);
+      root.style.setProperty('--fg', theme.text.primary);
+      root.style.setProperty('--white', theme.text.primary);
+      root.style.setProperty('--muted', theme.text.muted);
+      root.style.setProperty('--dim', theme.text.muted);
+      root.style.setProperty('--cyan', theme.accents.primary);
+      root.style.setProperty('--pink', theme.accents.secondary);
+      root.style.setProperty('--acid', theme.accents.success);
+      root.style.setProperty('--orange', theme.accents.warning);
+      root.style.setProperty('--purple', theme.accents.secondary);
+      root.style.setProperty('--green', theme.accents.success);
+    }
+
+    function renderPreview(t) {
+      const s = t.surfaces, tx = t.text, sx = t.syntax;
+      const color = (role) => role === 'punct' ? tx.primary : (sx[role] || tx.primary);
+      preview.style.background = s.editor;
+      preview.replaceChildren(
+        h('div', { class: 'pv-title', style: `background:${s.shell};color:${tx.muted};border-color:${s.border}` },
+          h('span', {}, h('b', { style: `color:${tx.primary}` }, t.name), `  ·  ${FAMILY_LABEL[t.family] || t.family} · ${t.appearance}`), h('span', {}, `${t.id}.json`)),
+        h('div', { class: 'pv-tabs', style: `background:${s.shell};border-color:${s.border}` },
+          h('span', { class: 'pv-tab', style: `background:${s.editor};color:${tx.primary};border-color:${s.border};box-shadow:inset 0 2px 0 ${t.accents.primary}` }, 'kinetic.css'),
+          h('span', { class: 'pv-tab', style: `color:${tx.muted};border-color:transparent` }, 'kinetic-theme.css')),
+        h('pre', { class: 'pv-code', style: `color:${tx.primary}` }, [
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '1'), h('span', {}, '<span style="color:', sx.keyword, '">.k-stack</span> { ')),
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '2'), h('span', {}, '  display: ')),
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '3'), h('span', {}, '    grid-template-rows: ')),
+          h('div', { class: 'row cur' }, h('span', { class: 'num' }, '4'), h('span', {}, '      ')),
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '5'), h('span', {}, '}')),
+        ]),
+        h('div', { class: 'pv-meta' },
+          [['primary', t.accents.primary], ['secondary', t.accents.secondary], ['success', t.accents.success]]
+            .map(([l, c]) => h('span', { class: 'chip', title: c }, h('i', { style: `background:${c}` }), `${l} ${c.toLowerCase()}`)))
+      );
+    }
+
+    loadThemes();
+  </script>
+</body>
+</html>

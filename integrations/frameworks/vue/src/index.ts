@@ -1,6 +1,6 @@
 // @kinetic/vue - Vue composables for Kinetic CSS
 import { onMounted, onUnmounted, ref } from 'vue';
-import { KineticCore, KineticConfig } from '@kinetic-css/core';
+import { KineticCore, KineticConfig } from '@kinetic/core';
 import { DialogController } from '@kinetic/js';
 
 export function useKinetic(config?: KineticConfig) {

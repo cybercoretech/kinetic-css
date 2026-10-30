@@ -1,0 +1,33 @@
+{
+  "name": "@kinetic/motion",
+  "version": "0.1.0",
+  "description": "Kinetic Motion — CSS transitions, animations, scroll reveals, and spring physics for Kinetic CSS",
+  "license": "MIT",
+  "main": "src/kinetic-motion.js",
+  "module": "src/kinetic-motion.js",
+  "types": "src/kinetic-motion.d.ts",
+  "style": "css/kinetic-motion.css",
+  "exports": {
+    ".": "./src/kinetic-motion.js",
+    "./css": "./css/kinetic-motion.css"
+  },
+  "files": [
+    "css/",
+    "dist/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "css",
+    "animation",
+    "transitions",
+    "scroll-reveal",
+    "spring-physics",
+    "motion",
+    "kinetic"
+  ],
+  "peerDependencies": {
+    "kinetic-css": ">=0.2.0"
+  }
+}

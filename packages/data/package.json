@@ -1,0 +1,19 @@
+{
+  "name": "@kinetic/data",
+  "version": "0.2.0",
+  "description": "Responsive tables, data cards, progress indicators, chart adapters, and sorting/filtering interfaces for Kinetic CSS",
+  "main": "css/kinetic-data.css",
+  "style": "css/kinetic-data.css",
+  "files": [
+    "css",
+    "src"
+  ],
+  "keywords": [
+    "kinetic-css",
+    "data",
+    "tables",
+    "charts",
+    "ui"
+  ],
+  "license": "MIT"
+}
