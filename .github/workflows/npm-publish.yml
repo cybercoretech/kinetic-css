@@ -27,17 +27,27 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Publish
-        run: npm publish --access public
+      - name: Publish packages not already on npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -e
 
-      - name: Publish Kinetic JS
-        run: cd packages/js && npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          publish_if_missing() {
+            package_dir="$1"
+            package_name="$(node -p "require('./${package_dir}/package.json').name")"
+            package_version="$(node -p "require('./${package_dir}/package.json').version")"
 
-      - name: Publish Kinetic TS
-        run: cd packages/ts && npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            echo "Checking ${package_name}@${package_version}..."
+
+            if npm view "${package_name}@${package_version}" version >/dev/null 2>&1; then
+              echo "${package_name}@${package_version} already exists; skipping."
+            else
+              echo "Publishing ${package_name}@${package_version}..."
+              (cd "${package_dir}" && npm publish --access public)
+            fi
+          }
+
+          publish_if_missing .
+          publish_if_missing packages/js
+          publish_if_missing packages/ts

@@ -9,8 +9,8 @@
     "esModuleInterop": true,
     "paths": {
       "@kinetic/core": ["./packages/core/src/index.ts"],
-      "@kinetic/js": ["./packages/js/src/index.ts"],
-      "@kinetic/ts": ["./packages/ts/src/index.ts"]
+      "@cybercoretech/js": ["./packages/js/src/index.ts"],
+      "@cybercoretech/ts": ["./packages/ts/src/index.ts"]
     }
   },
   "include": ["packages/**/*.ts", "integrations/**/*.ts"]
