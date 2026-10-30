@@ -1,1 +1,11 @@
-{"name":"@kinetic/ts","version":"0.4.0","description":"Kinetic TS definitions","main":"src/index.ts","license":"MIT"}
+{
+  "name": "@kinetic/ts",
+  "version": "0.4.0",
+  "description": "TypeScript declarations for Kinetic CSS runtime controllers",
+  "types": "src/index.d.ts",
+  "typings": "src/index.d.ts",
+  "files": [
+    "src/**/*.d.ts"
+  ],
+  "license": "MIT"
+}
