@@ -23,9 +23,9 @@
   <circle cx="80" cy="48" r="3" fill="#d18cff"/>
   <circle cx="80" cy="96" r="3" fill="#d18cff"/>
   <circle cx="62" cy="72" r="4" fill="#62e7ff"/>
-  <text x="24" y="140" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Hero Card Title</text>
-  <text x="24" y="168" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">Description text that explains the key value</text>
-  <text x="24" y="188" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">proposition of this component.</text>
+  <text x="24" y="140" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Density Modes</text>
+  <text x="24" y="168" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">Switch between compact, comfortable,</text>
+  <text x="24" y="188" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">and spacious without rewriting styles.</text>
   <rect x="24" y="208" width="120" height="36" rx="8" fill="url(#accent-gradient)"/>
-  <text x="84" y="231" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#0f172a" text-anchor="middle">Action</text>
+  <text x="84" y="231" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#0f172a" text-anchor="middle">Try it</text>
 </svg>

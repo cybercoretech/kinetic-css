@@ -13,10 +13,17 @@
     </linearGradient>
   </defs>
   <rect width="280" height="180" rx="12" fill="url(#card-gradient)" stroke="#e2e8f0" stroke-width="1"/>
-  <rect x="20" y="20" width="48" height="48" rx="12" fill="url(#accent-gradient)"/>
-  <path d="M36 44 L44 52 L52 36" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="20" y="90" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#0f172a">Feature Name</text>
-  <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">Concise description of this</text>
-  <text x="20" y="132" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">feature and its benefits.</text>
+  <rect x="20" y="20" width="48" height="48" rx="12" fill="rgba(98,231,255,0.1)"/>
+  <path d="M36 36 V52" fill="none" stroke="url(#accent-gradient)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M36 44 L52 36" fill="none" stroke="url(#accent-gradient)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M36 44 L52 52" fill="none" stroke="url(#accent-gradient)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="36" cy="36" r="2" fill="#78ff38"/>
+  <circle cx="36" cy="52" r="2" fill="#62e7ff"/>
+  <circle cx="52" cy="36" r="2" fill="#d18cff"/>
+  <circle cx="52" cy="52" r="2" fill="#d18cff"/>
+  <circle cx="42" cy="44" r="2.5" fill="#62e7ff"/>
+  <text x="20" y="90" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#0f172a">Container Queries</text>
+  <text x="20" y="115" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">Components adapt to their</text>
+  <text x="20" y="132" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">own available width.</text>
   <text x="20" y="155" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#62e7ff">Learn more →</text>
 </svg>

@@ -14,18 +14,18 @@
   </defs>
   <rect width="280" height="280" rx="16" fill="url(#card-gradient)" stroke="#e2e8f0" stroke-width="1"/>
   <rect x="0" y="0" width="280" height="4" rx="2" fill="url(#accent-gradient)"/>
-  <text x="20" y="40" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#0f172a">Pro Plan</text>
-  <text x="20" y="85" font-family="system-ui, sans-serif" font-size="42" font-weight="700" fill="#0f172a">$29</text>
-  <text x="100" y="85" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">/month</text>
+  <text x="20" y="40" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#0f172a">Kinetic Core</text>
+  <text x="20" y="85" font-family="system-ui, sans-serif" font-size="42" font-weight="700" fill="#0f172a">0KB</text>
+  <text x="100" y="85" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">JavaScript</text>
   <line x1="20" y1="110" x2="260" y2="110" stroke="#e2e8f0" stroke-width="1"/>
   <circle cx="28" cy="135" r="4" fill="#78ff38"/>
-  <text x="40" y="139" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Unlimited projects</text>
+  <text x="40" y="139" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Fluid typography</text>
   <circle cx="28" cy="160" r="4" fill="#78ff38"/>
-  <text x="40" y="164" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Advanced analytics</text>
+  <text x="40" y="164" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Container queries</text>
   <circle cx="28" cy="185" r="4" fill="#78ff38"/>
-  <text x="40" y="189" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Priority support</text>
+  <text x="40" y="189" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Density modes</text>
   <circle cx="28" cy="210" r="4" fill="#78ff38"/>
-  <text x="40" y="214" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Custom branding</text>
+  <text x="40" y="214" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Modern CSS only</text>
   <rect x="20" y="235" width="240" height="32" rx="8" fill="url(#accent-gradient)"/>
-  <text x="140" y="256" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#0f172a" text-anchor="middle">Get Started</text>
+  <text x="140" y="256" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#0f172a" text-anchor="middle">Install Now</text>
 </svg>
