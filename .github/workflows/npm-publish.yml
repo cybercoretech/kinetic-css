@@ -33,11 +33,11 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Kinetic JS
-        run: cd packages/kinetic-js && npm publish --access public
+        run: cd packages/js && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Kinetic TS
-        run: cd packages/kinetic-ts && npm publish --access public
+        run: cd packages/ts && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

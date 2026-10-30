@@ -1,7 +1,7 @@
 {
   "name": "kinetic-css",
   "version": "0.2.0",
-  "description": "Kinetic CSS — fluid-first, container-aware responsive CSS framework.",
+  "description": "Kinetic CSS \u2014 fluid-first, container-aware responsive CSS framework.",
   "license": "MIT",
   "files": [
     "css/*.css",
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "echo 'Kinetic CSS has no build step.'",
-    "test": "echo 'No runtime dependency; visual regression OK manually.'",
+    "test": "node --test",
     "lint": "npx stylelint \"css/**/*.css\" --config .stylelintrc.json"
   },
   "keywords": [
