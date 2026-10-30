@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-k-density="comfortable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#080d15">
+  <meta name="description" content="Kinetic CSS — fluid-first, container-aware responsive CSS framework. No JavaScript, no compiler, no build step.">
+  <title>Kinetic CSS — fluid by nature · v0.2.0</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/kinetic-mark.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+  <meta property="og:title" content="Kinetic CSS — fluid by nature">
+  <meta property="og:description" content="Fluid-first, container-aware responsive CSS framework. No JavaScript, no compiler, no build step.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://cybercoretech.github.io/kinetic-css/assets/og/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kinetic CSS — fluid by nature">
+  <meta name="twitter:description" content="Fluid-first, container-aware responsive CSS framework.">
+  <meta name="twitter:image" content="https://cybercoretech.github.io/kinetic-css/assets/og/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/kinetic.css">
+  <link rel="stylesheet" href="css/kinetic-theme.css">
+  <style>
+    .hero { padding-block: clamp(4rem, 12vw, 9rem); }
+    .hero__mark { font-size: clamp(2.5rem, 12vw, 7rem); font-weight: 850; letter-spacing: -.05em; line-height: .9; font-family: 'Montserrat', sans-serif; }
+  </style>
+</head>
+<body>
+  <header class="k-shell k-region">
+    <nav class="k-nav" aria-label="Main navigation">
+      <strong>KINETIC<span class="k-accent">/</span></strong>
+      <div class="k-nav__links"><a href="#principles">Principles</a><a href="#components">Components</a><a href="#patterns">Patterns</a><a href="#ecosystem">Ecosystem</a><a href="README.md">Docs</a><a href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></div>
+    </nav>
+  </header>
+  <main>
+    <section class="k-shell hero k-stack">
+      <span class="k-badge k-badge--accent">Fluid-first CSS · v0.2.0</span>
+      <h1 class="hero__mark">MOVE<br>WITH SPACE.</h1>
+      <p class="k-prose k-muted">A responsive framework that adapts to the space a component actually has — not just the size of the screen. No JavaScript, no compiler, no build step. Modern CSS: cascade layers, custom properties, <code>clamp()</code>, container queries, <code>light-dark()</code>, and OKLCH colors.</p>
+      <div class="k-cluster"><a class="k-button k-button--primary" href="#components">Explore the system</a><a class="k-button k-button--outline" href="README.md">Read the docs</a><a class="k-button k-button--outline" href="starter/index.html">Starter template</a></div>
+      <img src="assets/icons/kinetic-hero.svg" alt="Kinetic CSS hero graphic" style="max-inline-size: 24rem; block-size: auto; border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow-md); margin-block-start: var(--k-space-4)">
+    </section>
+    <section id="principles" class="k-region" style="background:var(--k-surface-raised)">
+      <div class="k-shell k-stack"><h2>Responsive by context.</h2><div class="k-grid" style="--k-min:16rem">
+        <article class="k-card k-stack"><span class="k-badge">01 / FLUID</span><h3>Continuous scale</h3><p class="k-muted">Typography and spacing move smoothly between viewport sizes. No pile of arbitrary breakpoints.</p></article>
+        <article class="k-card k-stack"><span class="k-badge">02 / CONTAINER</span><h3>Local intelligence</h3><p class="k-muted">Cards and navigation can react to their own available width using CSS container queries.</p></article>
+        <article class="k-card k-stack"><span class="k-badge">03 / DENSITY</span><h3>One system, three feels</h3><p class="k-muted">Switch between compact, comfortable, and spacious without rewriting component styles.</p></article>
+      </div></div>
+    </section>
+    <section id="components" class="k-shell k-region k-stack">
+      <h2>Built-in primitives</h2>
+      <div class="k-split">
+        <article class="k-card k-card--adaptive" data-k-lift><div class="k-stack"><span class="k-badge k-badge--accent">ADAPTIVE CARD</span><h3>Same markup. Different layout.</h3></div><p class="k-muted">Resize this card's container: at 34rem it becomes a two-column composition. The page breakpoint is irrelevant.</p></article>
+        <form class="k-card k-stack" action="#" method="get"><h3>Form controls</h3><label class="k-field">Email address<input class="k-input" type="email" placeholder="you@example.com"></label><label class="k-field">Subscribe to the newsletter<input class="k-checkbox" type="checkbox" checked></label><button class="k-button k-button--primary" type="button">Get updates</button></form>
+      </div>
+      <div class="k-card k-stack">
+        <h3>Tabs — CSS only</h3>
+        <div class="k-tabs" role="tablist">
+          <input type="radio" name="k-demo-tabs" id="ktab-1" checked>
+          <label class="k-tabs__tab" for="ktab-1">One</label>
+          <div class="k-tabs__panel">Panel one: fluid spacing and type scale.</div>
+          <input type="radio" name="k-demo-tabs" id="ktab-2">
+          <label class="k-tabs__tab" for="ktab-2">Two</label>
+          <div class="k-tabs__panel">Panel two: swap without JS.</div>
+        </div>
+      </div>
+      <div class="k-grid" style="--k-min: 20rem">
+        <details class="k-accordion">
+          <summary>Framework release checklist</summary>
+          <div class="k-accordion__panel">
+            <p class="k-muted">v0.2.0 adds application patterns: dialogs, tabs, accordions, menus, tooltips. Typography and spacing adapt fluidly.</p>
+          </div>
+        </details>
+        <details class="k-menu">
+          <summary>Components</summary>
+          <div class="k-menu__panel">
+            <div class="k-menu__item"><a href="#components">Cards & buttons</a></div>
+            <div class="k-menu__item"><a href="#components">Layout</a></div>
+            <div class="k-menu__item"><a href="#principles">Principles</a></div>
+          </div>
+        </details>
+      </div>
+      <div class="k-cluster">
+        <button class="k-button k-button--outline" data-k-tooltip="Copied to clipboard">Copy</button>
+        <dialog class="k-dialog" id="k-demo-dialog">
+          <h2>Dialog</h2>
+          <p class="k-dialog__body">Native <code>&lt;dialog&gt;</code> with Kinetic surface, radius, and shadow tokens.</p>
+          <div class="k-dialog__actions"><button class="k-button k-button--primary" data-k-close>Got it</button></div>
+        </dialog>
+      </div>
+      <div class="k-alert k-alert--info" role="status">
+        <p class="k-alert__title">Heads up</p>
+        <div class="k-alert__body"><p>v0.2.0 ships application patterns alongside the fluid defaults. Override tokens to re-skin.</p></div>
+      </div>
+      <div class="k-table-wrap">
+        <table class="k-table">
+          <thead><tr><th>Status</th><th>Version</th><th>Changed</th></tr></thead>
+          <tbody>
+            <tr><td><span class="k-badge">live</span></td><td>0.2.0</td><td>2026-10-30</td></tr>
+            <tr><td><span class="k-badge">live</span></td><td>0.1.0</td><td>2026-10-30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="k-cluster">
+        <span class="k-spinner" role="status" aria-label="loading"></span>
+        <div class="k-skeleton" style="inline-size: 12rem;"></div>
+        <div class="k-progress" style="inline-size: 10rem;"><div class="k-progress__bar" style="width: 64%;"></div></div>
+        <span class="k-avatar">K</span>
+      </div>
+    </section>
+    <section id="patterns" class="k-shell k-region k-stack">
+      <h2>Application patterns</h2>
+      <div class="k-grid" style="--k-min: 20rem">
+        <div class="k-card k-stack">
+          <h3>Tabs — CSS only</h3>
+          <div class="k-tabs" role="tablist">
+            <input type="radio" name="k-demo-tabs" id="ktab-1" checked>
+            <label class="k-tabs__tab" for="ktab-1">One</label>
+            <div class="k-tabs__panel">Panel one: fluid spacing and type scale.</div>
+            <input type="radio" name="k-demo-tabs" id="ktab-2">
+            <label class="k-tabs__tab" for="ktab-2">Two</label>
+            <div class="k-tabs__panel">Panel two: swap without JS.</div>
+          </div>
+        </div>
+        <div class="k-card k-stack">
+          <h3>Pagination</h3>
+          <div class="k-pagination k-pagination--centered">
+            <div class="k-pagination__list">
+              <a href="#" class="k-pagination__item" aria-label="Previous"><span aria-hidden="true">«</span></a>
+              <a href="#" class="k-pagination__item k-pagination__item--active">1</a>
+              <a href="#" class="k-pagination__item">2</a>
+              <a href="#" class="k-pagination__item">3</a>
+              <a href="#" class="k-pagination__item" aria-label="Next"><span aria-hidden="true">»</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="k-grid" style="--k-min: 20rem; margin-block-start: var(--k-space-4)">
+        <div class="k-card k-stack">
+          <h3>Carousel</h3>
+          <div class="k-carousel">
+            <div class="k-carousel__slide"><h3>Slide 1</h3><p class="k-muted">First slide content.</p></div>
+            <div class="k-carousel__slide"><h3>Slide 2</h3><p class="k-muted">Second slide content.</p></div>
+            <div class="k-carousel__slide"><h3>Slide 3</h3><p class="k-muted">Third slide content.</p></div>
+          </div>
+        </div>
+        <div class="k-card k-stack">
+          <h3>Toast</h3>
+          <div class="k-toast-container">
+            <div class="k-toast k-alert k-alert--success" data-state="open">Operation successful</div>
+          </div>
+        </div>
+      </div>
+      <div class="k-grid" style="--k-min: 20rem; margin-block-start: var(--k-space-4)">
+        <div class="k-card k-stack">
+          <h3>Sidebar layout</h3>
+          <div class="k-layout" style="--k-sidebar-w: 12rem">
+            <aside class="k-sidebar"><span class="k-sidebar__label">Sidebar</span></aside>
+            <main class="k-layout__main"><h3>Main content</h3><p class="k-muted">Responsive by container query.</p></main>
+          </div>
+        </div>
+        <div class="k-card k-stack">
+          <h3>Form validation</h3>
+          <form class="k-form">
+            <label class="k-field">Email<input class="k-input k-invalid" type="email" value="bad" placeholder="you@example.com"></label>
+            <span class="k-field__error">Please enter a valid email.</span>
+            <label class="k-field">Name<input class="k-input k-valid" type="text" value="Kinetic"></label>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section id="ecosystem" class="k-region" style="background:var(--k-surface-raised)">
+      <div class="k-shell k-stack">
+        <h2>Three packages. One framework.</h2>
+        <p class="k-prose k-muted">Kinetic CSS core plus independently installable JavaScript and TypeScript add-on packs.</p>
+        <div class="k-grid" style="--k-min: 18rem">
+          <article class="k-card k-stack">
+            <span class="k-badge k-badge--accent">CORE</span>
+            <h3>Kinetic CSS</h3>
+            <p class="k-muted">Responsive layouts, design tokens, components, density modes, themes. Zero dependencies.</p>
+            <code class="k-muted" style="font-size: .75rem">npm install kinetic-css</code>
+          </article>
+          <article class="k-card k-stack">
+            <span class="k-badge">JS ADD-ON</span>
+            <h3>Kinetic JS</h3>
+            <p class="k-muted">Dialogs, tabs, dropdowns, toasts, theme switching, form validation, scroll utilities.</p>
+            <code class="k-muted" style="font-size: .75rem">npm install kinetic-js</code>
+          </article>
+          <article class="k-card k-stack">
+            <span class="k-badge">TS ADD-ON</span>
+            <h3>Kinetic TS</h3>
+            <p class="k-muted">Typed APIs, type-safe event handling, typed theme configuration, ESM modules, tree-shaking.</p>
+            <code class="k-muted" style="font-size: .75rem">npm install kinetic-ts</code>
+          </article>
+        </div>
+        <div class="k-cluster" style="margin-block-start: var(--k-space-4)">
+          <a class="k-button k-button--primary" href="starter/index.html">Starter template</a>
+          <a class="k-button k-button--outline" href="docs/README.md">Documentation</a>
+          <a class="k-button k-button--outline" href="README.md">README</a>
+        </div>
+      </div>
+    </section>
+    <section id="quickstart" class="k-shell k-region k-stack">
+      <h2>Get started in 30 seconds.</h2>
+      <div class="k-grid" style="--k-min: 18rem">
+        <div class="k-card k-stack">
+          <h3>CDN</h3>
+          <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic-theme.css"&gt;</code></pre>
+        </div>
+        <div class="k-card k-stack">
+          <h3>npm</h3>
+          <pre><code>npm install kinetic-css
+# optional
+npm install kinetic-js kinetic-ts
+
+# or use the starter template:
+cp -r starter/ /your/project/

@@ -1,0 +1,60 @@
+/* Kinetic Navigation Pack: Menus, Mega Menus, Breadcrumbs */
+.k-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--k-space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.k-nav-link {
+  color: var(--k-ink);
+  text-decoration: none;
+  padding: var(--k-space-2) var(--k-space-3);
+  border-radius: var(--k-radius-sm);
+  transition: background var(--k-duration) var(--k-ease), color var(--k-duration) var(--k-ease);
+}
+.k-nav-link:hover {
+  background: var(--k-surface-raised);
+  color: var(--k-accent);
+}
+
+.k-mega-menu {
+  position: absolute;
+  inset-inline: 0;
+  background: var(--k-surface);
+  border-block: 1px solid var(--k-line);
+  box-shadow: var(--k-shadow-md);
+  padding: var(--k-space-5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--k-space-5);
+  z-index: 50;
+}
+
+.k-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--k-space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--k-text-sm);
+  color: var(--k-muted);
+}
+.k-breadcrumbs > li + li::before {
+  content: "/";
+  margin-inline-end: var(--k-space-2);
+  color: var(--k-line);
+}
+.k-breadcrumbs a {
+  color: var(--k-muted);
+  text-decoration: none;
+}
+.k-breadcrumbs a:hover {
+  color: var(--k-accent);
+}
+.k-breadcrumbs [aria-current="page"] {
+  color: var(--k-ink);
+  pointer-events: none;
+}

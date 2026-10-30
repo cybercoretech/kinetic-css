@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Kinetic CSS mark</title>
+  <desc id="desc">A geometric K glyph inside a fluid gradient circle.</desc>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#62e7ff"/>
+      <stop offset="50%" stop-color="#78ff38"/>
+      <stop offset="100%" stop-color="#d18cff"/>
+    </linearGradient>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d1720"/>
+      <stop offset="100%" stop-color="#080d15"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" rx="48" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="96" fill="none" stroke="url(#g)" stroke-width="3" opacity=".35"/>
+  <path d="M96 72 V184" fill="none" stroke="url(#g)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M96 128 L180 72" fill="none" stroke="url(#g)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M96 128 L180 184" fill="none" stroke="url(#g)" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="96" cy="72" r="5" fill="#78ff38"/>
+  <circle cx="96" cy="184" r="5" fill="#62e7ff"/>
+  <circle cx="180" cy="72" r="5" fill="#d18cff"/>
+  <circle cx="180" cy="184" r="5" fill="#d18cff"/>
+  <circle cx="128" cy="128" r="6" fill="#62e7ff"/>
+</svg>

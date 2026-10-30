@@ -1,0 +1,16 @@
+/* Kinetic Design Token Generator Engine */
+:root {
+  --k-base-hue: 263;
+  --k-base-radius: 0.8rem;
+  
+  /* Automatically derived cohesive system tokens */
+  --k-primary: oklch(62% .22 var(--k-base-hue));
+  --k-primary-hover: oklch(57% .24 var(--k-base-hue));
+  --k-primary-subtle: color-mix(in oklab, var(--k-primary) 15%, transparent);
+  
+  --k-radius-card: var(--k-base-radius);
+  --k-radius-control: calc(var(--k-base-radius) * 0.6);
+  --k-radius-pill: 999px;
+  
+  --k-shadow-elevation: 0 10px 30px -10px color-mix(in oklab, var(--k-primary) 20%, transparent);
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@kinetic/cli",
+  "version": "0.3.0",
+  "description": "Command line interface for scaffolding and inspecting Kinetic CSS projects",
+  "main": "src/index.js",
+  "bin": {
+    "kinetic": "src/index.js"
+  },
+  "dependencies": {
+    "@kinetic-css/core": "workspace:*"
+  },
+  "license": "MIT"
+}

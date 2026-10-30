@@ -1,0 +1,37 @@
+/* Kinetic Adaptive Intelligence Pack */
+@container style(--k-adaptive: true) {
+  .k-adaptive-card {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@container (min-width: 30rem) {
+  .k-adaptive-cluster {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .k-adaptive-card {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+@container (max-width: 20rem) {
+  .k-adaptive-compact {
+    font-size: var(--k-text-xs);
+    padding: var(--k-space-1);
+  }
+  .k-adaptive-compact .k-hide-on-tight {
+    display: none;
+  }
+}
+
+.k-adaptive-container {
+  container-type: inline-size;
+  container-name: k-adaptive;
+}
+
+.k-density-auto {
+  padding: calc(var(--k-space-3) * var(--k-density, 1));
+  gap: calc(var(--k-space-3) * var(--k-density, 1));
+}

@@ -1,0 +1,27 @@
+/* Kinetic Layout Pack: Advanced Grids, Masonry, Split Panes */
+.k-grid-advanced {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--k-space-4);
+}
+
+.k-masonry {
+  columns: 3 16rem;
+  column-gap: var(--k-space-4);
+}
+.k-masonry > * {
+  break-inside: avoid;
+  margin-block-end: var(--k-space-4);
+}
+
+.k-split-pane {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--k-space-4);
+  align-items: stretch;
+}
+@media (max-width: 48rem) {
+  .k-split-pane {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,30 @@
+/* Kinetic Adaptive Breakpoint Engine */
+.k-fluid-container {
+  container-type: inline-size;
+  container-name: k-fluid;
+}
+
+@container k-fluid (max-width: 30rem) {
+  .k-fluid-stack {
+    flex-direction: column !important;
+  }
+  .k-fluid-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@container k-fluid (min-width: 30.01rem) and (max-width: 60rem) {
+  .k-fluid-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@container k-fluid (min-width: 60.01rem) {
+  .k-fluid-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+.k-fluid-space {
+  padding: clamp(1rem, 2vw + 1rem, 4rem);
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@kinetic/fonts",
+  "version": "0.3.0",
+  "description": "Google Fonts integration and font switching utility for Kinetic CSS",
+  "main": "css/kinetic-fonts.css",
+  "style": "css/kinetic-fonts.css",
+  "files": [
+    "css",
+    "src"
+  ],
+  "keywords": [
+    "kinetic-css",
+    "fonts",
+    "google-fonts",
+    "typography"
+  ],
+  "license": "MIT"
+}

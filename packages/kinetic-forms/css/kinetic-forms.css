@@ -1,0 +1,72 @@
+/* Kinetic Forms Pack */
+.k-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--k-space-4);
+}
+.k-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--k-space-1);
+}
+.k-label {
+  font-weight: 600;
+  font-size: var(--k-text-sm);
+  color: var(--k-ink);
+}
+.k-input, .k-select, .k-textarea {
+  background: var(--k-surface);
+  color: var(--k-ink);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-radius-sm);
+  padding: .6em .8em;
+  font-size: var(--k-text-md);
+  transition: border-color var(--k-duration) var(--k-ease), box-shadow var(--k-duration) var(--k-ease);
+}
+.k-input:focus, .k-select:focus, .k-textarea:focus {
+  border-color: var(--k-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--k-accent) 25%, transparent);
+  outline: none;
+}
+.k-input-group {
+  display: flex;
+  align-items: stretch;
+}
+.k-input-group .k-input {
+  border-radius: 0;
+}
+.k-input-group > *:first-child {
+  border-start-start-radius: var(--k-radius-sm);
+  border-end-start-radius: var(--k-radius-sm);
+}
+.k-input-group > *:last-child {
+  border-start-end-radius: var(--k-radius-sm);
+  border-end-end-radius: var(--k-radius-sm);
+}
+.k-input-addon {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: .9em;
+  background: var(--k-surface-raised);
+  border: 1px solid var(--k-line);
+  color: var(--k-muted);
+  font-size: var(--k-text-sm);
+}
+.k-field__error {
+  color: var(--k-danger);
+  font-size: var(--k-text-xs);
+}
+.k-field__success {
+  color: var(--k-success);
+  font-size: var(--k-text-xs);
+}
+.k-field__hint {
+  color: var(--k-muted);
+  font-size: var(--k-text-xs);
+}
+.k-invalid {
+  border-color: var(--k-danger) !important;
+}
+.k-valid {
+  border-color: var(--k-success) !important;
+}

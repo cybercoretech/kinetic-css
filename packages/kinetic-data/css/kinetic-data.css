@@ -1,0 +1,75 @@
+/* Kinetic Data Pack */
+.k-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-radius-md);
+  background: var(--k-surface);
+}
+.k-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--k-text-md);
+}
+.k-table th, .k-table td {
+  padding: var(--k-space-3) var(--k-space-4);
+  border-bottom: 1px solid var(--k-line);
+}
+.k-table th {
+  background: var(--k-surface-raised);
+  font-weight: 600;
+  color: var(--k-ink);
+}
+.k-table tr:last-child td {
+  border-bottom: none;
+}
+.k-data-card {
+  background: var(--k-surface);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-radius-md);
+  padding: var(--k-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--k-space-2);
+}
+.k-progress {
+  appearance: none;
+  width: 100%;
+  height: .5rem;
+  border-radius: var(--k-radius-pill);
+  background: var(--k-surface-raised);
+  overflow: hidden;
+  border: none;
+}
+.k-progress::-webkit-progress-bar { background: var(--k-surface-raised); }
+.k-progress::-webkit-progress-value { background: var(--k-accent); border-radius: var(--k-radius-pill); }
+.k-chart-adapter {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--k-space-2);
+  height: 12rem;
+  padding: var(--k-space-4);
+  background: var(--k-surface);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-radius-md);
+}
+.k-chart-bar {
+  flex: 1;
+  background: var(--k-accent);
+  border-radius: var(--k-radius-sm) var(--k-radius-sm) 0 0;
+  transition: height var(--k-duration) var(--k-ease);
+}
+.k-data-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--k-space-3);
+  margin-block-end: var(--k-space-4);
+}
+.k-sort-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--k-space-2);
+}

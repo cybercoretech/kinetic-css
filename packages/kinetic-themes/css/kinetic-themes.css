@@ -1,0 +1,69 @@
+/* Kinetic Themes Pack */
+:root, :root[data-k-theme="auto"] {
+  color-scheme: light dark;
+}
+:root[data-k-theme="light"] {
+  color-scheme: light;
+}
+:root[data-k-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Preset: Cyberpunk / Neon */
+:root[data-k-preset="neon"] {
+  --k-hue: 320;
+  --k-accent: oklch(65% .28 320);
+  --k-bg: oklch(12% .03 265);
+  --k-surface: oklch(18% .04 265);
+  --k-surface-raised: oklch(24% .05 265);
+  --k-ink: oklch(98% .01 265);
+  --k-muted: oklch(70% .03 265);
+  --k-line: oklch(35% .05 265);
+}
+
+/* Preset: Corporate Minimal */
+:root[data-k-preset="corporate"] {
+  --k-hue: 220;
+  --k-accent: oklch(55% .2 220);
+  --k-bg: oklch(99% .002 220);
+  --k-surface: white;
+  --k-surface-raised: oklch(96% .005 220);
+  --k-ink: oklch(20% .02 220);
+  --k-muted: oklch(50% .02 220);
+  --k-line: oklch(90% .01 220);
+}
+
+/* Preset: Emerald Forest */
+:root[data-k-preset="emerald"] {
+  --k-hue: 150;
+  --k-accent: oklch(60% .18 150);
+  --k-bg: oklch(15% .02 150);
+  --k-surface: oklch(20% .025 150);
+  --k-surface-raised: oklch(26% .03 150);
+  --k-ink: oklch(95% .01 150);
+  --k-muted: oklch(70% .02 150);
+  --k-line: oklch(32% .03 150);
+}
+
+.k-theme-switcher {
+  display: inline-flex;
+  gap: var(--k-space-2);
+  padding: var(--k-space-1);
+  background: var(--k-surface-raised);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-radius-pill);
+}
+.k-theme-btn {
+  background: transparent;
+  border: none;
+  color: var(--k-muted);
+  padding: .4em .8em;
+  font-size: var(--k-text-sm);
+  border-radius: var(--k-radius-pill);
+  cursor: pointer;
+  transition: background var(--k-duration) var(--k-ease), color var(--k-duration) var(--k-ease);
+}
+.k-theme-btn[aria-pressed="true"], .k-theme-btn:hover {
+  background: var(--k-surface);
+  color: var(--k-accent);
+}

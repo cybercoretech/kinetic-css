@@ -1,0 +1,36 @@
+/* Kinetic Component State System */
+.k-state-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: .75;
+}
+.k-state-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--k-surface) 50%, transparent);
+  backdrop-filter: blur(2px);
+  border-radius: inherit;
+}
+
+.k-state-disabled, [aria-disabled="true"], :disabled {
+  opacity: .5;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.k-state-selected, [aria-selected="true"], [aria-current="true"] {
+  background: var(--k-surface-raised);
+  color: var(--k-accent);
+  border-color: var(--k-accent);
+}
+
+.k-state-invalid, [aria-invalid="true"] {
+  border-color: var(--k-danger) !important;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--k-danger) 20%, transparent);
+}
+
+.k-state-focused, *:focus-visible {
+  outline: 2px solid var(--k-focus);
+  outline-offset: 2px;
+}

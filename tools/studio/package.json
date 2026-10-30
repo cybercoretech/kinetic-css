@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/studio",
+  "version": "0.3.0",
+  "description": "Visual theme builder and component studio for Kinetic CSS",
+  "main": "src/index.html",
+  "license": "MIT"
+}

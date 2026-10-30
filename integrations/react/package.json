@@ -1,0 +1,15 @@
+{
+  "name": "@kinetic/react",
+  "version": "0.3.0",
+  "description": "React integration bindings for Kinetic CSS",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@kinetic-css/core": "workspace:*",
+    "@kinetic-css/javascript": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "license": "MIT"
+}

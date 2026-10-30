@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/python",
+  "version": "0.4.0",
+  "description": "Python template tags and helper bindings for Kinetic CSS",
+  "main": "src/kinetic_css/__init__.py",
+  "license": "MIT"
+}

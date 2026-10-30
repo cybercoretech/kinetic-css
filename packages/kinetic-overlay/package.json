@@ -1,0 +1,20 @@
+{
+  "name": "@kinetic-css/kinetic-overlay",
+  "version": "0.2.0",
+  "description": "Overlays including dialogs, popovers, drawers, and tooltips for Kinetic CSS",
+  "main": "css/kinetic-overlay.css",
+  "style": "css/kinetic-overlay.css",
+  "files": [
+    "css",
+    "src"
+  ],
+  "keywords": [
+    "kinetic-css",
+    "overlay",
+    "dialog",
+    "popover",
+    "drawer",
+    "tooltip"
+  ],
+  "license": "MIT"
+}

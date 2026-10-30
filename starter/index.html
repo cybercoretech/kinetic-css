@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-k-density="comfortable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>My Kinetic Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/kinetic.css">
+  <link rel="stylesheet" href="css/kinetic-theme.css">
+  <style>
+    .hero { padding-block: clamp(4rem, 12vw, 9rem); }
+    .hero__mark { font-size: clamp(2.5rem, 12vw, 7rem); font-weight: 850; letter-spacing: -.05em; line-height: .9; font-family: 'Montserrat', sans-serif; }
+  </style>
+</head>
+<body>
+  <header class="k-header">
+    <strong class="k-header__brand">MY<span class="k-accent">APP</span></strong>
+    <nav class="k-header__nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
+  </header>
+  <main class="k-shell k-region k-stack">
+    <section class="k-stack">
+      <span class="k-badge k-badge--accent">Starter Template · v0.2.0</span>
+      <h1 class="hero__mark">HELLO,<br>KINETIC.</h1>
+      <p class="k-prose k-muted">Replace this starter with your content. Kinetic CSS gives you fluid typography, container-aware components, and density modes out of the box.</p>
+      <div class="k-cluster">
+        <a class="k-button k-button--primary" href="#components">Explore components</a>
+        <a class="k-button k-button--outline" href="README.md">Read the docs</a>
+      </div>
+    </section>
+    <section id="components" class="k-shell k-region k-stack">
+      <h2>Quick start</h2>
+      <div class="k-grid" style="--k-min: 16rem">
+        <article class="k-card k-stack">
+          <span class="k-badge">01 / LAYOUT</span>
+          <h3>Auto-fit grid</h3>
+          <p class="k-muted">Cards flow into as many columns as fit. Set <code>--k-min</code> locally.</p>
+        </article>
+        <article class="k-card k-stack">
+          <span class="k-badge">02 / CONTAINER</span>
+          <h3>Local intelligence</h3>
+          <p class="k-muted">Cards react to their own width with container queries.</p>
+        </article>
+        <article class="k-card k-stack">
+          <span class="k-badge">03 / DENSITY</span>
+          <h3>One system, three feels</h3>
+          <p class="k-muted">Switch density with <code>data-k-density</code>.</p>
+        </article>
+      </div>
+    </section>
+    <section class="k-shell k-region k-stack">
+      <h2>Application patterns</h2>
+      <div class="k-grid" style="--k-min: 20rem">
+        <details class="k-accordion">
+          <summary>Accordion</summary>
+          <div class="k-accordion__panel">Accordion content goes here.</div>
+        </details>
+        <div class="k-menu k-menu--below">
+          <summary>Menu</summary>
+          <div class="k-menu__panel">
+            <div class="k-menu__item"><a href="#">Item 1</a></div>
+            <div class="k-menu__item"><a href="#">Item 2</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="k-footer">
+    <div class="k-footer__inner">
+      <span>2026 · MIT · Kinetic CSS</span>
+      <nav aria-label="Footer links"><a href="#">Privacy</a><a href="#">Terms</a></nav>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/kinetic-js/src/index.js" type="module"></script>
+  <script type="module">
+    import { autoInit } from 'https://unpkg.com/kinetic-js/src/index.js';
+    autoInit();
+  </script>
+</body>
+</html>

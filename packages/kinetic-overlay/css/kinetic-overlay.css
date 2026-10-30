@@ -1,0 +1,65 @@
+/* Kinetic Overlay Pack: Dialogs, Popovers, Drawers, Tooltips */
+.k-dialog {
+  background: var(--k-surface);
+  color: var(--k-ink);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-radius-lg);
+  padding: var(--k-space-6);
+  max-inline-size: min(90vw, 32rem);
+  box-shadow: var(--k-shadow-md);
+}
+.k-dialog::backdrop {
+  background: rgb(0 0 / .5);
+  backdrop-filter: blur(4px);
+}
+
+.k-popover {
+  position: absolute;
+  background: var(--k-surface);
+  color: var(--k-ink);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-radius-md);
+  padding: var(--k-space-3);
+  box-shadow: var(--k-shadow-sm);
+  z-index: 100;
+}
+
+.k-drawer {
+  position: fixed;
+  inset-block: 0;
+  inline-size: min(80vw, 24rem);
+  background: var(--k-surface);
+  color: var(--k-ink);
+  box-shadow: var(--k-shadow-md);
+  padding: var(--k-space-6);
+  z-index: 200;
+  transition: transform var(--k-duration) var(--k-ease);
+}
+.k-drawer--start { inset-inline-start: 0; transform: translateX(-100%); }
+.k-drawer--end { inset-inline-end: 0; transform: translateX(100%); }
+.k-drawer[open] { transform: translateX(0); }
+
+.k-tooltip {
+  position: relative;
+  display: inline-block;
+}
+.k-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(.25rem);
+  background: var(--k-ink);
+  color: var(--k-bg);
+  padding: .3em .6em;
+  font-size: var(--k-text-xs);
+  border-radius: var(--k-radius-sm);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--k-duration) var(--k-ease), transform var(--k-duration) var(--k-ease);
+}
+.k-tooltip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

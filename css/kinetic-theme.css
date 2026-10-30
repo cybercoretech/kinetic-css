@@ -1,0 +1,4 @@
+/* Optional theme overrides. Load after kinetic.css. */
+:root[data-k-theme="ocean"] { --k-hue: 205; --k-accent: oklch(64% .19 220); }
+:root[data-k-theme="ember"] { --k-hue: 35; --k-accent: oklch(68% .2 35); }
+:root[data-k-theme="violet"] { --k-hue: 290; --k-accent: oklch(65% .22 290); }

@@ -1,0 +1,1155 @@
+/**
+ * Kinetic Motion — Add-on Pack for Kinetic CSS
+ * Transitions, animations, scroll reveals, spring physics, and page transitions.
+ *
+ * @layer k-motion sits between k-components and k-utilities in the cascade.
+ * @version 0.1.0
+ * @license MIT
+ */
+
+/* ============================================================================
+   A. MOTION DESIGN TOKENS
+   ============================================================================ */
+
+:root {
+  /* ---- Duration scale ---- */
+  --k-motion-instant: 100ms;
+  --k-motion-fast: 150ms;
+  --k-motion-normal: 250ms;
+  --k-motion-slow: 400ms;
+  --k-motion-glacial: 700ms;
+
+  /* ---- Easing presets ---- */
+  --k-ease-linear: linear;
+  --k-ease-standard: cubic-bezier(.2, .75, .25, 1);
+  --k-ease-enter: cubic-bezier(0, 0, .3, 1);
+  --k-ease-exit: cubic-bezier(.6, 0, 1, 1);
+  --k-ease-spring: cubic-bezier(.175, .885, .32, 1.275);
+  --k-ease-bounce: cubic-bezier(.68, -.55, .265, 1.55);
+  --k-ease-elastic: cubic-bezier(.5, 1.5, .5, 1);
+  --k-ease-snap: cubic-bezier(.55, .085, 0, .99);
+
+  /* ---- Spring physics approximation tokens ---- */
+  --k-spring-stiffness: 200;
+  --k-spring-damping: 20;
+  --k-spring-mass: 1;
+  --k-spring-duration: 500ms;
+  --k-spring-ease: cubic-bezier(.175, .885, .32, 1.275);
+
+  /* ---- Reveal defaults ---- */
+  --k-reveal-threshold: 0.15;
+  --k-reveal-offset: -50px;
+  --k-reveal-stagger-interval: 80ms;
+}
+
+/* ============================================================================
+   B – H. EVERYTHING INSIDE @layer k-motion
+   ============================================================================ */
+
+@layer k-motion {
+
+  /* ==========================================================================
+     B. TRANSITION PRESETS
+     ========================================================================== */
+
+  /* --- Transition property classes --- */
+
+  .k-transition-none {
+    transition: none;
+  }
+
+  .k-transition-all {
+    transition-property: all;
+    transition-duration: var(--k-motion-normal);
+    transition-timing-function: var(--k-ease-standard);
+  }
+
+  .k-transition-colors {
+    transition-property: color, background-color, border-color, outline-color, fill, stroke;
+    transition-duration: var(--k-motion-normal);
+    transition-timing-function: var(--k-ease-standard);
+  }
+
+  .k-transition-opacity {
+    transition-property: opacity;
+    transition-duration: var(--k-motion-normal);
+    transition-timing-function: var(--k-ease-standard);
+  }
+
+  .k-transition-shadow {
+    transition-property: box-shadow;
+    transition-duration: var(--k-motion-normal);
+    transition-timing-function: var(--k-ease-standard);
+  }
+
+  .k-transition-transform {
+    transition-property: transform;
+    transition-duration: var(--k-motion-normal);
+    transition-timing-function: var(--k-ease-standard);
+  }
+
+  .k-transition-size {
+    transition-property: width, height, max-width, max-height, padding, margin, gap;
+    transition-duration: var(--k-motion-normal);
+    transition-timing-function: var(--k-ease-standard);
+  }
+
+  .k-transition-blur {
+    transition-property: filter, backdrop-filter;
+    transition-duration: var(--k-motion-normal);
+    transition-timing-function: var(--k-ease-standard);
+  }
+
+  /* --- Duration modifiers --- */
+
+  .k-duration-instant { transition-duration: var(--k-motion-instant); }
+  .k-duration-fast    { transition-duration: var(--k-motion-fast); }
+  .k-duration-normal  { transition-duration: var(--k-motion-normal); }
+  .k-duration-slow    { transition-duration: var(--k-motion-slow); }
+  .k-duration-glacial { transition-duration: var(--k-motion-glacial); }
+
+  /* --- Easing modifiers --- */
+
+  .k-ease-linear   { transition-timing-function: var(--k-ease-linear); }
+  .k-ease-standard { transition-timing-function: var(--k-ease-standard); }
+  .k-ease-enter    { transition-timing-function: var(--k-ease-enter); }
+  .k-ease-exit     { transition-timing-function: var(--k-ease-exit); }
+  .k-ease-spring   { transition-timing-function: var(--k-ease-spring); }
+  .k-ease-bounce   { transition-timing-function: var(--k-ease-bounce); }
+  .k-ease-elastic  { transition-timing-function: var(--k-ease-elastic); }
+  .k-ease-snap     { transition-timing-function: var(--k-ease-snap); }
+
+  /* --- Delay modifiers --- */
+
+  .k-delay-75   { transition-delay: 75ms; }
+  .k-delay-100  { transition-delay: 100ms; }
+  .k-delay-150  { transition-delay: 150ms; }
+  .k-delay-200  { transition-delay: 200ms; }
+  .k-delay-300  { transition-delay: 300ms; }
+  .k-delay-500  { transition-delay: 500ms; }
+  .k-delay-700  { transition-delay: 700ms; }
+  .k-delay-1000 { transition-delay: 1000ms; }
+
+
+  /* ==========================================================================
+     C. ANIMATION PRESETS — KEYFRAMES & CLASSES
+     ========================================================================== */
+
+  /* --- Iteration modifiers --- */
+
+  .k-animate-once  { animation-iteration-count: 1; }
+  .k-animate-loop  { animation-iteration-count: infinite; }
+  .k-animate-twice { animation-iteration-count: 2; }
+
+
+  /* --------------------------------------------------------------------------
+     C-1. ENTRANCE ANIMATIONS
+     -------------------------------------------------------------------------- */
+
+  /* ---- k-fade-in ---- */
+  @keyframes k-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .k-animate-fade-in {
+    animation: k-fade-in var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-fade-in-up ---- */
+  @keyframes k-fade-in-up {
+    from { opacity: 0; transform: translateY(1rem); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .k-animate-fade-in-up {
+    animation: k-fade-in-up var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-fade-in-down ---- */
+  @keyframes k-fade-in-down {
+    from { opacity: 0; transform: translateY(-1rem); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .k-animate-fade-in-down {
+    animation: k-fade-in-down var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-fade-in-left ---- */
+  @keyframes k-fade-in-left {
+    from { opacity: 0; transform: translateX(-1rem); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .k-animate-fade-in-left {
+    animation: k-fade-in-left var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-fade-in-right ---- */
+  @keyframes k-fade-in-right {
+    from { opacity: 0; transform: translateX(1rem); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .k-animate-fade-in-right {
+    animation: k-fade-in-right var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-slide-in-up ---- */
+  @keyframes k-slide-in-up {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+  .k-animate-slide-in-up {
+    animation: k-slide-in-up var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-slide-in-down ---- */
+  @keyframes k-slide-in-down {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(0); }
+  }
+  .k-animate-slide-in-down {
+    animation: k-slide-in-down var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-slide-in-left ---- */
+  @keyframes k-slide-in-left {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+  }
+  .k-animate-slide-in-left {
+    animation: k-slide-in-left var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-slide-in-right ---- */
+  @keyframes k-slide-in-right {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+  .k-animate-slide-in-right {
+    animation: k-slide-in-right var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-scale-in ---- */
+  @keyframes k-scale-in {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .k-animate-scale-in {
+    animation: k-scale-in var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-scale-in-up ---- */
+  @keyframes k-scale-in-up {
+    from { opacity: 0; transform: scale(0.85) translateY(1rem); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .k-animate-scale-in-up {
+    animation: k-scale-in-up var(--k-motion-slow) var(--k-ease-spring) both;
+  }
+
+  /* ---- k-zoom-in ---- */
+  @keyframes k-zoom-in {
+    from { opacity: 0; transform: scale(0); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .k-animate-zoom-in {
+    animation: k-zoom-in var(--k-motion-normal) var(--k-ease-spring) both;
+  }
+
+  /* ---- k-flip-in-x ---- */
+  @keyframes k-flip-in-x {
+    from { opacity: 0; transform: perspective(600px) rotateX(-90deg); }
+    to   { opacity: 1; transform: perspective(600px) rotateX(0); }
+  }
+  .k-animate-flip-in-x {
+    animation: k-flip-in-x var(--k-motion-slow) var(--k-ease-spring) both;
+    backface-visibility: visible;
+  }
+
+  /* ---- k-flip-in-y ---- */
+  @keyframes k-flip-in-y {
+    from { opacity: 0; transform: perspective(600px) rotateY(-90deg); }
+    to   { opacity: 1; transform: perspective(600px) rotateY(0); }
+  }
+  .k-animate-flip-in-y {
+    animation: k-flip-in-y var(--k-motion-slow) var(--k-ease-spring) both;
+    backface-visibility: visible;
+  }
+
+  /* ---- k-rotate-in ---- */
+  @keyframes k-rotate-in {
+    from { opacity: 0; transform: rotate(-180deg); }
+    to   { opacity: 1; transform: rotate(0); }
+  }
+  .k-animate-rotate-in {
+    animation: k-rotate-in var(--k-motion-slow) var(--k-ease-spring) both;
+  }
+
+  /* ---- k-drop-in ---- */
+  @keyframes k-drop-in {
+    0%   { opacity: 0; transform: translateY(-3rem); }
+    60%  { opacity: 1; transform: translateY(0.25rem); }
+    80%  { transform: translateY(-0.1rem); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .k-animate-drop-in {
+    animation: k-drop-in var(--k-motion-slow) var(--k-ease-bounce) both;
+  }
+
+  /* ---- k-blur-in ---- */
+  @keyframes k-blur-in {
+    from { opacity: 0; filter: blur(12px); }
+    to   { opacity: 1; filter: blur(0); }
+  }
+  .k-animate-blur-in {
+    animation: k-blur-in var(--k-motion-slow) var(--k-ease-enter) both;
+  }
+
+  /* ---- k-swing-in ---- */
+  @keyframes k-swing-in {
+    0%   { opacity: 0; transform: perspective(600px) rotateY(-70deg); }
+    40%  { transform: perspective(600px) rotateY(15deg); }
+    60%  { transform: perspective(600px) rotateY(-5deg); }
+    80%  { opacity: 1; transform: perspective(600px) rotateY(2deg); }
+    100% { opacity: 1; transform: perspective(600px) rotateY(0); }
+  }
+  .k-animate-swing-in {
+    animation: k-swing-in var(--k-spring-duration) var(--k-ease-standard) both;
+    transform-origin: left center;
+  }
+
+
+  /* --------------------------------------------------------------------------
+     C-2. EXIT ANIMATIONS
+     -------------------------------------------------------------------------- */
+
+  /* ---- k-fade-out ---- */
+  @keyframes k-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  .k-animate-fade-out {
+    animation: k-fade-out var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-fade-out-up ---- */
+  @keyframes k-fade-out-up {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-1rem); }
+  }
+  .k-animate-fade-out-up {
+    animation: k-fade-out-up var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-fade-out-down ---- */
+  @keyframes k-fade-out-down {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(1rem); }
+  }
+  .k-animate-fade-out-down {
+    animation: k-fade-out-down var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-fade-out-left ---- */
+  @keyframes k-fade-out-left {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(-1rem); }
+  }
+  .k-animate-fade-out-left {
+    animation: k-fade-out-left var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-fade-out-right ---- */
+  @keyframes k-fade-out-right {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(1rem); }
+  }
+  .k-animate-fade-out-right {
+    animation: k-fade-out-right var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-slide-out-up ---- */
+  @keyframes k-slide-out-up {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-100%); }
+  }
+  .k-animate-slide-out-up {
+    animation: k-slide-out-up var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-slide-out-down ---- */
+  @keyframes k-slide-out-down {
+    from { transform: translateY(0); }
+    to   { transform: translateY(100%); }
+  }
+  .k-animate-slide-out-down {
+    animation: k-slide-out-down var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-slide-out-left ---- */
+  @keyframes k-slide-out-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+  }
+  .k-animate-slide-out-left {
+    animation: k-slide-out-left var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-slide-out-right ---- */
+  @keyframes k-slide-out-right {
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
+  }
+  .k-animate-slide-out-right {
+    animation: k-slide-out-right var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-scale-out ---- */
+  @keyframes k-scale-out {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.85); }
+  }
+  .k-animate-scale-out {
+    animation: k-scale-out var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-zoom-out ---- */
+  @keyframes k-zoom-out {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0); }
+  }
+  .k-animate-zoom-out {
+    animation: k-zoom-out var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+
+  /* ---- k-blur-out ---- */
+  @keyframes k-blur-out {
+    from { opacity: 1; filter: blur(0); }
+    to   { opacity: 0; filter: blur(12px); }
+  }
+  .k-animate-blur-out {
+    animation: k-blur-out var(--k-motion-slow) var(--k-ease-exit) both;
+  }
+
+
+  /* --------------------------------------------------------------------------
+     C-3. ATTENTION / EMPHASIS ANIMATIONS
+     -------------------------------------------------------------------------- */
+
+  /* ---- k-pulse ---- */
+  @keyframes k-pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+  }
+  .k-animate-pulse {
+    animation: k-pulse var(--k-motion-slow) var(--k-ease-standard) both infinite;
+  }
+
+  /* ---- k-shake ---- */
+  @keyframes k-shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 50%, 90% { transform: translateX(-4px); }
+    30%, 70%      { transform: translateX(4px); }
+  }
+  .k-animate-shake {
+    animation: k-shake var(--k-motion-slow) var(--k-ease-standard) both;
+  }
+
+  /* ---- k-wiggle ---- */
+  @keyframes k-wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    15%      { transform: rotate(-6deg); }
+    30%      { transform: rotate(5deg); }
+    45%      { transform: rotate(-4deg); }
+    60%      { transform: rotate(3deg); }
+    75%      { transform: rotate(-1deg); }
+  }
+  .k-animate-wiggle {
+    animation: k-wiggle var(--k-motion-slow) var(--k-ease-standard) both;
+  }
+
+  /* ---- k-bounce ---- */
+  @keyframes k-bounce {
+    0%, 100% { transform: translateY(0); }
+    25%      { transform: translateY(-8px); }
+    50%      { transform: translateY(0); }
+    75%      { transform: translateY(-4px); }
+  }
+  .k-animate-bounce {
+    animation: k-bounce 600ms var(--k-ease-standard) both infinite;
+  }
+
+  /* ---- k-heartbeat ---- */
+  @keyframes k-heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.12); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.15); }
+    56%      { transform: scale(1); }
+  }
+  .k-animate-heartbeat {
+    animation: k-heartbeat 1.2s var(--k-ease-standard) both infinite;
+  }
+
+  /* ---- k-flash ---- */
+  @keyframes k-flash {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75%      { opacity: 0; }
+  }
+  .k-animate-flash {
+    animation: k-flash 1s var(--k-ease-linear) both;
+  }
+
+  /* ---- k-rubber-band ---- */
+  @keyframes k-rubber-band {
+    0%   { transform: scaleX(1) scaleY(1); }
+    30%  { transform: scaleX(1.25) scaleY(0.75); }
+    40%  { transform: scaleX(0.75) scaleY(1.25); }
+    50%  { transform: scaleX(1.15) scaleY(0.85); }
+    65%  { transform: scaleX(0.95) scaleY(1.05); }
+    75%  { transform: scaleX(1.05) scaleY(0.95); }
+    100% { transform: scaleX(1) scaleY(1); }
+  }
+  .k-animate-rubber-band {
+    animation: k-rubber-band 800ms var(--k-ease-standard) both;
+  }
+
+  /* ---- k-jello ---- */
+  @keyframes k-jello {
+    0%, 100% { transform: skewX(0deg) skewY(0deg); }
+    15%      { transform: skewX(-8deg) skewY(-8deg); }
+    30%      { transform: skewX(6deg) skewY(6deg); }
+    45%      { transform: skewX(-4deg) skewY(-4deg); }
+    60%      { transform: skewX(2deg) skewY(2deg); }
+    75%      { transform: skewX(-1deg) skewY(-1deg); }
+  }
+  .k-animate-jello {
+    animation: k-jello 900ms var(--k-ease-standard) both;
+    transform-origin: center;
+  }
+
+  /* ---- k-tada ---- */
+  @keyframes k-tada {
+    0%        { transform: scale(1) rotate(0deg); }
+    10%, 20%  { transform: scale(0.9) rotate(-3deg); }
+    30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+    40%, 60%, 80%      { transform: scale(1.1) rotate(-3deg); }
+    100%      { transform: scale(1) rotate(0deg); }
+  }
+  .k-animate-tada {
+    animation: k-tada 1s var(--k-ease-standard) both;
+  }
+
+  /* ---- k-wobble ---- */
+  @keyframes k-wobble {
+    0%   { transform: translateX(0) rotate(0deg); }
+    15%  { transform: translateX(-15px) rotate(-5deg); }
+    30%  { transform: translateX(12px) rotate(3deg); }
+    45%  { transform: translateX(-9px) rotate(-3deg); }
+    60%  { transform: translateX(6px) rotate(2deg); }
+    75%  { transform: translateX(-3px) rotate(-1deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+  }
+  .k-animate-wobble {
+    animation: k-wobble 800ms var(--k-ease-standard) both;
+  }
+
+
+  /* --------------------------------------------------------------------------
+     C-4. LOOPING / DECORATIVE ANIMATIONS
+     -------------------------------------------------------------------------- */
+
+  /* ---- k-float ---- */
+  @keyframes k-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+  .k-animate-float {
+    animation: k-float 2.5s var(--k-ease-standard) infinite;
+  }
+
+  /* ---- k-sway ---- */
+  @keyframes k-sway {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(2deg); }
+    75%      { transform: rotate(-2deg); }
+  }
+  .k-animate-sway {
+    animation: k-sway 3s var(--k-ease-standard) infinite;
+    transform-origin: top center;
+  }
+
+  /* ---- k-breathe ---- */
+  @keyframes k-breathe {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.03); }
+  }
+  .k-animate-breathe {
+    animation: k-breathe 3.5s var(--k-ease-standard) infinite;
+  }
+
+  /* ---- k-shimmer ---- */
+  @keyframes k-shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .k-animate-shimmer {
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(1 0 0 / 0.12) 20%,
+      oklch(1 0 0 / 0.24) 50%,
+      oklch(1 0 0 / 0.12) 80%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: k-shimmer 1.8s var(--k-ease-linear) infinite;
+  }
+
+
+  /* --------------------------------------------------------------------------
+     C-5. SPRING-LIKE ANIMATIONS
+     -------------------------------------------------------------------------- */
+
+  /* ---- k-spring-in ---- */
+  @keyframes k-spring-in {
+    0%   { opacity: 0; transform: scale(0.6); }
+    50%  { opacity: 1; transform: scale(1.08); }
+    70%  { transform: scale(0.96); }
+    85%  { transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .k-animate-spring-in {
+    animation: k-spring-in var(--k-spring-duration) var(--k-ease-standard) both;
+  }
+
+  /* ---- k-spring-up ---- */
+  @keyframes k-spring-up {
+    0%   { opacity: 0; transform: translateY(2rem); }
+    50%  { opacity: 1; transform: translateY(-0.35rem); }
+    70%  { transform: translateY(0.15rem); }
+    85%  { transform: translateY(-0.05rem); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .k-animate-spring-up {
+    animation: k-spring-up var(--k-spring-duration) var(--k-ease-standard) both;
+  }
+
+  /* ---- k-spring-scale ---- */
+  @keyframes k-spring-scale {
+    0%   { transform: scale(0); }
+    30%  { transform: scale(1.12); }
+    50%  { transform: scale(0.94); }
+    65%  { transform: scale(1.04); }
+    80%  { transform: scale(0.98); }
+    90%  { transform: scale(1.01); }
+    100% { transform: scale(1); }
+  }
+  .k-animate-spring-scale {
+    animation: k-spring-scale 600ms var(--k-ease-standard) both;
+  }
+
+  /* ---- k-spring-rotate ---- */
+  @keyframes k-spring-rotate {
+    0%   { transform: rotate(-30deg); opacity: 0; }
+    35%  { transform: rotate(8deg); opacity: 1; }
+    55%  { transform: rotate(-4deg); }
+    70%  { transform: rotate(2deg); }
+    85%  { transform: rotate(-0.5deg); }
+    100% { transform: rotate(0); opacity: 1; }
+  }
+  .k-animate-spring-rotate {
+    animation: k-spring-rotate 600ms var(--k-ease-standard) both;
+  }
+
+  /* ---- k-spring-pop ---- */
+  @keyframes k-spring-pop {
+    0%   { transform: scale(0); opacity: 0; }
+    20%  { transform: scale(1.25); opacity: 1; }
+    40%  { transform: scale(0.88); }
+    55%  { transform: scale(1.1); }
+    70%  { transform: scale(0.96); }
+    85%  { transform: scale(1.03); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .k-animate-spring-pop {
+    animation: k-spring-pop var(--k-spring-duration) var(--k-ease-standard) both;
+  }
+
+
+  /* ==========================================================================
+     D. SCROLL-TRIGGERED REVEAL CLASSES
+     ========================================================================== */
+
+  /* ---- Base reveal (hidden state) ---- */
+
+  .k-reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                transform var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-down {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                transform var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-left {
+    opacity: 0;
+    transform: translateX(-2rem);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                transform var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-right {
+    opacity: 0;
+    transform: translateX(2rem);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                transform var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-scale {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                transform var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-blur {
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                filter var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-flip {
+    opacity: 0;
+    transform: perspective(600px) rotateX(-15deg);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                transform var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-rotate {
+    opacity: 0;
+    transform: rotate(-8deg) scale(0.95);
+    transition: opacity var(--k-motion-slow) var(--k-ease-enter),
+                transform var(--k-motion-slow) var(--k-ease-enter);
+  }
+
+  .k-reveal-spring {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity var(--k-motion-slow) var(--k-ease-spring),
+                transform var(--k-spring-duration) var(--k-ease-spring);
+  }
+
+  /* ---- Revealed state (applied by JS or animation-timeline) ---- */
+
+  .k-reveal--visible,
+  .k-reveal.is-visible,
+  .k-reveal-down--visible,
+  .k-reveal-down.is-visible,
+  .k-reveal-left--visible,
+  .k-reveal-left.is-visible,
+  .k-reveal-right--visible,
+  .k-reveal-right.is-visible,
+  .k-reveal-scale--visible,
+  .k-reveal-scale.is-visible,
+  .k-reveal-blur--visible,
+  .k-reveal-blur.is-visible,
+  .k-reveal-flip--visible,
+  .k-reveal-flip.is-visible,
+  .k-reveal-rotate--visible,
+  .k-reveal-rotate.is-visible,
+  .k-reveal-spring--visible,
+  .k-reveal-spring.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  /* ---- Stagger support ---- */
+
+  .k-reveal-stagger > *:nth-child(1)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 0); }
+  .k-reveal-stagger > *:nth-child(2)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 1); }
+  .k-reveal-stagger > *:nth-child(3)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 2); }
+  .k-reveal-stagger > *:nth-child(4)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 3); }
+  .k-reveal-stagger > *:nth-child(5)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 4); }
+  .k-reveal-stagger > *:nth-child(6)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 5); }
+  .k-reveal-stagger > *:nth-child(7)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 6); }
+  .k-reveal-stagger > *:nth-child(8)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 7); }
+  .k-reveal-stagger > *:nth-child(9)  { transition-delay: calc(var(--k-reveal-stagger-interval) * 8); }
+  .k-reveal-stagger > *:nth-child(10) { transition-delay: calc(var(--k-reveal-stagger-interval) * 9); }
+  .k-reveal-stagger > *:nth-child(11) { transition-delay: calc(var(--k-reveal-stagger-interval) * 10); }
+  .k-reveal-stagger > *:nth-child(12) { transition-delay: calc(var(--k-reveal-stagger-interval) * 11); }
+
+  /* ---- Progressive enhancement: CSS animation-timeline (Chromium 115+) ---- */
+
+  @supports (animation-timeline: view()) {
+    @keyframes k-reveal-timeline {
+      from { opacity: 0; transform: translateY(1.5rem); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .k-reveal:not(.is-visible):not(.k-reveal--visible) {
+      animation: k-reveal-timeline both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+      transition: none;
+    }
+  }
+
+
+  /* ==========================================================================
+     E. PAGE TRANSITION CLASSES
+     ========================================================================== */
+
+  /* ---- View Transitions API integration ---- */
+
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: k-fade-out var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+  ::view-transition-new(root) {
+    animation: k-fade-in var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- Slide transition ---- */
+
+  @keyframes k-vt-slide-out-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+  }
+  @keyframes k-vt-slide-in-right {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+
+  [data-k-transition="slide"]::view-transition-old(root) {
+    animation: k-vt-slide-out-left var(--k-motion-slow) var(--k-ease-exit) both;
+  }
+  [data-k-transition="slide"]::view-transition-new(root) {
+    animation: k-vt-slide-in-right var(--k-motion-slow) var(--k-ease-enter) both;
+  }
+
+  /* ---- Scale transition ---- */
+
+  [data-k-transition="scale"]::view-transition-old(root) {
+    animation: k-scale-out var(--k-motion-normal) var(--k-ease-exit) both;
+  }
+  [data-k-transition="scale"]::view-transition-new(root) {
+    animation: k-scale-in var(--k-motion-normal) var(--k-ease-enter) both;
+  }
+
+  /* ---- Flip transition ---- */
+
+  @keyframes k-vt-flip-out {
+    from { transform: perspective(800px) rotateY(0); opacity: 1; }
+    to   { transform: perspective(800px) rotateY(90deg); opacity: 0; }
+  }
+  @keyframes k-vt-flip-in {
+    from { transform: perspective(800px) rotateY(-90deg); opacity: 0; }
+    to   { transform: perspective(800px) rotateY(0); opacity: 1; }
+  }
+
+  [data-k-transition="flip"]::view-transition-old(root) {
+    animation: k-vt-flip-out var(--k-motion-slow) var(--k-ease-exit) both;
+  }
+  [data-k-transition="flip"]::view-transition-new(root) {
+    animation: k-vt-flip-in var(--k-motion-slow) var(--k-ease-enter) both;
+  }
+
+  /* ---- Crossfade transition ---- */
+
+  [data-k-transition="crossfade"]::view-transition-old(root) {
+    animation: k-fade-out var(--k-motion-slow) var(--k-ease-standard) both;
+  }
+  [data-k-transition="crossfade"]::view-transition-new(root) {
+    animation: k-fade-in var(--k-motion-slow) var(--k-ease-standard) both;
+  }
+
+  /* ---- Morph transition (scale + crossfade) ---- */
+
+  @keyframes k-vt-morph-out {
+    from { transform: scale(1); opacity: 1; filter: blur(0); }
+    to   { transform: scale(1.08); opacity: 0; filter: blur(4px); }
+  }
+  @keyframes k-vt-morph-in {
+    from { transform: scale(0.92); opacity: 0; filter: blur(4px); }
+    to   { transform: scale(1); opacity: 1; filter: blur(0); }
+  }
+
+  [data-k-transition="morph"]::view-transition-old(root) {
+    animation: k-vt-morph-out var(--k-motion-slow) var(--k-ease-exit) both;
+  }
+  [data-k-transition="morph"]::view-transition-new(root) {
+    animation: k-vt-morph-in var(--k-motion-slow) var(--k-ease-enter) both;
+  }
+
+  /* ---- SPA page-transition classes ---- */
+
+  .k-page-enter {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  .k-page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity var(--k-motion-normal) var(--k-ease-enter),
+                transform var(--k-motion-normal) var(--k-ease-enter);
+  }
+  .k-page-leave {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .k-page-leave-active {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition: opacity var(--k-motion-normal) var(--k-ease-exit),
+                transform var(--k-motion-normal) var(--k-ease-exit);
+  }
+
+  /* SPA variants: slide */
+  .k-page--slide .k-page-enter        { transform: translateX(100%); opacity: 1; }
+  .k-page--slide .k-page-enter-active { transform: translateX(0); }
+  .k-page--slide .k-page-leave-active { transform: translateX(-100%); opacity: 1; }
+
+  /* SPA variants: fade */
+  .k-page--fade .k-page-enter        { transform: none; }
+  .k-page--fade .k-page-enter-active { transform: none; }
+  .k-page--fade .k-page-leave        { transform: none; }
+  .k-page--fade .k-page-leave-active { transform: none; }
+
+  /* SPA variants: scale */
+  .k-page--scale .k-page-enter        { transform: scale(0.95); }
+  .k-page--scale .k-page-enter-active { transform: scale(1); }
+  .k-page--scale .k-page-leave-active { transform: scale(0.95); }
+
+  /* SPA variants: slide-up */
+  .k-page--slide-up .k-page-enter        { transform: translateY(100%); opacity: 1; }
+  .k-page--slide-up .k-page-enter-active { transform: translateY(0); }
+  .k-page--slide-up .k-page-leave-active { transform: translateY(-100%); opacity: 1; }
+
+
+  /* ==========================================================================
+     F. HOVER / INTERACTIVE MOTION
+     ========================================================================== */
+
+  .k-hover-lift {
+    transition: transform var(--k-motion-fast) var(--k-ease-standard),
+                box-shadow var(--k-motion-fast) var(--k-ease-standard);
+  }
+  .k-hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--k-shadow-md);
+  }
+
+  .k-hover-scale {
+    transition: transform var(--k-motion-fast) var(--k-ease-standard);
+  }
+  .k-hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .k-hover-glow {
+    transition: box-shadow var(--k-motion-normal) var(--k-ease-standard);
+  }
+  .k-hover-glow:hover {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--k-accent) 30%, transparent);
+  }
+
+  .k-hover-rotate {
+    transition: transform var(--k-motion-fast) var(--k-ease-spring);
+  }
+  .k-hover-rotate:hover {
+    transform: rotate(5deg);
+  }
+
+  .k-hover-spring {
+    transition: transform var(--k-motion-fast) var(--k-ease-spring);
+  }
+  .k-hover-spring:hover {
+    transform: scale(1.08);
+  }
+
+  .k-hover-tilt {
+    transition: transform var(--k-motion-fast) var(--k-ease-standard);
+    perspective: 600px;
+  }
+  .k-hover-tilt:hover {
+    transform: perspective(600px) rotateX(4deg) rotateY(-4deg);
+  }
+
+  .k-press-shrink {
+    transition: transform var(--k-motion-instant) var(--k-ease-standard);
+  }
+  .k-press-shrink:active {
+    transform: scale(0.96);
+  }
+
+  /* ---- Group hover interaction ---- */
+
+  .k-hover-group .k-hover-group-target {
+    transition: transform var(--k-motion-fast) var(--k-ease-standard),
+                opacity var(--k-motion-fast) var(--k-ease-standard);
+  }
+  .k-hover-group:hover .k-hover-group-target {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+
+
+  /* ==========================================================================
+     H. COMPONENT MOTION INTEGRATION
+     ========================================================================== */
+
+  /* ---- Card hover animations ---- */
+  .k-card.k-motion-hover {
+    transition: transform var(--k-motion-fast) var(--k-ease-standard),
+                box-shadow var(--k-motion-fast) var(--k-ease-standard);
+  }
+  .k-card.k-motion-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--k-shadow-md);
+  }
+
+  /* ---- Dialog enter/exit ---- */
+  .k-dialog.k-motion-enter {
+    animation: k-scale-in var(--k-motion-normal) var(--k-ease-spring) both;
+  }
+  .k-dialog.k-motion-exit {
+    animation: k-scale-out var(--k-motion-fast) var(--k-ease-exit) both;
+  }
+
+  /* ---- Toast slide in/out ---- */
+  .k-toast.k-motion-enter {
+    animation: k-slide-in-right var(--k-motion-normal) var(--k-ease-spring) both;
+  }
+  .k-toast.k-motion-exit {
+    animation: k-fade-out-right var(--k-motion-fast) var(--k-ease-exit) both;
+  }
+
+  /* ---- Menu reveal ---- */
+  .k-menu.k-motion-reveal .k-menu__panel {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+    transform-origin: top left;
+    transition: opacity var(--k-motion-fast) var(--k-ease-enter),
+                transform var(--k-motion-fast) var(--k-ease-spring);
+    pointer-events: none;
+  }
+  .k-menu.k-motion-reveal[open] .k-menu__panel,
+  .k-menu.k-motion-reveal .k-menu__panel.is-open {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+  }
+
+  /* ---- Accordion smooth open/close ---- */
+  .k-accordion.k-motion-smooth details {
+    overflow: hidden;
+  }
+  .k-accordion.k-motion-smooth details > :not(summary) {
+    transition: opacity var(--k-motion-fast) var(--k-ease-standard);
+  }
+  .k-accordion.k-motion-smooth details:not([open]) > :not(summary) {
+    opacity: 0;
+  }
+  .k-accordion.k-motion-smooth details[open] > :not(summary) {
+    opacity: 1;
+  }
+
+  /* ---- Tab panel transitions ---- */
+  .k-tabs.k-motion-fade .k-tabs__panel {
+    opacity: 0;
+    transition: opacity var(--k-motion-fast) var(--k-ease-standard);
+  }
+  .k-tabs.k-motion-fade .k-tabs__panel.is-active,
+  .k-tabs.k-motion-fade .k-tabs__panel[aria-hidden="false"] {
+    opacity: 1;
+  }
+
+} /* end @layer k-motion */
+
+
+/* ============================================================================
+   G. REDUCED MOTION ACCESSIBILITY (outside layer for highest specificity)
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Kill ALL kinetic-motion animations and transitions */
+  [class*="k-animate-"],
+  [class*="k-reveal"],
+  [class*="k-hover-"],
+  [class*="k-press-"],
+  [class*="k-transition-"],
+  .k-spring-in,
+  .k-spring-up,
+  .k-spring-scale,
+  .k-motion-enter,
+  .k-motion-exit {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  /* Reveal elements visible by default */
+  .k-reveal,
+  .k-reveal-down,
+  .k-reveal-left,
+  .k-reveal-right,
+  .k-reveal-scale,
+  .k-reveal-blur,
+  .k-reveal-flip,
+  .k-reveal-rotate,
+  .k-reveal-spring,
+  [class*="k-reveal-"] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* Keep functional transitions that are very fast (color feedback) */
+  .k-transition-colors {
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Page-transition elements */
+  .k-page-enter,
+  .k-page-enter-active,
+  .k-page-leave,
+  .k-page-leave-active {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Stagger support — no delays */
+  .k-reveal-stagger > * {
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Data attribute override to force motion even when prefers-reduced-motion is set */
+@media (prefers-reduced-motion: reduce) {
+  [data-k-force-motion] [class*="k-animate-"],
+  [data-k-force-motion] [class*="k-reveal"],
+  [data-k-force-motion] [class*="k-hover-"],
+  [data-k-force-motion] [class*="k-press-"],
+  [data-k-force-motion] [class*="k-transition-"],
+  [data-k-force-motion].k-animate-shimmer,
+  [data-k-force-motion].k-animate-float,
+  [data-k-force-motion].k-animate-sway,
+  [data-k-force-motion].k-animate-breathe {
+    animation: revert !important;
+    transition: revert !important;
+    transform: revert !important;
+    opacity: revert !important;
+    filter: revert !important;
+  }
+}

@@ -1,0 +1,24 @@
+/* Kinetic Fonts Pack - Google Fonts Integration */
+:root {
+  --k-font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --k-font-serif: 'Merriweather', Georgia, serif;
+  --k-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --k-font-display: 'Montserrat', sans-serif;
+}
+
+:root[data-k-font="inter"] { --k-font-sans: 'Inter', sans-serif; }
+:root[data-k-font="roboto"] { --k-font-sans: 'Roboto', sans-serif; }
+:root[data-k-font="poppins"] { --k-font-sans: 'Poppins', sans-serif; }
+:root[data-k-font="fira"] { --k-font-mono: 'Fira Code', monospace; }
+
+body {
+  font-family: var(--k-font-sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--k-font-display);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--k-font-mono);
+}

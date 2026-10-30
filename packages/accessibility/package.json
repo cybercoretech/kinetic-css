@@ -1,0 +1,11 @@
+{
+  "name": "@kinetic/accessibility",
+  "version": "0.3.0",
+  "description": "Accessibility utilities, focus management, and screen reader announcements for Kinetic CSS",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@kinetic-css/core": "workspace:*"
+  },
+  "license": "MIT"
+}
