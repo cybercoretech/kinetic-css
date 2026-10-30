@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/angular",
+  "version": "0.4.0",
+  "description": "Angular directives and component bindings for Kinetic CSS",
+  "main": "src/index.ts",
+  "license": "MIT"
+}

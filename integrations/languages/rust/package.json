@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/rust",
+  "version": "0.4.0",
+  "description": "Rust Leptos/Yew/Tera HTML macro and renderer helpers for Kinetic CSS",
+  "main": "src/lib.rs",
+  "license": "MIT"
+}

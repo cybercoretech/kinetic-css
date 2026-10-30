@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/elixir",
+  "version": "0.4.0",
+  "description": "Elixir Phoenix HTML/HEEx component helpers for Kinetic CSS",
+  "main": "lib/kinetic.ex",
+  "license": "MIT"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/solid",
+  "version": "0.4.0",
+  "description": "SolidJS primitives and bindings for Kinetic CSS",
+  "main": "src/index.ts",
+  "license": "MIT"
+}

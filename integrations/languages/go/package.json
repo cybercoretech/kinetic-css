@@ -1,0 +1,7 @@
+{
+  "name": "@kinetic/go",
+  "version": "0.4.0",
+  "description": "Go HTML/template helpers and renderers for Kinetic CSS",
+  "main": "kinetic.go",
+  "license": "MIT"
+}

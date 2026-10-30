@@ -5,6 +5,7 @@
   "license": "MIT",
   "files": [
     "css/*.css",
+    "assets/**/*",
     "README.md",
     "LICENSE",
     "CHANGELOG.md",
