@@ -50,7 +50,7 @@ jobs:
             cp -R assets _site/assets
           fi
 
-          # Convert local-preview paths to deployed root paths.
+          # Convert local-preview paths to deployed relative paths.
           python3 - <<'PYCODE'
           from pathlib import Path
 
@@ -59,11 +59,11 @@ jobs:
               if not path.exists():
                   continue
               content = path.read_text(encoding="utf-8")
-              content = content.replace("../css/", "/css/")
-              content = content.replace("../assets/", "/assets/")
+              content = content.replace("../css/", "css/")
+              content = content.replace("../assets/", "assets/")
               content = content.replace(
                   "new URL('../themes.json', import.meta.url)",
-                  "new URL('/themes.json', import.meta.url)"
+                  "new URL('./themes.json', import.meta.url)"
               )
               path.write_text(content, encoding="utf-8")
           PYCODE
