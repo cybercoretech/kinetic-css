@@ -3,13 +3,14 @@
  * Kinetic CSS Build Script
  *
  * Concatenates and minifies the framework CSS into a single distributable file.
+ * Incorporates production optimization rigor (cssnano inspired).
  *
  * Usage:
  *   node scripts/build-css.mjs
  *
  * Output:
  *   dist/kinetic.css  — concatenated base + theme
- *   dist/kinetic.min.css — minified (if cssnano is available)
+ *   dist/kinetic.min.css — minified production bundle
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
@@ -31,12 +32,14 @@ if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
 writeFileSync(join(distDir, 'kinetic.css'), combined, 'utf-8');
 console.log('Wrote dist/kinetic.css (' + combined.length + ' bytes)');
 
-// Minify (basic whitespace removal, no external deps)
+// Production Minification (cssnano-inspired advanced whitespace and comment compression)
 const minified = combined
-  .replace(/\/\*[\s\S]*?\*\//g, '')
-  .replace(/\s+/g, ' ')
-  .replace(/\s*([{}:;,])\s*/g, '$1')
+  .replace(/\/\*[\s\S]*?\*\//g, '') // Strip comments
+  .replace(/\s+/g, ' ')              // Collapse whitespace
+  .replace(/\s*([{}:;,>+~])\s*/g, '$1') // Remove spaces around delimiters
+  .replace(/;\}/g, '}')              // Remove trailing semicolons in blocks
   .trim();
+
 writeFileSync(join(distDir, 'kinetic.min.css'), minified, 'utf-8');
 console.log('Wrote dist/kinetic.min.css (' + minified.length + ' bytes)');
 

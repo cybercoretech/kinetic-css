@@ -1,22 +1,25 @@
-# Kinetic CSS
+# ⚡ Kinetic CSS v0.3.0
 
-**Fluid by nature. Responsive by context.** Kinetic is a small, standalone, mobile-first CSS framework. It is designed around three ideas: fluid scales, container-aware components, and a global density mode.
+**Fluid by nature. Responsive by context.** Kinetic CSS is a high-performance, framework-agnostic design toolkit combining Tailwind-style atomic utilities with Bootstrap-grade components and Cybercore-Minimalist aesthetics. Built entirely on modern CSS with zero runtime JavaScript required for styling.
 
-- No JavaScript runtime
-- No compiler, package manager, or build step
-- No external dependencies
-- Modern CSS: cascade layers, custom properties, `clamp()`, container queries, `light-dark()`, and OKLCH colors
+- 🚫 **Zero JS Runtime Styling:** Pure CSS architecture with native browser primitives.
+- 📐 **Fluid-First Architecture:** Continuous scaling across viewports using `clamp()` instead of arbitrary breakpoints.
+- 🧱 **Container-Aware by Context:** Components react to their own available container width via `@container`.
+- ⚡ **Utility-Component Mashup:** Exhaustive atomic utilities combined with high-fidelity UI components and modern layout primitives (`kbox`).
+- 🔮 **Next-Gen CSS Ready:** Proactive support for Anchor Positioning, Scroll-Driven Animations, View Transitions, and Typed Custom Properties (`@property`).
 
-## Quick start
+---
 
-### Via CDN
+## 🚀 Quick Start
+
+### 🌐 Via CDN
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic-theme.css">
 ```
 
-### Via package
+### 📦 Via Package Manager
 
 ```bash
 npm install kinetic-css
@@ -27,175 +30,69 @@ import "kinetic-css";
 import "kinetic-css/theme.css";
 ```
 
-### Self-hosted
+---
 
-Copy `css/kinetic.css` and `css/kinetic-theme.css` into your project and load them in the document head:
+## 📦 Core Architecture & Primitives
 
+### 1. 📦 Modern Layout Primitive (`kbox`)
+Say goodbye to verbose flexbox utility chains. Use `.k-box` for clean, expressive layouts:
 ```html
-<link rel="stylesheet" href="/css/kinetic.css">
+<div class="k-box k-box--col k-box--center k-box--gap-4">
+  <h2 class="k-text-2xl k-font-bold">Centered Content</h2>
+  <p class="k-muted">Fluid spacing and alignment made effortless.</p>
+</div>
 ```
 
-Optional theme presets:
-
+### 2. 📐 12-Column Fluid Grid (`.k-row`, `.k-col-*`)
+Responsive layouts powered by CSS Grid with fluid gutters:
 ```html
-<link rel="stylesheet" href="/css/kinetic-theme.css">
+<div class="k-row">
+  <div class="k-col-12 k-col-md-8">Main content area (span 8)</div>
+  <div class="k-col-12 k-col-md-4">Sidebar area (span 4)</div>
+</div>
 ```
 
-Use semantic HTML and add Kinetic classes where you want the framework's behavior.
+### 3. ⚡ Exhaustive Utility Layer (`k-utilities`)
+Comprehensive atomic classes inspired by Tailwind:
+- **Display & Flex:** `.k-flex`, `.k-grid`, `.k-flex-col`, `.k-items-center`, `.k-justify-between`
+- **Fluid Spacing:** `.k-p-1` through `.k-p-6`, `.k-px-*`, `.k-py-*`, `.k-m-*`, `.k-mx-auto`
+- **Typography:** `.k-text-xs` to `.k-text-5xl`, `.k-font-bold`, `.k-text-center`, `.k-uppercase`, `.k-truncate`
+- **Sizing & Borders:** `.k-w-full`, `.k-rounded-lg`, `.k-border`, `.k-shadow-md`, `.k-shadow-glow`
+- **State Modifiers:** `.k-is-active`, `.k-is-open`, `.k-is-disabled`, `.k-has-shadow`, `.k-has-border`
+- **Accessibility & Visibility:** `.k-sr-only` (screen readers), `.k-show-desktop`, `.k-hide-mobile`
 
-```html
-<main class="k-shell k-region k-stack">
-  <h1>Build something that moves.</h1>
-  <p class="k-prose k-muted">Fluid typography and spacing adapt continuously.</p>
-  <div class="k-grid" style="--k-min: 17rem">
-    <article class="k-card k-stack">
-      <h2>Card title</h2>
-      <p>Cards flow into as many columns as fit.</p>
-      <a class="k-button k-button--primary" href="#">Continue</a>
-    </article>
-  </div>
-</main>
+### 4. 💎 High-Fidelity Cybercore/Minimalist Components
+- **Glassmorphism & Glow Cards:** `.k-card--glass`, `.k-card--glow`
+- **Floating Labels:** `.k-floating` form pattern with pure CSS state animation
+- **Offcanvas Slide-Over Panels:** `.k-offcanvas`
+- **Button Groups:** `.k-button-group` for connected action toolbars
+
+### 5. 🔮 Phase 6 Next-Gen CSS APIs
+- **Typed Custom Properties (`@property`):** Smooth hue rotations and gradient animations.
+- **Scroll-Driven Animations (`animation-timeline: view()`):** `.k-scroll-fade` for hardware-accelerated scroll reveals.
+- **Anchor Positioning (`anchor-name`):** Native tethered popovers and tooltips without JS math.
+- **View Transitions (`view-transition-name`):** App-like state morphing.
+
+### 6. 🛠️ DX & Type-Safe Tooling (`@kinetic/ts`, `@kinetic/js`)
+- **Type-Safe Tokens (`KineticTokens`):** Instant autocomplete and type safety for TypeScript projects.
+- **Dynamic Theme Controller (`ThemeController`):** High-performance runtime hue and custom property injection.
+
+---
+
+## 🛠️ Build & Tooling
+
+```bash
+# Build framework distribution files (dist/kinetic.css & dist/kinetic.min.css)
+npm run build
+
+# Run stylelint checks
+npm run lint
+
+# Run automated test suite
+npm test
 ```
 
-## The Kinetic difference
+---
 
-### 1. Fluid scale
-
-Spacing and type tokens use `clamp()` so they interpolate instead of jumping between fixed viewport breakpoints. Override any token at the root or a local scope.
-
-### 2. Container-aware components
-
-`.k-card` and `.k-nav` establish inline-size containers. `.k-card--adaptive` changes its internal composition at 34rem of *its own width*. This lets the same component work in a sidebar, grid, or full-width page without viewport-specific variants.
-
-### 3. Density as a design axis
-
-Set one attribute on `<html>` to tune density:
-
-```html
-<html data-k-density="compact">      <!-- compact -->
-<html data-k-density="comfortable">  <!-- default -->
-<html data-k-density="spacious">     <!-- relaxed -->
-```
-
-Density-aware components read `--k-density`. You can apply it to your own component styles too.
-
-## What's new in v0.2.0
-
-- **Application patterns**: `.k-dialog` (native `<dialog>`), `.k-tabs` (CSS-only tab panels via hidden radios), `.k-accordion` (`<details>`), `.k-menu` (CSS disclosure), `[data-k-tooltip]`.
-- **Navigation patterns**: `.k-header`, `.k-footer`, `.k-breadcrumb`.
-- **Responsive data display**: `.k-table`, `.k-table-wrap`.
-- **Feedback & loading**: `.k-alert` (+ `--info/--success/--warning/--danger`), `.k-skeleton`, `.k-progress`, `.k-spinner`, `.k-avatar`.
-- **Native controls**: `accent-color` for checkboxes and radios.
-- **Animations**: `k-skeleton-slide`, `k-spin` keyframes.
-- **Distribution**: npm package (`kinetic-css`) and CDN entry points.
-
-## Core classes
-
-| Area | Classes |
-|---|---|
-| Containers | `k-shell`, `k-prose`, `k-region` |
-| Layout | `k-stack`, `k-cluster`, `k-grid`, `k-split`, `k-center`, `k-flow` |
-| Components | `k-card`, `k-button`, `k-field`, `k-input`, `k-select`, `k-textarea`, `k-badge`, `k-nav`, `k-divider` |
-| Application | `k-header`, `k-footer`, `k-breadcrumb`, `k-tabs`, `k-accordion`, `k-menu`, `k-dialog`, `[data-k-tooltip]` |
-| Feedback & data | `k-alert`, `k-table`, `k-table-wrap`, `k-skeleton`, `k-progress`, `k-spinner`, `k-avatar` |
-| Utilities | `k-muted`, `k-accent`, `k-surface`, `k-rounded`, `k-shadow`, `k-hidden`, `k-w-full`, `k-text-center`, `k-gap-*`, `k-pad-*` |
-
-### Layout recipes
-
-```html
-<!-- Auto-fit grid. Set the minimum card width locally. -->
-<div class="k-grid" style="--k-min: 18rem; --k-gap: 1.25rem">...</div>
-
-<!-- Vertical rhythm -->
-<section class="k-stack" style="--k-gap: 2rem">...</section>
-
-<!-- Wrapping inline controls -->
-<div class="k-cluster" style="--k-gap: .75rem">...</div>
-
-<!-- Split layout; stacks on small screens -->
-<div class="k-split" style="--k-gap: 2rem">...</div>
-```
-
-## Design tokens
-
-The public token namespace is prefixed `--k-` to reduce collisions. Important tokens include:
-
-- Color: `--k-bg`, `--k-surface`, `--k-surface-raised`, `--k-ink`, `--k-muted`, `--k-line`, `--k-accent`
-- Spacing: `--k-space-1` through `--k-space-8`
-- Type: `--k-text-xs` through `--k-text-3xl`
-- Shape/elevation: `--k-radius-*`, `--k-shadow-*`
-- Motion: `--k-ease`, `--k-duration`
-- Layout: `--k-content`, `--k-reading`, `--k-gutter`
-
-Change the accent hue by setting `--k-hue` and `--k-accent` in your own stylesheet. Optional theme presets are in `css/kinetic-theme.css` (`ocean`, `ember`, `violet`). Example: `<html data-k-theme="ocean">`.
-
-## Accessibility
-
-Kinetic preserves semantic HTML, provides visible `:focus-visible` outlines, respects `prefers-reduced-motion`, uses real labels for form controls in examples, and avoids encoding meaning in color alone. Always provide accessible names and appropriate ARIA only when needed by your markup.
-
-## Browser support
-
-Kinetic uses modern CSS features including container queries, cascade layers, OKLCH, `light-dark()`, and logical properties. Target current evergreen browsers. If supporting older browsers is a requirement, add a project-specific fallback layer; Kinetic does not ship legacy polyfills.
-
-## Files
-
-- `css/kinetic.css` — complete framework
-- `css/kinetic-theme.css` — optional accent presets
-- `package.json` — npm package manifest (`kinetic-css`)
-- `index.html` — live component showcase
-- `CHANGELOG.md` — release notes
-- `LICENSE` — MIT
-
-## Theming API
-
-Kinetic CSS exposes a comprehensive theming API via CSS custom properties. See [docs/theming](docs/theming/README.md) for the full token list.
-
-### Full token override example
-
-```css
-:root {
-  --k-hue: 35;
-  --k-accent: oklch(68% .2 35);
-  --k-bg: #0a0a0a;
-  --k-surface: #121212;
-  --k-ink: #f0f0f0;
-  --k-muted: #777;
-  --k-line: #333;
-}
-```
-
-### Dark-mode default toggle (no JavaScript)
-
-Use a checkbox and the `color-scheme` CSS property:
-
-```html
-<input type="checkbox" id="theme-toggle" class="k-toogle">
-<label for="theme-toggle" class="k-toogle__label">⚫︎</label>
-```
-
-```css
-html { color-scheme: light dark; }
-input#theme-toggle { position: absolute; inset: -9999px; }
-input#theme-toggle:checked ~ html { color-scheme: dark; }
-```
-
-No JS runtime required. See [docs/theming](docs/theming/README.md) for details.
-
-## Documentation
-
-- [Overview](docs/README.md)
-- [Theming](docs/theming/README.md)
-- [Patterns](docs/patterns/README.md)
-- [API reference](docs/api/README.md)
-- [Components](docs/components/) - per-component guides
-
-## Adding Kinetic to a project
-
-1. Load the framework stylesheet (CDN, package, or self-hosted — see Quick start).
-2. Add the design tokens you want to override on `:root` or at a narrower scope.
-3. Use semantic HTML plus `k-*` classes for layout, components, and utilities.
-4. For app patterns (dialog, tabs, accordion, menu, tooltip), use the semantic elements described above; Kinetic styles them without JavaScript.
-
-## License
-
-MIT. See `LICENSE`.
+## 📄 License
+MIT. See [LICENSE](LICENSE).

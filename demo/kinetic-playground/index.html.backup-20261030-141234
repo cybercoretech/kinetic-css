@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" data-k-theme="dark" data-k-density="comfortable">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100e19">
+<title>Kinetic CSS — Playground</title>
+<link rel="stylesheet" href="../../css/kinetic.css">
+<link rel="stylesheet" href="../../css/kinetic-theme.css">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="container topbar">
+  <div class="brand"><span class="brand-mark">K</span> KINETIC CSS <span class="pill">PLAYGROUND</span></div>
+  <div class="controls">
+    <label for="theme">Theme</label>
+    <select id="theme"><option value="dark">Dark</option><option value="light">Light</option></select>
+    <label for="density">Density</label>
+    <select id="density"><option value="compact">Compact</option><option value="comfortable" selected>Comfortable</option><option value="spacious">Spacious</option></select>
+  </div>
+</header>
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">A responsive CSS toolkit</div>
+      <h1>Make room<br>for <span class="gradient">momentum.</span></h1>
+      <p>A hands-on tour of Kinetic CSS: adaptive layouts, fluid design, thoughtful components, and a little motion. Change the controls and see the page respond.</p>
+      <div class="actions">
+        <a class="demo-button primary" href="#features">Explore features ↓</a>
+        <a class="demo-button" href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="orbit" aria-label="Abstract kinetic orbital illustration">
+      <div class="orbit-core">K</div>
+      <div class="orbit-label">LAYOUT · FLOW · ADAPT</div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-head">
+      <div class="eyebrow">01 / The essentials</div>
+      <h2>Small toolkit. Big range.</h2>
+      <p>Build interfaces that adapt to their content and their environment.</p>
+    </div>
+    <div class="cards">
+      <article class="panel"><div class="icon">↗</div><h3>Fluid by default</h3><p>Responsive sizing and flexible layouts help interfaces move naturally between screen sizes.</p></article>
+      <article class="panel"><div class="icon">▦</div><h3>Adaptive components</h3><p>Container-aware components respond to the space they actually have.</p></article>
+      <article class="panel"><div class="icon">◉</div><h3>Density controls</h3><p>Explore compact, comfortable, and spacious presentation modes.</p></article>
+      <article class="panel"><div class="icon">⌘</div><h3>Native-friendly</h3><p>Use browser primitives like details and dialog without adding a JavaScript framework.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">02 / Adaptive layout lab</div>
+      <h2>Same component. Different space.</h2>
+      <p>Resize the preview area to see its card layout switch at the container breakpoint.</p>
+    </div>
+    <div class="panel lab">
+      <div>
+        <h3>Try the container</h3>
+        <p>Drag the handle on the preview panel's lower-right corner to resize it.</p>
+        <div class="swatch">
+          <button type="button" data-width="100%">Wide</button>
+          <button type="button" data-width="75%">Medium</button>
+          <button type="button" data-width="48%">Narrow</button>
+        </div>
+        <p style="margin-top:20px">This demo uses CSS container queries, so the component reacts to its parent rather than the viewport.</p>
+      </div>
+      <div class="preview" id="resize-preview" style="resize:horizontal;overflow:auto;min-width:180px;max-width:100%">
+        <div class="preview-card">
+          <div class="preview-card-inner">
+            <div class="icon" style="margin:0">✦</div>
+            <div><strong>Adaptive card</strong><span>Resize this container</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">03 / Density studio</div>
+      <h2>Find your rhythm.</h2>
+      <p>Switch density above or use these presets to compare the same content.</p>
+    </div>
+    <div class="cards">
+      <article class="panel"><span class="pill">COMPACT</span><h3 style="margin-top:12px">Less space</h3><p>For information-dense dashboards and focused workflows.</p></article>
+      <article class="panel"><span class="pill">COMFORTABLE</span><h3 style="margin-top:12px">Balanced</h3><p>A versatile baseline for everyday interfaces.</p></article>
+      <article class="panel"><span class="pill">SPACIOUS</span><h3 style="margin-top:12px">More room</h3><p>For relaxed reading and touch-friendly layouts.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">04 / Components</div>
+      <h2>Useful building blocks.</h2>
+      <p>Interactive examples, with no frontend framework required.</p>
+    </div>
+    <div class="panel">
+      <div class="tabs" role="tablist" aria-label="Component examples">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="tab-buttons" id="tab-button-1">Buttons</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="tab-feedback" id="tab-button-2">Feedback</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="tab-progress" id="tab-button-3">Progress</button>
+      </div>
+      <div class="tab-panel active" id="tab-buttons" role="tabpanel" aria-labelledby="tab-button-1">
+        <div class="actions">
+          <button class="demo-button primary" id="toast-button">Primary action</button>
+          <button class="demo-button" id="dialog-button">Open dialog</button>
+          <button class="demo-button" type="button" disabled>Disabled</button>
+        </div>
+        <pre><code>&lt;button class="k-button k-button--primary"&gt;
+  Get started
+&lt;/button&gt;</code></pre>
+      </div>
+      <div class="tab-panel" id="tab-feedback" role="tabpanel" aria-labelledby="tab-button-2">
+        <div class="alert info">Information: your layout is adapting to its container.</div>
+        <div class="alert success">Success: the demo is running locally.</div>
+        <div class="alert warning">Heads up: try a narrower viewport.</div>
+      </div>
+      <div class="tab-panel" id="tab-progress" role="tabpanel" aria-labelledby="tab-button-3">
+        <p>Build progress <strong>72%</strong></p>
+        <div class="progress" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">05 / Native HTML</div>
+      <h2>Less JavaScript. More platform.</h2>
+      <p>Accessible browser features can do a lot of the heavy lifting.</p>
+    </div>
+    <div class="panel">
+      <details open><summary>What makes a layout adaptive?</summary><p style="margin-top:10px">A container query lets a component respond to the size of its containing element, instead of relying only on viewport breakpoints.</p></details>
+      <details><summary>Why use native dialog?</summary><p style="margin-top:10px">The dialog element provides built-in modal behavior, focus handling, and Escape-key dismissal in modern browsers.</p></details>
+      <details><summary>Can I use this without a framework?</summary><p style="margin-top:10px">Yes. Kinetic CSS is a stylesheet toolkit. This page uses a small amount of plain JavaScript for its interactive controls.</p></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">06 / Data display</div>
+      <h2>A little structure goes a long way.</h2>
+    </div>
+    <div class="panel table-wrap">
+      <table>
+        <thead><tr><th>MODULE</th><th>ROLE</th><th>STATUS</th><th>MODE</th></tr></thead>
+        <tbody>
+          <tr><td>Layout</td><td>Responsive structure</td><td><span class="pill">Ready</span></td><td>Fluid</td></tr>
+          <tr><td>Components</td><td>Reusable UI</td><td><span class="pill">Ready</span></td><td>Adaptive</td></tr>
+          <tr><td>Tokens</td><td>Visual consistency</td><td><span class="pill">Ready</span></td><td>Configurable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer><div class="container">
+  <div class="brand"><span class="brand-mark">K</span> KINETIC CSS</div>
+  <p>Designed to move with your interface.</p>
+  <a href="https://www.npmjs.com/package/kinetic-css" target="_blank" rel="noreferrer">View on npm ↗</a>
+  <span> · </span>
+  <a href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+</div></footer>
+
+<dialog id="demo-dialog">
+  <div class="eyebrow">A native browser feature</div>
+  <h2>Hello, Kinetic.</h2>
+  <p>This modal uses the HTML dialog element. Press Escape or use the button below to close it.</p>
+  <button class="demo-button primary" id="close-dialog">Close dialog</button>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite">Nice. Your interaction worked.</div>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const theme = document.querySelector("#theme");
+  const density = document.querySelector("#density");
+  theme.addEventListener("change", () => {
+    root.dataset.kTheme = theme.value;
+  });
+  density.addEventListener("change", () => {
+    root.dataset.kDensity = density.value;
+  });
+
+  const preview = document.querySelector("#resize-preview");
+  document.querySelectorAll("[data-width]").forEach(button => {
+    button.addEventListener("click", () => {
+      preview.style.width = button.dataset.width;
+    });
+  });
+
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((item, i) => {
+        item.setAttribute("aria-selected", String(i === index));
+        panels[i].classList.toggle("active", i === index);
+      });
+    });
+    tab.addEventListener("keydown", event => {
+      if (!["ArrowRight", "ArrowLeft"].includes(event.key)) return;
+      event.preventDefault();
+      const next = (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[next].focus();
+      tabs[next].click();
+    });
+  });
+
+  const dialog = document.querySelector("#demo-dialog");
+  document.querySelector("#dialog-button").addEventListener("click", () => dialog.showModal());
+  document.querySelector("#close-dialog").addEventListener("click", () => dialog.close());
+
+  const toast = document.querySelector("#toast");
+  let toastTimeout;
+  document.querySelector("#toast-button").addEventListener("click", () => {
+    toast.classList.add("show");
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => toast.classList.remove("show"), 2400);
+  });
+})();
+</script>
+</body>
+</html>

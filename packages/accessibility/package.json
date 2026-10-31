@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "dependencies": {
-    "@kinetic-css/core": "workspace:*"
+    "@kinetic/core": "^0.3.0"
   },
   "license": "MIT"
 }
