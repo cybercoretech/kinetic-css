@@ -79,8 +79,25 @@
     const tree = $('#theme-tree'), preview = $('#theme-preview');
 
     async function loadThemes() {
+      const paths = [
+        new URL('../themes.json', import.meta.url).href,
+        './themes.json',
+        '../themes.json',
+        '/themes.json',
+        'themes.json'
+      ];
+      let res;
+      for (const p of paths) {
+        try {
+          const r = await fetch(p);
+          if (r.ok) {
+            res = r;
+            break;
+          }
+        } catch {}
+      }
+      if (!res) throw new Error('Could not fetch themes.json');
       try {
-        const res = await fetch(new URL('../themes.json', import.meta.url));
         themes = await res.json();
         $('#theme-total').textContent = themes.length;
         $('#family-total').textContent = FAMILY_ORDER.length;
