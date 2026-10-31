@@ -1,5 +1,5 @@
 {
-  "name": "@cybercoretech/js",
+  "name": "@kinetic/js",
   "version": "0.4.0",
   "description": "Kinetic JS runtime add-on",
   "main": "./src/index.js",

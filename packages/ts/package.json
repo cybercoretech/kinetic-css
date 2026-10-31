@@ -1,5 +1,5 @@
 {
-  "name": "@cybercoretech/ts",
+  "name": "@kinetic/ts",
   "version": "0.4.0",
   "description": "TypeScript declarations for Kinetic CSS runtime controllers",
   "types": "src/index.d.ts",

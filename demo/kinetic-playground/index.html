@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" data-k-theme="dark" data-k-density="comfortable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15111f">
+  <title>Kinetic CSS — Interactive Playground</title>
+  <link rel="stylesheet" href="../../css/kinetic.css">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+
+<header class="k-header">
+  <div class="k-shell k-nav">
+    <a class="k-header__brand" href="#" aria-label="Kinetic CSS home">
+      <span class="brand-mark">K</span> KINETIC<span class="k-accent">.</span>
+    </a>
+    <nav class="k-header__nav" aria-label="Main navigation">
+      <a href="#layouts">Layouts</a>
+      <a href="#components">Components</a>
+      <a href="#tokens">Design tokens</a>
+      <a href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+    <div class="k-cluster">
+      <label class="visually-hidden" for="theme-select">Theme</label>
+      <select class="k-select toolbar-select" id="theme-select">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+      </select>
+      <label class="visually-hidden" for="density-select">Density</label>
+      <select class="k-select toolbar-select" id="density-select">
+        <option value="compact">Compact</option>
+        <option value="comfortable" selected>Comfortable</option>
+        <option value="spacious">Spacious</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main class="k-shell">
+
+  <section class="k-region hero">
+    <div class="k-split hero-layout">
+      <div class="k-stack hero-copy">
+        <span class="k-badge k-badge--accent">CSS TOOLKIT · VERSION 0.2.0</span>
+        <h1>Interfaces that<br><span class="gradient-text">move with you.</span></h1>
+        <p class="k-prose hero-lead">
+          Meet Kinetic CSS. A fluid-first, container-aware toolkit for
+          building responsive interfaces without a JavaScript framework
+          or a build step.
+        </p>
+        <div class="k-cluster">
+          <a class="k-button k-button--primary" href="#layouts">Explore the toolkit ↓</a>
+          <a class="k-button k-button--outline" href="https://www.npmjs.com/package/kinetic-css" target="_blank" rel="noreferrer">View on npm ↗</a>
+        </div>
+        <div class="k-cluster hero-meta">
+          <span class="k-badge">Zero dependencies</span>
+          <span class="k-badge">Fluid-first</span>
+          <span class="k-badge">Container queries</span>
+        </div>
+      </div>
+
+      <div class="hero-art k-center" aria-label="Kinetic CSS orbital illustration">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+        <div class="orbit-core">K</div>
+        <span class="orbit-caption">LAYOUT · FLOW · ADAPT</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-region" id="layouts">
+    <div class="section-heading k-stack">
+      <span class="k-badge k-badge--accent">01 / LAYOUT SYSTEM</span>
+      <h2>Structure without the struggle.</h2>
+      <p class="k-muted">Kinetic's layout primitives handle the responsive heavy lifting.</p>
+    </div>
+
+    <div class="k-grid feature-grid">
+      <article class="k-card" data-k-lift>
+        <div class="feature-icon">↗</div>
+        <div class="k-card__body">
+          <h3>Fluid layouts</h3>
+          <p class="k-muted">Use <code>k-shell</code>, <code>k-stack</code>, and <code>k-cluster</code> to create adaptable page structures.</p>
+          <span class="k-badge k-badge--accent">Layout primitives</span>
+        </div>
+      </article>
+
+      <article class="k-card" data-k-lift>
+        <div class="feature-icon">▦</div>
+        <div class="k-card__body">
+          <h3>Responsive grids</h3>
+          <p class="k-muted">The <code>k-grid</code> utility uses auto-fit and minmax to adapt to available space.</p>
+          <span class="k-badge k-badge--accent">Auto-fit grid</span>
+        </div>
+      </article>
+
+      <article class="k-card" data-k-lift>
+        <div class="feature-icon">◉</div>
+        <div class="k-card__body">
+          <h3>Container-aware</h3>
+          <p class="k-muted">Components can respond to their own container instead of only watching the viewport.</p>
+          <span class="k-badge k-badge--accent">Container queries</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="k-region">
+    <div class="section-heading k-stack">
+      <span class="k-badge k-badge--accent">02 / ADAPTIVE COMPONENTS</span>
+      <h2>One card. More than one layout.</h2>
+      <p class="k-muted">The real <code>k-card--adaptive</code> component changes its layout at its container breakpoint.</p>
+    </div>
+
+    <div class="k-split adaptive-lab">
+      <div class="k-stack">
+        <h3>Resize the container</h3>
+        <p class="k-muted">Use the presets or drag the bottom-right corner of the preview.</p>
+        <div class="k-cluster">
+          <button class="k-button k-button--outline" data-preview-width="100%">Wide</button>
+          <button class="k-button k-button--outline" data-preview-width="75%">Medium</button>
+          <button class="k-button k-button--outline" data-preview-width="48%">Narrow</button>
+        </div>
+        <div class="k-alert k-alert--info">
+          <div class="k-alert__title">Container query</div>
+          <div class="k-alert__body">
+            <code>k-card--adaptive</code> switches to a two-column layout
+            when its own container reaches 34rem.
+          </div>
+        </div>
+      </div>
+
+      <div class="resize-stage" id="resize-stage">
+        <article class="k-card k-card--adaptive adaptive-card">
+          <div class="adaptive-art k-center">
+            <span>✦</span>
+          </div>
+          <div class="k-card__body">
+            <span class="k-badge k-badge--accent">ADAPTIVE</span>
+            <h3>Made for its container.</h3>
+            <p class="k-muted">This is the framework's actual adaptive card pattern. Change the width and watch it respond.</p>
+            <a href="#components">Explore components →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-region" id="components">
+    <div class="section-heading k-stack">
+      <span class="k-badge k-badge--accent">03 / COMPONENT LIBRARY</span>
+      <h2>Useful pieces. Ready to compose.</h2>
+      <p class="k-muted">Real Kinetic component classes, demonstrated in context.</p>
+    </div>
+
+    <div class="k-grid component-grid">
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Buttons</h3>
+          <p class="k-muted">Consistent actions and variants.</p>
+          <div class="k-cluster">
+            <button class="k-button k-button--primary">Primary</button>
+            <button class="k-button k-button--outline">Outline</button>
+            <button class="k-button k-button--danger">Danger</button>
+          </div>
+          <pre><code>.k-button
+.k-button--primary
+.k-button--outline
+.k-button--danger</code></pre>
+        </div>
+      </article>
+
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Badges</h3>
+          <p class="k-muted">Compact status and category indicators.</p>
+          <div class="k-cluster">
+            <span class="k-badge">Default</span>
+            <span class="k-badge k-badge--accent">Accent</span>
+          </div>
+          <pre><code>.k-badge
+.k-badge--accent</code></pre>
+        </div>
+      </article>
+
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Form controls</h3>
+          <p class="k-muted">Inputs with shared design tokens.</p>
+          <label class="k-field">
+            Your project name
+            <input class="k-input" type="text" placeholder="e.g. kinetic-playground">
+          </label>
+          <label class="k-field">
+            Choose a layout
+            <select class="k-select">
+              <option>Responsive grid</option>
+              <option>Split layout</option>
+              <option>Vertical stack</option>
+            </select>
+          </label>
+          <pre><code>.k-field
+.k-input
+.k-select</code></pre>
+        </div>
+      </article>
+
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Feedback</h3>
+          <p class="k-muted">Communicate application states.</p>
+          <div class="k-alert k-alert--success">
+            <div class="k-alert__title">Success</div>
+            <div>Everything is looking good.</div>
+          </div>
+          <div class="k-alert k-alert--warning">
+            <div class="k-alert__title">Heads up</div>
+            <div>Try a narrower viewport.</div>
+          </div>
+          <pre><code>.k-alert
+.k-alert--success
+.k-alert--warning
+.k-alert--danger</code></pre>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="k-region">
+    <div class="section-heading k-stack">
+      <span class="k-badge k-badge--accent">04 / INTERACTION PATTERNS</span>
+      <h2>Native HTML. Kinetic styling.</h2>
+      <p class="k-muted">A few interactive patterns that don't need a frontend framework.</p>
+    </div>
+
+    <div class="k-split">
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>CSS-only tabs</h3>
+          <p class="k-muted">Switch between these examples.</p>
+          <div class="k-tabs demo-tabs">
+            <div class="k-cluster tab-controls" role="tablist" aria-label="Example tabs">
+              <button class="k-tabs__tab is-active" role="tab" aria-selected="true" aria-controls="panel-layout" id="tab-layout">Layout</button>
+              <button class="k-tabs__tab" role="tab" aria-selected="false" aria-controls="panel-theme" id="tab-theme">Theme</button>
+              <button class="k-tabs__tab" role="tab" aria-selected="false" aria-controls="panel-utility" id="tab-utility">Utilities</button>
+            </div>
+            <div class="k-tabs__panel is-active" id="panel-layout" role="tabpanel" aria-labelledby="tab-layout">
+              <strong>Layout primitives</strong>
+              <p class="k-muted">Compose shells, stacks, clusters, grids, and split layouts.</p>
+            </div>
+            <div class="k-tabs__panel" id="panel-theme" role="tabpanel" aria-labelledby="tab-theme" hidden>
+              <strong>Theme tokens</strong>
+              <p class="k-muted">Use CSS custom properties to shape your interface.</p>
+            </div>
+            <div class="k-tabs__panel" id="panel-utility" role="tabpanel" aria-labelledby="tab-utility" hidden>
+              <strong>Utility classes</strong>
+              <p class="k-muted">Use spacing, surface, color, and alignment helpers.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Accordion</h3>
+          <p class="k-muted">Native details and summary elements.</p>
+          <div class="k-accordion">
+            <details open>
+              <summary>What is container-aware CSS?</summary>
+              <div class="k-accordion__panel">
+                Components respond to the dimensions of their container, not just the viewport.
+              </div>
+            </details>
+            <details>
+              <summary>Does Kinetic require JavaScript?</summary>
+              <div class="k-accordion__panel">
+                The stylesheet has no runtime dependency. JavaScript here is only for playground interactions.
+              </div>
+            </details>
+            <details>
+              <summary>Is a build step required?</summary>
+              <div class="k-accordion__panel">
+                No build step is required to use the published CSS file.
+              </div>
+            </details>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="k-region" id="tokens">
+    <div class="section-heading k-stack">
+      <span class="k-badge k-badge--accent">05 / DESIGN TOKENS</span>
+      <h2>Consistency, built in.</h2>
+      <p class="k-muted">Explore the framework's color, spacing, and density tokens.</p>
+    </div>
+
+    <div class="k-split">
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Theme and density</h3>
+          <p class="k-muted">Use the selectors in the header to switch the framework theme and density.</p>
+          <div class="token-swatch">
+            <span style="background:var(--k-accent)"></span>
+            <span style="background:var(--k-success)"></span>
+            <span style="background:var(--k-warning)"></span>
+            <span style="background:var(--k-danger)"></span>
+            <span style="background:var(--k-surface-raised)"></span>
+          </div>
+          <p class="k-muted">Core tokens: <code>--k-accent</code>, <code>--k-surface</code>, <code>--k-ink</code>, <code>--k-muted</code>.</p>
+        </div>
+      </article>
+
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Spacing scale</h3>
+          <div class="spacing-demo">
+            <div><code>--k-space-2</code><span style="--sample-size:var(--k-space-2)"></span></div>
+            <div><code>--k-space-3</code><span style="--sample-size:var(--k-space-3)"></span></div>
+            <div><code>--k-space-4</code><span style="--sample-size:var(--k-space-4)"></span></div>
+            <div><code>--k-space-5</code><span style="--sample-size:var(--k-space-5)"></span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="k-region">
+    <div class="section-heading k-stack">
+      <span class="k-badge k-badge--accent">06 / DATA & LOADING</span>
+      <h2>More than just layout.</h2>
+      <p class="k-muted">A few more components from the framework stylesheet.</p>
+    </div>
+
+    <div class="k-grid">
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Progress</h3>
+          <p class="k-muted">A framework progress bar.</p>
+          <div class="k-progress" role="progressbar" aria-label="Project progress" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
+            <div class="k-progress__bar" style="--k-progress-value:72%"></div>
+          </div>
+          <span class="k-badge k-badge--accent">72% complete</span>
+        </div>
+      </article>
+
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Loading states</h3>
+          <div class="k-cluster">
+            <span class="k-spinner" role="status" aria-label="Loading"></span>
+            <span class="k-muted">Loading...</span>
+          </div>
+          <div class="k-skeleton" style="width:85%"></div>
+          <div class="k-skeleton" style="width:65%"></div>
+          <div class="k-skeleton" style="width:45%"></div>
+        </div>
+      </article>
+
+      <article class="k-card">
+        <div class="k-card__body">
+          <h3>Avatars</h3>
+          <div class="k-cluster">
+            <span class="k-avatar">K</span>
+            <span class="k-avatar">CSS</span>
+            <span class="k-avatar">JS</span>
+          </div>
+          <p class="k-muted">Simple identity markers.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="k-region">
+    <div class="section-heading k-stack">
+      <span class="k-badge k-badge--accent">07 / DATA DISPLAY</span>
+      <h2>Clear, responsive tables.</h2>
+    </div>
+    <div class="k-table-wrap">
+      <table class="k-table">
+        <thead>
+          <tr><th>COMPONENT</th><th>CLASS</th><th>CAPABILITY</th><th>STATUS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Layout</td><td><code>k-grid</code></td><td>Auto-fit responsive grid</td><td><span class="k-badge k-badge--accent">Ready</span></td></tr>
+          <tr><td>Card</td><td><code>k-card</code></td><td>Container-aware component</td><td><span class="k-badge k-badge--accent">Ready</span></td></tr>
+          <tr><td>Button</td><td><code>k-button</code></td><td>Interactive variants</td><td><span class="k-badge k-badge--accent">Ready</span></td></tr>
+          <tr><td>Feedback</td><td><code>k-alert</code></td><td>Contextual status messages</td><td><span class="k-badge k-badge--accent">Ready</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="k-region closing">
+    <div class="k-card k-center closing-card">
+      <span class="k-badge k-badge--accent">YOUR NEXT INTERFACE STARTS HERE</span>
+      <h2>Keep things in motion.</h2>
+      <p class="k-muted">Install Kinetic CSS and build something that adapts.</p>
+      <div class="k-cluster">
+        <a class="k-button k-button--primary" href="https://www.npmjs.com/package/kinetic-css" target="_blank" rel="noreferrer">Install from npm ↗</a>
+        <a class="k-button k-button--outline" href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noreferrer">Explore the source ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="k-footer">
+  <div class="k-shell k-footer__inner">
+    <span><strong>KINETIC CSS</strong> · Fluid-first. Container-aware.</span>
+    <span>Built with the actual Kinetic CSS v0.2.0 stylesheet.</span>
+  </div>
+</footer>
+
+<dialog class="k-dialog" id="demo-dialog">
+  <div class="k-stack">
+    <span class="k-badge k-badge--accent">NATIVE HTML DIALOG</span>
+    <h2>It just works.</h2>
+    <div class="k-dialog__body">
+      This modal uses the browser's native dialog element, styled with
+      the Kinetic <code>k-dialog</code> component.
+    </div>
+    <div class="k-dialog__actions">
+      <button class="k-button k-button--primary" id="close-dialog">Close dialog</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="k-toast-container" id="toast-container" aria-live="polite"></div>
+
+</body>
+</html>

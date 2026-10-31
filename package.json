@@ -18,7 +18,7 @@
     "./theme": "./css/kinetic-theme.css"
   },
   "scripts": {
-    "build": "echo 'Kinetic CSS has no build step.'",
+    "build": "node scripts/build-css.mjs",
     "test": "node --test",
     "lint": "npx stylelint \"css/**/*.css\" --config .stylelintrc.json"
   },

@@ -1,0 +1,91 @@
+name: Deploy Kinetic CSS Site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'site/**'
+      - 'css/**'
+      - 'assets/**'
+      - 'themes.json'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Run lint, build, and test verification
+        run: |
+          npm run lint
+          npm run build
+          npm test
+
+      - name: Prepare site
+        run: |
+          mkdir -p _site/css
+          cp -R site/. _site/
+          cp -R css/. _site/css/
+          cp themes.json _site/themes.json
+          if [ -d assets ]; then
+            cp -R assets _site/assets
+          fi
+
+          # Convert local-preview paths to deployed root paths.
+          python3 - <<'PYCODE'
+          from pathlib import Path
+
+          for name in ("index.html", "styles.css", "script.js"):
+              path = Path("_site") / name
+              if not path.exists():
+                  continue
+              content = path.read_text(encoding="utf-8")
+              content = content.replace("../css/", "/css/")
+              content = content.replace("../assets/", "/assets/")
+              content = content.replace(
+                  "new URL('../themes.json', import.meta.url)",
+                  "new URL('/themes.json', import.meta.url)"
+              )
+              path.write_text(content, encoding="utf-8")
+          PYCODE
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

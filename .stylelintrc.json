@@ -6,7 +6,6 @@
     "length-zero-no-unit": true,
     "block-no-empty": true,
     "declaration-block-no-duplicate-properties": true,
-    "max-empty-lines": 3,
     "color-hex-length": "short",
     "property-no-vendor-prefix": true,
     "selector-pseudo-class-no-unknown": true,
