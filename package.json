@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "node scripts/build-css.mjs",
-    "test": "node --test",
+    "test": "node --test tests/**/*.test.mjs",
     "lint": "npx stylelint \"css/**/*.css\" --config .stylelintrc.json"
   },
   "keywords": [
