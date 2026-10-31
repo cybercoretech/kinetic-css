@@ -80,11 +80,12 @@
 
     async function loadThemes() {
       const paths = [
-        new URL('../themes.json', import.meta.url).href,
         './themes.json',
+        '/kinetic-css/themes.json',
         '../themes.json',
         '/themes.json',
-        'themes.json'
+        'themes.json',
+        new URL('../themes.json', import.meta.url).href
       ];
       let res;
       for (const p of paths) {
