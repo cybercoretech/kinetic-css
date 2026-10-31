@@ -1,0 +1,42 @@
+{
+  "name": "kinetic-css",
+  "version": "0.2.0",
+  "description": "Kinetic CSS — fluid-first, container-aware responsive CSS framework.",
+  "license": "MIT",
+  "files": [
+    "css/*.css",
+    "assets/**/*",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "package.json"
+  ],
+  "main": "css/kinetic.css",
+  "style": "css/kinetic.css",
+  "exports": {
+    ".": "./css/kinetic.css",
+    "./theme": "./css/kinetic-theme.css"
+  },
+  "scripts": {
+    "build": "echo 'Kinetic CSS has no build step.'",
+    "test": "echo 'No runtime dependency; visual regression OK manually.'",
+    "lint": "npx stylelint \"css/**/*.css\" --config .stylelintrc.json"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "responsive",
+    "fluid",
+    "container-queries",
+    "design-tokens",
+    "mobile-first"
+  ],
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "react": "^19.3.1",
+    "stylelint-scss": "^7.4.0",
+    "svelte": "^5.57.3",
+    "typescript": "^7.0.2",
+    "vue": "^3.5.44"
+  }
+}
