@@ -465,16 +465,39 @@ function renderTree() {
     const active = showcasePackages[activeShowcaseIndex];
     showcaseDisplay.innerHTML = `
       <div style="display: flex; align-items: center; justify-content: space-between;">
-        <h3 style="margin: 0; display: flex; align-items: center; gap: 10px; color: var(--cyan);"><span style="font-size: 20px;">${active.glyph}</span> ${active.name}</h3>
+        <h3 style="margin: 0; display: flex; align-items: center; gap: 10px; color: #a5b4fc;"><span style="font-size: 20px;">${active.glyph}</span> ${active.name}</h3>
         <span class="status">${active.version}</span>
       </div>
-      <p style="color: #aebbc8; font-size: 13.5px; margin: 0;">${active.desc}</p>
+      <p style="color: #94a3b8; font-size: 13.5px; margin: 0;">${active.desc}</p>
       <pre>{\n  "name": "${active.name}",\n  "version": "${active.version}",\n  "description": "${active.desc}",\n  "main": "src/index.js",\n  "license": "${active.license}",\n  "manifest": "${active.file}"\n}</pre>
-      <div style="display: flex; gap: 8px; margin-top: 4px;">
-        <span style="background: rgba(46,230,246,.1); color: var(--cyan); padding: 3px 8px; border-radius: 4px; font-size: 11px; border: 1px solid rgba(46,230,246,.3);">license: ${active.license}</span>
-        <span style="background: rgba(155,107,255,.1); color: var(--purple); padding: 3px 8px; border-radius: 4px; font-size: 11px; border: 1px solid rgba(155,107,255,.3);">source: ${active.file}</span>
+      
+      <!-- Interactive Opacity / Animation Slider Example inspired by reference -->
+      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(129, 149, 248, 0.2); border-radius: 12px; padding: 14px; display: grid; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11.5px; color: #94a3b8; font-family: var(--mono);">
+          <span>Animations & Opacity Preview</span>
+          <span id="slider-val-label" style="color: #a5b4fc;">50%</span>
+        </div>
+        <input type="range" id="showcase-slider" min="0" max="100" value="50" style="accent-color: #818cf8; width: 100%; cursor: pointer;">
+        <div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #64748b;">
+          <span>0%<br>opacity: 0</span>
+          <span style="text-align: center;">50%<br>opacity: 1</span>
+          <span style="text-align: right;">100%<br>opacity: 0</span>
+        </div>
       </div>
     `;
+
+    setTimeout(() => {
+      const slider = document.getElementById('showcase-slider');
+      const label = document.getElementById('slider-val-label');
+      if (slider && label) {
+        slider.addEventListener('input', (e) => {
+          const val = e.target.value;
+          label.textContent = val + '%';
+          const opacity = val == 50 ? 1 : (val / 100);
+          showcaseDisplay.style.opacity = Math.max(0.3, opacity);
+        });
+      }
+    }, 50);
   }
   renderShowcase();
 })();
