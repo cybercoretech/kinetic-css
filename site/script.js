@@ -351,9 +351,9 @@ function renderTree() {
       }
     };
 
-    $$('.card[data-principle]').forEach(card => {
-      card.addEventListener('click', () => {
-        const detail = principleDetails[card.dataset.principle];
+    $$('.card-details-btn[data-principle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const detail = principleDetails[btn.dataset.principle];
         if (!detail) return;
 
         principleNumber.textContent = `// ${detail.number} · principle`;
@@ -420,3 +420,170 @@ function renderTree() {
   });
 })();
 // END KINETIC ECOSYSTEM INTERACTIONS
+
+// KINETIC SHOWCASE CIRCULAR SLIDER
+(() => {
+  const showcasePackages = [
+    { name: '@kinetic/themes', version: 'v0.2.0', glyph: '🎨', desc: 'Theme presets, custom design tokens, dark/light/auto modes, brand customization, and runtime theme switching for Kinetic CSS.', license: 'MIT', file: 'packages/themes/package.json' },
+    { name: '@kinetic/fonts', version: 'v0.3.0', glyph: '🔤', desc: 'Google Fonts integration and font switching utility for Kinetic CSS.', license: 'MIT', file: 'packages/fonts/package.json' },
+    { name: '@kinetic/layout', version: 'v0.2.0', glyph: '▦', desc: 'Advanced grids, masonry layouts, and split panes for Kinetic CSS.', license: 'MIT', file: 'packages/layout/package.json' },
+    { name: '@kinetic/core', version: 'v0.3.0', glyph: '⚙️', desc: 'Kinetic API Standard (KAS) Reference Core.', license: 'MIT', file: 'packages/core/package.json' },
+    { name: '@kinetic/navigation', version: 'v0.2.0', glyph: '🧭', desc: 'Advanced navigation components including menus, mega menus, and breadcrumbs for Kinetic CSS.', license: 'MIT', file: 'packages/navigation/package.json' },
+    { name: '@kinetic/ts', version: 'v0.4.0', glyph: '🔷', desc: 'TypeScript declarations for Kinetic CSS runtime controllers.', license: 'MIT', file: 'packages/ts/package.json' },
+    { name: '@kinetic/js', version: 'v0.4.0', glyph: '🟣', desc: 'Kinetic JS runtime add-on.', license: 'MIT', file: 'packages/js/package.json' }
+  ];
+
+  const dialContainer = document.getElementById('showcase-dial');
+  const showcaseDisplay = document.getElementById('showcase-display');
+  let activeShowcaseIndex = 0;
+
+  function renderShowcase() {
+    if (!dialContainer || !showcaseDisplay) return;
+    dialContainer.innerHTML = '';
+    const radius = 95;
+    const center = 140;
+
+    showcasePackages.forEach((pkg, idx) => {
+      const angle = (idx / showcasePackages.length) * 2 * Math.PI - Math.PI / 2;
+      const x = center + radius * Math.cos(angle) - 22;
+      const y = center + radius * Math.sin(angle) - 22;
+
+      const node = document.createElement('button');
+      node.className = `dial-node ${idx === activeShowcaseIndex ? 'active' : ''}`;
+      node.type = 'button';
+      node.style.left = `${x}px`;
+      node.style.top = `${y}px`;
+      node.title = pkg.name;
+      node.textContent = pkg.glyph;
+      node.addEventListener('click', () => {
+        activeShowcaseIndex = idx;
+        renderShowcase();
+      });
+      dialContainer.appendChild(node);
+    });
+
+    const active = showcasePackages[activeShowcaseIndex];
+    showcaseDisplay.innerHTML = `
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h3 style="margin: 0; display: flex; align-items: center; gap: 10px; color: var(--cyan);"><span style="font-size: 20px;">${active.glyph}</span> ${active.name}</h3>
+        <span class="status">${active.version}</span>
+      </div>
+      <p style="color: #aebbc8; font-size: 13.5px; margin: 0;">${active.desc}</p>
+      <pre>{\n  "name": "${active.name}",\n  "version": "${active.version}",\n  "description": "${active.desc}",\n  "main": "src/index.js",\n  "license": "${active.license}",\n  "manifest": "${active.file}"\n}</pre>
+      <div style="display: flex; gap: 8px; margin-top: 4px;">
+        <span style="background: rgba(46,230,246,.1); color: var(--cyan); padding: 3px 8px; border-radius: 4px; font-size: 11px; border: 1px solid rgba(46,230,246,.3);">license: ${active.license}</span>
+        <span style="background: rgba(155,107,255,.1); color: var(--purple); padding: 3px 8px; border-radius: 4px; font-size: 11px; border: 1px solid rgba(155,107,255,.3);">source: ${active.file}</span>
+      </div>
+    `;
+  }
+  renderShowcase();
+})();
+
+window.copyAndToast = function(text, label = 'Copied to clipboard') {
+  navigator.clipboard.writeText(text);
+  let container = document.querySelector('.cyber-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'cyber-toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = 'cyber-toast';
+  toast.innerHTML = `<span class="cyber-toast-dot"></span><span>${label}: <code>${text}</code></span>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('hiding');
+    setTimeout(() => toast.remove(), 200);
+  }, 2500);
+};
+
+// GLOBAL SEARCH MODAL
+(() => {
+  const searchModal = document.getElementById('search-modal');
+  const searchInput = document.getElementById('global-search-input');
+  const searchResults = document.getElementById('global-search-results');
+  const searchBtn = document.querySelector('.bar-search-btn');
+
+  if (!searchModal || !searchInput || !searchResults) return;
+
+  const searchableItems = [
+    { title: 'Fluid Scale', desc: 'Typography and spacing move smoothly between viewport sizes using clamp().', type: 'Principle', link: '#features' },
+    { title: 'Container Queries', desc: 'Cards and navigation react to their own available width.', type: 'Principle', link: '#features' },
+    { title: 'Density Modes', desc: 'Switch between compact, comfortable, and spacious with one attribute.', type: 'Principle', link: '#features' },
+    { title: '@kinetic/a11y', desc: 'Accessibility utilities, focus management, and screen reader announcements.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/adaptive', desc: 'Adaptive Intelligence engine for Kinetic CSS.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/breakpoint', desc: 'Adaptive Breakpoint Engine using container queries.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/core', desc: 'Kinetic API Standard (KAS) Reference Core.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/data', desc: 'Responsive tables, data cards, progress indicators, chart adapters.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/density', desc: 'Universal Density Engine for Kinetic CSS.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/feedback', desc: 'Feedback components including toasts, alerts, and loading states.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/fonts', desc: 'Google Fonts integration and font switching utility.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/forms', desc: 'Form layouts, validation states, input groups, and accessible messaging.', type: 'Package', link: '#ecosystem' },
+    { title: '@cybercoretech/js', desc: 'Kinetic JS runtime add-on.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/layout', desc: 'Advanced grids, masonry layouts, and split panes.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/micro', desc: 'Micro-interactions and physics-based fluid transitions.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/motion', desc: 'CSS transitions, animations, scroll reveals, and spring physics.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/navigation', desc: 'Advanced navigation components including menus, mega menus.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/overlay', desc: 'Overlays including dialogs, popovers, drawers, and tooltips.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/states', desc: 'Standardized component state system.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/themes', desc: 'Theme presets, custom design tokens, dark/light/auto modes.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/tokens-generator', desc: 'Design Token Generator for Kinetic CSS.', type: 'Package', link: '#ecosystem' },
+    { title: '@cybercoretech/ts', desc: 'TypeScript declarations for Kinetic CSS runtime controllers.', type: 'Package', link: '#ecosystem' },
+    { title: '@kinetic/cli', desc: 'Command line interface for scaffolding and inspecting projects.', type: 'Tool', link: '#ecosystem' },
+    { title: '@kinetic/studio', desc: 'Visual theme builder and component studio.', type: 'Tool', link: '#ecosystem' },
+    { title: 'Interactive Showcase', desc: 'Interactive ecosystem preview with circular dial slider.', type: 'Showcase', link: '#showcase' }
+  ];
+
+  function openSearch() {
+    if (typeof searchModal.showModal === 'function') {
+      searchModal.showModal();
+      searchInput.focus();
+      renderResults('');
+    }
+  }
+
+  if (searchBtn) {
+    searchBtn.addEventListener('click', openSearch);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  function renderResults(query) {
+    const q = query.toLowerCase().trim();
+    const matches = searchableItems.filter(item => 
+      !q || item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q) || item.type.toLowerCase().includes(q)
+    );
+
+    searchResults.innerHTML = '';
+    if (matches.length === 0) {
+      searchResults.innerHTML = `<p style="color: var(--dim); padding: 12px; text-align: center;">No matching ecosystem components found.</p>`;
+      return;
+    }
+
+    matches.forEach(item => {
+      const el = document.createElement('a');
+      el.href = item.link;
+      el.style.cssText = 'display: grid; gap: 4px; padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--line-hi); border-radius: 6px; text-decoration: none; color: inherit; transition: border-color .2s;';
+      el.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <strong style="color: var(--white); font-size: 13.5px;">${item.title}</strong>
+          <span style="font-size: 10.5px; padding: 2px 6px; background: rgba(46,230,246,.1); color: var(--cyan); border-radius: 4px; border: 1px solid rgba(46,230,246,.3);">${item.type}</span>
+        </div>
+        <p style="margin: 0; color: var(--muted); font-size: 12px; line-height: 1.4;">${item.desc}</p>
+      `;
+      el.addEventListener('click', () => {
+        searchModal.close();
+      });
+      searchResults.appendChild(el);
+    });
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    renderResults(e.target.value);
+  });
+})();

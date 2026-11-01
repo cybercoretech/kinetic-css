@@ -29,15 +29,28 @@
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="bar">
-    <a class="wordmark" href="#top" aria-label="Kinetic CSS home">
-      <span class="wm-fallback"><span class="wm-k">K</span><span class="wm-i">I</span><span class="wm-n">N</span><span class="wm-e">E</span><span class="wm-t">T</span><span class="wm-c">I</span><span class="wm-c">C</span><span class="wm-rest"> CSS</span></span>
+    <a class="bar-brand" href="#top" aria-label="Kinetic CSS home">
+      <div class="bar-logo"><img src="../assets/icons/kinetic-mark.svg" alt="" width="18" height="18"></div>
+      <div class="bar-title-group">
+        <div style="display: flex; align-items: baseline; gap: 10px;">
+          <span class="bar-title" style="letter-spacing: .12em; font-weight: 700;">KINETIC CSS</span>
+          <span class="bar-path" style="font-size: 11.5px;">~/cybercore/kinetic-css <b>main</b></span>
+        </div>
+      </div>
     </a>
-    <span class="bar-path" aria-hidden="true">~/cybercore/kinetic-css <b>main</b></span>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="#features">PRINCIPLES</a>
+      <a href="#themes">THEMES</a>
+      <a href="#ecosystem">ECOSYSTEM</a>
+      <a href="#showcase">SHOWCASE</a>
+      <a href="#install">INSTALL</a>
+    </nav>
     <div class="bar-right">
+      <button class="bar-search-btn" type="button"><span style="width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 8px var(--acid);"></span> SEARCH <kbd>⌘K</kbd></button>
       <select class="theme-select" id="theme-select" aria-label="Select theme">
         <option value="">DEFAULT THEME</option>
       </select>
-      <a class="bar-gh" href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span><span class="sr"> (opens in a new tab)</span></a>
+      <a class="bar-gh" href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noopener">GitHub ↗</a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
@@ -53,24 +66,37 @@
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="dot"></span>cybercore / kinetic-css · v0.2.0</p>
+      <div class="hero-copy card" style="padding: 28px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <img src="../assets/icons/kinetic-mark.svg" alt="Kinetic Logo" width="28" height="28" style="display: block;">
+          <p class="eyebrow" style="margin: 0;"><span class="dot"></span>cybercore / kinetic-css · v0.3.0</p>
+        </div>
         <h1>Fluid by <em>nature.</em></h1>
         <p class="lede">A responsive framework that adapts to the space a component actually has — not just the size of the screen. No JavaScript. No compiler. No build step. Modern CSS: cascade layers, custom properties, clamp(), container queries, light-dark(), and OKLCH colors.</p>
         <div class="cta">
-          <a class="btn btn-primary" href="#demo">▶ explore the system</a>
+          <a class="btn btn-primary" href="#features">▶ explore the system</a>
           <a class="btn btn-ghost" href="#install">npm install kinetic-css</a>
         </div>
       </div>
-      <div class="hero-term" aria-label="Example session">
-        <div class="term-bar"><i></i><i></i><i></i><span>zsh — kinetic-css</span></div>
-        <pre class="term"><span class="tl"><b class="p">❯</b> npm install kinetic-css</span>
-<span class="tl"><b class="ok">✓</b> kinetic-css@0.2.0 installed</span>
+      <div style="display: grid; gap: 16px;">
+        <div class="hero-term" aria-label="Example session">
+          <div class="term-bar"><i></i><i></i><i></i><span>zsh — kinetic-css</span></div>
+          <pre class="term"><span class="tl"><b class="p">❯</b> npm install kinetic-css</span>
+<span class="tl"><b class="ok">✓</b> kinetic-css@0.3.0 installed</span>
 <span class="tl"><b class="p">❯</b> &lt;link rel="stylesheet" href="../css/kinetic.css"&gt;</span>
 <span class="tl"><b class="ok">✓</b> fluid scale active</span>
 <span class="tl"><b class="ok">✓</b> container queries enabled</span>
 <span class="tl"><b class="ok">✓</b> density modes: compact · comfortable · spacious</span>
 <span class="tl"><b class="p">❯</b> <span class="caret"></span></span></pre>
+        </div>
+        <div class="code" id="install">
+          <div class="code-bar"><span>npm</span><button class="btn btn-ghost btn-sm" type="button" onclick="window.copyAndToast('npm install kinetic-css', 'NPM command copied')">copy</button></div>
+          <pre><span class="ln">1</span>npm install kinetic-css</pre>
+        </div>
+        <div class="code">
+          <div class="code-bar"><span>cdn</span><button class="btn btn-ghost btn-sm" type="button" onclick="window.copyAndToast('&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css&quot;&gt;', 'CDN link copied')">copy</button></div>
+          <pre><span class="ln">1</span>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css"&gt;</pre>
+        </div>
       </div>
     </section>
 
@@ -82,23 +108,23 @@
       </header>
 
       <div class="features">
-        <button class="card" type="button" data-principle="fluid">
+        <div class="card">
           <div class="card-top"><span class="glyph">01</span><h3>Fluid Scale</h3></div>
           <p>Typography and spacing move smoothly between viewport sizes using clamp(). No pile of arbitrary breakpoints.</p>
-          <div class="card-foot"><span class="status">working</span><span class="open">details →</span></div>
-        </button>
+          <div class="card-foot"><span class="status">working</span><button type="button" class="card-details-btn" data-principle="fluid">details →</button></div>
+        </div>
 
-        <button class="card" type="button" data-principle="container">
+        <div class="card">
           <div class="card-top"><span class="glyph">02</span><h3>Container Queries</h3></div>
           <p>Cards and navigation react to their own available width. The same component works in a sidebar, grid, or full-width page.</p>
-          <div class="card-foot"><span class="status">working</span><span class="open">details →</span></div>
-        </button>
+          <div class="card-foot"><span class="status">working</span><button type="button" class="card-details-btn" data-principle="container">details →</button></div>
+        </div>
 
-        <button class="card" type="button" data-principle="density">
+        <div class="card">
           <div class="card-top"><span class="glyph">03</span><h3>Density Modes</h3></div>
           <p>Switch between compact, comfortable, and spacious with one attribute. No rewriting component styles.</p>
-          <div class="card-foot"><span class="status">working</span><span class="open">details →</span></div>
-        </button>
+          <div class="card-foot"><span class="status">working</span><button type="button" class="card-details-btn" data-principle="density">details →</button></div>
+        </div>
       </div>
 
       <dialog class="principle-dialog" id="kinetic-principle-dialog"
@@ -167,9 +193,7 @@
     </header>
     <div class="features eco-grid">
       
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-accessibility"
-            aria-haspopup="dialog" aria-controls="eco-package-accessibility-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">♿</span>
         <h3>@kinetic/a11y</h3>
@@ -177,14 +201,12 @@
       <p>Accessibility utilities, focus management, and screen reader announcements for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.3.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-accessibility" aria-haspopup="dialog" aria-controls="eco-package-accessibility-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-adaptive"
-            aria-haspopup="dialog" aria-controls="eco-package-adaptive-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🧠</span>
         <h3>@kinetic/adaptive</h3>
@@ -192,14 +214,12 @@
       <p>Adaptive Intelligence engine for Kinetic CSS — automatic container-aware layout adjustment based on space, content density, and flow</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-adaptive" aria-haspopup="dialog" aria-controls="eco-package-adaptive-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-breakpoint"
-            aria-haspopup="dialog" aria-controls="eco-package-breakpoint-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">📐</span>
         <h3>@kinetic/breakpoint</h3>
@@ -207,14 +227,12 @@
       <p>Adaptive Breakpoint Engine using container queries and fluid interpolation instead of fixed media queries</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-breakpoint" aria-haspopup="dialog" aria-controls="eco-package-breakpoint-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-core"
-            aria-haspopup="dialog" aria-controls="eco-package-core-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">⚙️</span>
         <h3>@kinetic/core</h3>
@@ -222,14 +240,12 @@
       <p>Kinetic API Standard (KAS) Reference Core</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.3.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-core" aria-haspopup="dialog" aria-controls="eco-package-core-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-data"
-            aria-haspopup="dialog" aria-controls="eco-package-data-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">📊</span>
         <h3>@kinetic/data</h3>
@@ -237,14 +253,12 @@
       <p>Responsive tables, data cards, progress indicators, chart adapters, and sorting/filtering interfaces for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-data" aria-haspopup="dialog" aria-controls="eco-package-data-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-density"
-            aria-haspopup="dialog" aria-controls="eco-package-density-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🎚️</span>
         <h3>@kinetic/density</h3>
@@ -252,14 +266,12 @@
       <p>Universal Density Engine for Kinetic CSS — globally scales spacing, control sizes, and component proportions</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-density" aria-haspopup="dialog" aria-controls="eco-package-density-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-feedback"
-            aria-haspopup="dialog" aria-controls="eco-package-feedback-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">💬</span>
         <h3>@kinetic/feedback</h3>
@@ -267,14 +279,12 @@
       <p>Feedback components including toasts, alerts, and loading states for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-feedback" aria-haspopup="dialog" aria-controls="eco-package-feedback-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-fonts"
-            aria-haspopup="dialog" aria-controls="eco-package-fonts-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🔤</span>
         <h3>@kinetic/fonts</h3>
@@ -282,14 +292,12 @@
       <p>Google Fonts integration and font switching utility for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.3.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-fonts" aria-haspopup="dialog" aria-controls="eco-package-fonts-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-forms"
-            aria-haspopup="dialog" aria-controls="eco-package-forms-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">📝</span>
         <h3>@kinetic/forms</h3>
@@ -297,12 +305,10 @@
       <p>Form layouts, validation states, input groups, and accessible messaging for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-forms" aria-haspopup="dialog" aria-controls="eco-package-forms-dialog">details →</button>
       </div>
-    </button>
-<button class="card eco-card" type="button"
-            data-eco-open="eco-package-js"
-            aria-haspopup="dialog" aria-controls="eco-package-js-dialog">
+    </div>
+<div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🟣</span>
         <h3>@cybercoretech/js</h3>
@@ -310,14 +316,12 @@
       <p>Kinetic JS runtime add-on</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.4.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-js" aria-haspopup="dialog" aria-controls="eco-package-js-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-layout"
-            aria-haspopup="dialog" aria-controls="eco-package-layout-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">▦</span>
         <h3>@kinetic/layout</h3>
@@ -325,14 +329,12 @@
       <p>Advanced grids, masonry layouts, and split panes for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-layout" aria-haspopup="dialog" aria-controls="eco-package-layout-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-micro"
-            aria-haspopup="dialog" aria-controls="eco-package-micro-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">✨</span>
         <h3>@kinetic/micro</h3>
@@ -340,14 +342,12 @@
       <p>Micro-interactions and physics-based fluid transitions for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-micro" aria-haspopup="dialog" aria-controls="eco-package-micro-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-motion"
-            aria-haspopup="dialog" aria-controls="eco-package-motion-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">〰️</span>
         <h3>@kinetic/motion</h3>
@@ -355,14 +355,12 @@
       <p>Kinetic Motion — CSS transitions, animations, scroll reveals, and spring physics for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.1.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-motion" aria-haspopup="dialog" aria-controls="eco-package-motion-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-navigation"
-            aria-haspopup="dialog" aria-controls="eco-package-navigation-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🧭</span>
         <h3>@kinetic/navigation</h3>
@@ -370,14 +368,12 @@
       <p>Advanced navigation components including menus, mega menus, and breadcrumbs for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-navigation" aria-haspopup="dialog" aria-controls="eco-package-navigation-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-overlay"
-            aria-haspopup="dialog" aria-controls="eco-package-overlay-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🪟</span>
         <h3>@kinetic/overlay</h3>
@@ -385,14 +381,12 @@
       <p>Overlays including dialogs, popovers, drawers, and tooltips for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-overlay" aria-haspopup="dialog" aria-controls="eco-package-overlay-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-states"
-            aria-haspopup="dialog" aria-controls="eco-package-states-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🔘</span>
         <h3>@kinetic/states</h3>
@@ -400,14 +394,12 @@
       <p>Standardized component state system (loading, disabled, selected, invalid, focused, interactive) for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-states" aria-haspopup="dialog" aria-controls="eco-package-states-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-themes"
-            aria-haspopup="dialog" aria-controls="eco-package-themes-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🎨</span>
         <h3>@kinetic/themes</h3>
@@ -415,14 +407,12 @@
       <p>Theme presets, custom design tokens, dark/light/auto modes, brand customization, and runtime theme switching for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-themes" aria-haspopup="dialog" aria-controls="eco-package-themes-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-tokens-generator"
-            aria-haspopup="dialog" aria-controls="eco-package-tokens-generator-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">◇</span>
         <h3>@kinetic/tokens-generator</h3>
@@ -430,14 +420,12 @@
       <p>Design Token Generator for Kinetic CSS — automatically derives coordinated colors, typography, spacing, radii, and shadows from base config values</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.2.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-tokens-generator" aria-haspopup="dialog" aria-controls="eco-package-tokens-generator-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-package-ts"
-            aria-haspopup="dialog" aria-controls="eco-package-ts-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🔷</span>
         <h3>@cybercoretech/ts</h3>
@@ -445,9 +433,9 @@
       <p>TypeScript declarations for Kinetic CSS runtime controllers</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.4.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-package-ts" aria-haspopup="dialog" aria-controls="eco-package-ts-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
     </div>
   </div>
@@ -460,9 +448,7 @@
     </header>
     <div class="features eco-grid eco-tools-grid">
       
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-tool-cli"
-            aria-haspopup="dialog" aria-controls="eco-tool-cli-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">⌨️</span>
         <h3>@kinetic/cli</h3>
@@ -470,14 +456,12 @@
       <p>Command line interface for scaffolding and inspecting Kinetic CSS projects</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.3.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-tool-cli" aria-haspopup="dialog" aria-controls="eco-tool-cli-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-tool-studio"
-            aria-haspopup="dialog" aria-controls="eco-tool-studio-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🎛️</span>
         <h3>@kinetic/studio</h3>
@@ -485,9 +469,9 @@
       <p>Visual theme builder and component studio for Kinetic CSS</p>
       <div class="card-foot">
         <span class="status"><span class="eco-version">v0.3.0</span></span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-tool-studio" aria-haspopup="dialog" aria-controls="eco-tool-studio-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
     </div>
   </div>
@@ -503,10 +487,7 @@
     </header>
     <div class="features eco-grid">
       
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-integration-html-css"
-            aria-haspopup="dialog"
-            aria-controls="eco-integration-html-css-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🧱</span>
         <h3>HTML + CSS</h3>
@@ -514,15 +495,12 @@
       <p>Use Kinetic directly with semantic HTML and modern CSS.</p>
       <div class="card-foot">
         <span class="status">NATIVE FOUNDATION</span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-integration-html-css" aria-haspopup="dialog" aria-controls="eco-integration-html-css-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-integration-javascript"
-            aria-haspopup="dialog"
-            aria-controls="eco-integration-javascript-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🟨</span>
         <h3>JavaScript</h3>
@@ -530,15 +508,12 @@
       <p>Add optional runtime behavior when your project needs it.</p>
       <div class="card-foot">
         <span class="status">LANGUAGE COMPATIBILITY</span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-integration-javascript" aria-haspopup="dialog" aria-controls="eco-integration-javascript-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-integration-typescript"
-            aria-haspopup="dialog"
-            aria-controls="eco-integration-typescript-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🔷</span>
         <h3>TypeScript</h3>
@@ -546,15 +521,12 @@
       <p>Type declarations for Kinetic runtime controllers.</p>
       <div class="card-foot">
         <span class="status">LANGUAGE COMPATIBILITY</span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-integration-typescript" aria-haspopup="dialog" aria-controls="eco-integration-typescript-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-integration-react"
-            aria-haspopup="dialog"
-            aria-controls="eco-integration-react-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">⚛️</span>
         <h3>React</h3>
@@ -562,15 +534,12 @@
       <p>Use Kinetic styles in React components.</p>
       <div class="card-foot">
         <span class="status">FRAMEWORK COMPATIBILITY</span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-integration-react" aria-haspopup="dialog" aria-controls="eco-integration-react-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-integration-vue"
-            aria-haspopup="dialog"
-            aria-controls="eco-integration-vue-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">💚</span>
         <h3>Vue</h3>
@@ -578,15 +547,12 @@
       <p>Use Kinetic styles in Vue templates.</p>
       <div class="card-foot">
         <span class="status">FRAMEWORK COMPATIBILITY</span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-integration-vue" aria-haspopup="dialog" aria-controls="eco-integration-vue-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
 
-    <button class="card eco-card" type="button"
-            data-eco-open="eco-integration-svelte"
-            aria-haspopup="dialog"
-            aria-controls="eco-integration-svelte-dialog">
+    <div class="card eco-card">
       <div class="card-top">
         <span class="glyph" aria-hidden="true">🔥</span>
         <h3>Svelte</h3>
@@ -594,9 +560,9 @@
       <p>Use Kinetic styles in Svelte components.</p>
       <div class="card-foot">
         <span class="status">FRAMEWORK COMPATIBILITY</span>
-        <span class="open">details →</span>
+        <button type="button" class="card-details-btn" data-eco-open="eco-integration-svelte" aria-haspopup="dialog" aria-controls="eco-integration-svelte-dialog">details →</button>
       </div>
-    </button>
+    </div>
     
     </div>
   </div>
@@ -1467,12 +1433,30 @@
     </dialog>
   </section>
 
+    <section class="section" id="showcase" aria-labelledby="showcase-h">
+      <header class="section-head">
+        <p class="kicker">// 06 · kinetic showcase</p>
+        <h2 id="showcase-h">Interactive ecosystem preview.</h2>
+        <p>Explore core packages, themes, and runtime modules using the circular dial selector below.</p>
+      </header>
+      <div class="showcase-wrapper">
+        <div class="circular-dial-container" id="showcase-dial" aria-label="Package selector dial"></div>
+        <div class="showcase-display" id="showcase-display" aria-live="polite"></div>
+      </div>
+    </section>
 
-
-
-
-
-
+    <dialog class="eco-dialog" id="search-modal" aria-label="Global Search">
+      <div class="eco-dialog-content" style="max-width: 600px;">
+        <div class="eco-dialog-heading">
+          <span class="glyph" aria-hidden="true">🔍</span>
+          <button type="button" class="eco-close" data-eco-close aria-label="Close search">×</button>
+        </div>
+        <h3>Global Ecosystem Search</h3>
+        <p class="eco-dialog-kicker">SEARCH ACROSS PACKAGES, PRINCIPLES, THEMES & DOCS</p>
+        <input type="text" id="global-search-input" class="k-input" placeholder="Type to search packages, features, themes..." autofocus style="margin: 12px 0; font-family: var(--mono);">
+        <div id="global-search-results" style="max-height: 350px; overflow-y: auto; display: grid; gap: 8px; margin-top: 10px;"></div>
+      </div>
+    </dialog>
 
   </main>
 
