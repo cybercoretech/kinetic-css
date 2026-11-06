@@ -24,7 +24,17 @@
   <link rel="stylesheet" href="../css/kinetic.css">
   <link rel="stylesheet" href="../css/kinetic-theme.css">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="theme-chooser/cybercore-theme-chooser.css">
+  <link rel="stylesheet" href="https://cybercoretech.github.io/kit/chooser.css">
+  <script>window.SITE = Object.assign(window.SITE || {}, {"defaultTheme": "cyberpunk-chrome", "themeVars": {"white": ["--white", "--fg"], "acid_green": ["--acid", "--green"]}});</script>
+  <script type="module" src="https://cybercoretech.github.io/kit/chooser.js"></script>
+  <script>
+    /* Derived shades follow the universal chooser's palette. */
+    document.addEventListener('cc:theme', function (e) {
+      var p = e.detail && e.detail.palette, r = document.documentElement;
+      if (!p) { ['--panel-2', '--line-hi', '--dim'].forEach(function (v) { r.style.removeProperty(v); }); return; }
+      r.style.setProperty('--panel-2', '#' + p.panel); r.style.setProperty('--line-hi', '#' + p.line); r.style.setProperty('--dim', '#' + p.muted);
+    });
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -48,14 +58,7 @@
     </nav>
     <div class="bar-right">
       <button class="bar-search-btn" type="button"><span style="width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 8px var(--acid);"></span> SEARCH <kbd>⌘K</kbd></button>
-      
-      <div class="theme-select cc-theme-chooser-host" class="cc-theme-chooser-host">
-    <div data-cc-theme-chooser></div>
-
-      
-      
-  
-  </div>
+      <cybercore-theme-chooser adopt><button class="theme-select" type="button">Cyberpunk Chrome</button></cybercore-theme-chooser>
       <a class="bar-gh" href="https://github.com/cybercoretech/kinetic-css" target="_blank" rel="noopener">GitHub ↗</a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -151,25 +154,39 @@
       </dialog>
     </section>
 
-
-
-        <section class="section" id="themes" aria-labelledby="themes-h">
+    <section class="section" id="themes" aria-labelledby="themes-h">
       <header class="section-head">
         <p class="kicker">// 02 · cybercore themes</p>
         <h2 id="themes-h">Tune it to your signal.</h2>
-        <p>Browse <b data-source-theme-count>600</b> source palettes across
-        <b>50</b> families, plus <b data-mashup-count>12</b> signature mashups.
-        That's <b data-theme-count>612</b> selectable themes.</p>
+        <p>Kinetic CSS reads the canonical Cybercore theme files: <b id="theme-total">301</b> palettes in <b id="family-total">8</b> families. Browse them like a project tree; the preview shows each theme's real colours.</p>
       </header>
+      <div class="theme-explorer">
+        <div class="tree" id="theme-tree" role="tree" aria-label="Themes by family"></div>
+        <div class="preview" id="theme-preview" aria-live="polite"></div>
+      </div>
+    </section>
 
-  
+    <section class="section" id="install" aria-labelledby="install-h">
+      <header class="section-head">
+        <p class="kicker">// 03 · install</p>
+        <h2 id="install-h">Get started in 30 seconds.</h2>
+        <p>Three ways to add Kinetic CSS to your project. Choose what works for you.</p>
+      </header>
+      <div class="code">
+        <div class="code-bar"><span>npm</span><button class="btn btn-ghost btn-sm" type="button" onclick="navigator.clipboard.writeText('npm install kinetic-css')">copy</button></div>
+        <pre><span class="ln">1</span>npm install kinetic-css</pre>
+      </div>
+      <div class="code" style="margin-top: 12px;">
+        <div class="code-bar"><span>cdn</span><button class="btn btn-ghost btn-sm" type="button" onclick="navigator.clipboard.writeText('&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css&quot;&gt;')">copy</button></div>
+        <pre><span class="ln">1</span>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kinetic-css/css/kinetic.css"&gt;</pre>
+      </div>
+    </section>
 
-</section>
 
-    <!-- KINETIC ECOSYSTEM SECTION -->
+<!-- KINETIC ECOSYSTEM SECTION -->
 <section class="section" id="ecosystem" aria-labelledby="ecosystem-heading">
   <header class="section-head">
-    <p class="kicker">// 03 · ecosystem</p>
+    <p class="kicker">// 04 · ecosystem</p>
     <h2 id="ecosystem-heading">The Kinetic ecosystem.</h2>
     <p>
       Explore the packages, developer tools, frameworks, and languages
@@ -179,7 +196,7 @@
 
   <div class="eco-group">
     <header class="section-head eco-group-head">
-      <p class="kicker">// 03.1 · packages</p>
+      <p class="kicker">// 04.1 · packages</p>
       <h3>Nineteen published packages.</h3>
       <p>Each published package has its own role. Open a card to inspect its package metadata.</p>
     </header>
@@ -434,7 +451,7 @@
 
   <div class="eco-group">
     <header class="section-head eco-group-head">
-      <p class="kicker">// 03.2 · tools</p>
+      <p class="kicker">// 04.2 · tools</p>
       <h3>Build, inspect, create.</h3>
       <p>The standalone developer tools that make working with Kinetic easier.</p>
     </header>
@@ -470,7 +487,7 @@
 
   <div class="eco-group">
     <header class="section-head eco-group-head">
-      <p class="kicker">// 03.3 · integrations</p>
+      <p class="kicker">// 04.3 · integrations</p>
       <h3>Fits the stack you already use.</h3>
       <p>
         Kinetic is framework-agnostic. These are compatibility paths,
@@ -1370,7 +1387,7 @@
 
   <section class="section" id="under-development" aria-labelledby="under-development-heading">
     <header class="section-head">
-      <p class="kicker">// 04 · under development</p>
+      <p class="kicker">// 05 · under development</p>
       <h2 id="under-development-heading">In progress.</h2>
       <p>Work in the Kinetic ecosystem that is taking shape but is not yet a published package.</p>
     </header>
@@ -1427,7 +1444,7 @@
 
     <section class="section" id="showcase" aria-labelledby="showcase-h">
       <header class="section-head">
-        <p class="kicker">// 05 · kinetic showcase</p>
+        <p class="kicker">// 06 · kinetic showcase</p>
         <h2 id="showcase-h">Interactive ecosystem preview.</h2>
         <p>Explore core packages, themes, and runtime modules using the circular dial selector below.</p>
       </header>
@@ -1459,110 +1476,6 @@
   </footer>
 
   <script type="module" src="https://cybercoretech.github.io/kit/contact.js"></script>
-  <script>
-  window.SITE = Object.assign({}, window.SITE || {}, {
-    dataRoot: './theme-chooser/data',
-    defaultTheme: 'neon-night',
-    mashups: [
-    {
-        "id": "cc-chrome-horizon",
-        "label": "CHROME HORIZON",
-        "base": "cyberdyne-steel",
-        "accent": "synthwave-outrun"
-    },
-    {
-        "id": "cc-skynet-plasma",
-        "label": "SKYNET PLASMA",
-        "base": "cyberdyne-skynet",
-        "accent": "neosynth-plasma"
-    },
-    {
-        "id": "cc-midnight-mainframe",
-        "label": "MIDNIGHT MAINFRAME",
-        "base": "synthwave-sunset",
-        "accent": "cyberpunk-neon"
-    },
-    {
-        "id": "cc-judgment-grid",
-        "label": "JUDGMENT GRID",
-        "base": "cyberdyne-judgment",
-        "accent": "neosynth-laser-grid"
-    },
-    {
-        "id": "cc-alien-aurora",
-        "label": "ALIEN AURORA",
-        "base": "alien-arc",
-        "accent": "cyberdark-aurora"
-    },
-    {
-        "id": "cc-neon-forge",
-        "label": "NEON FORGE",
-        "base": "cybercore-neon-forge",
-        "accent": "cyberpunk-neon"
-    },
-    {
-        "id": "cc-ultraviolet-outrun",
-        "label": "ULTRAVIOLET OUTRUN",
-        "base": "cyberdark-ultraviolet",
-        "accent": "synthwave-outrun"
-    },
-    {
-        "id": "cc-ghost-plasma",
-        "label": "GHOST IN THE PLASMA",
-        "base": "alien-ghost",
-        "accent": "neosynth-plasma"
-    },
-    {
-        "id": "cc-steel-punk",
-        "label": "STEEL PUNK",
-        "base": "cyberdyne-steel",
-        "accent": "cyberpunk-neon"
-    },
-    {
-        "id": "cc-sunset-deep-space",
-        "label": "SUNSET DEEP SPACE",
-        "base": "synthwave-sunset",
-        "accent": "cyberdark-deep-space"
-    },
-    {
-        "id": "cc-skynet-vector",
-        "label": "SKYNET VECTOR",
-        "base": "cyberdyne-skynet",
-        "accent": "alien-vector"
-    },
-    {
-        "id": "cc-aurora-laser-grid",
-        "label": "AURORA LASER GRID",
-        "base": "cyberdark-aurora",
-        "accent": "neosynth-laser-grid"
-    }
-]
-  });
-</script>
-<!-- CYBERCORE_SITE_CONFIG_START -->
-<script>
-window.SITE = Object.assign({}, window.SITE || {}, {
-  dataRoot: './theme-chooser/data',
-  defaultTheme: 'neon-night',
-  mashups: [
-  { id: 'cc-chrome-horizon', label: 'CHROME HORIZON', base: 'cyberdyne-steel', accent: 'synthwave-outrun' },
-  { id: 'cc-skynet-plasma', label: 'SKYNET PLASMA', base: 'cyberdyne-skynet', accent: 'neosynth-plasma' },
-  { id: 'cc-midnight-mainframe', label: 'MIDNIGHT MAINFRAME', base: 'synthwave-sunset', accent: 'cyberpunk-neon' },
-  { id: 'cc-judgment-grid', label: 'JUDGMENT GRID', base: 'cyberdyne-judgment', accent: 'neosynth-laser-grid' },
-  { id: 'cc-alien-aurora', label: 'ALIEN AURORA', base: 'alien-arc', accent: 'cyberdark-aurora' },
-  { id: 'cc-neon-forge', label: 'NEON FORGE', base: 'cybercore-neon-forge', accent: 'cyberpunk-neon' },
-  { id: 'cc-ultraviolet-outrun', label: 'ULTRAVIOLET OUTRUN', base: 'cyberdark-ultraviolet', accent: 'synthwave-outrun' },
-  { id: 'cc-ghost-plasma', label: 'GHOST IN THE PLASMA', base: 'alien-ghost', accent: 'neosynth-plasma' },
-  { id: 'cc-steel-punk', label: 'STEEL PUNK', base: 'cyberdyne-steel', accent: 'cyberpunk-neon' },
-  { id: 'cc-sunset-deep-space', label: 'SUNSET DEEP SPACE', base: 'synthwave-sunset', accent: 'cyberdark-deep-space' },
-  { id: 'cc-skynet-vector', label: 'SKYNET VECTOR', base: 'cyberdyne-skynet', accent: 'alien-vector' },
-  { id: 'cc-aurora-laser-grid', label: 'AURORA LASER GRID', base: 'cyberdark-aurora', accent: 'neosynth-laser-grid' }
-]
-});
-</script>
-<!-- CYBERCORE_SITE_CONFIG_END -->
-
-<script src="theme-chooser/cybercore-theme-chooser.js"></script>
-<script type="module" src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

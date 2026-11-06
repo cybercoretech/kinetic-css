@@ -45,56 +45,175 @@
     drawer.addEventListener('click', (e) => { if (e.target.closest('a[href^="#"]')) setDrawer(false); });
     addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('open')) setDrawer(false); });
 
-    // Cybercore shared theme chooser -> Kinetic CSS variables.
-    document.addEventListener('cc:theme', (event) => {
-      const palette = event.detail?.palette;
-      if (!palette || typeof palette !== 'object') return;
+    // Theme explorer
+    const FAMILY_LABEL = { cyberpunk: 'cyberpunk', cyberdyne: 'cyberdyne', synthwave: 'synthwave', neosynth: 'neosynth', dystopian: 'dystopian', default: 'classics', 'omarchy-live': 'omarchy-live' };
+    const FAMILY_ORDER = ['cyberpunk', 'cyberdyne', 'synthwave', 'neosynth', 'dystopian', 'omarchy-live', 'default'];
+    let themes = [], selectedTheme = 'cyberpunk-chrome';
+    const tree = $('#theme-tree'), preview = $('#theme-preview');
 
+    async function loadThemes() {
+      const paths = [
+        './themes.json',
+        '/kinetic-css/themes.json',
+        '../themes.json',
+        '/themes.json',
+        'themes.json',
+        new URL('../themes.json', import.meta.url).href
+      ];
+      let res;
+      for (const p of paths) {
+        try {
+          const r = await fetch(p);
+          if (r.ok) {
+            res = r;
+            break;
+          }
+        } catch {}
+      }
+      if (!res) throw new Error('Could not fetch themes.json');
+      try {
+        themes = await res.json();
+        $('#theme-total').textContent = themes.length;
+        $('#family-total').textContent = FAMILY_ORDER.length;
+        
+      renderTree();
+        selectTheme(selectedTheme, false, false);
+      } catch (e) {
+        console.error('Failed to load themes:', e);
+      }
+    }
+
+function renderTree() {
+      const byFamily = {};
+
+      themes.forEach(t => {
+        const family = t.family || 'uncategorized';
+        if (!byFamily[family]) byFamily[family] = [];
+        byFamily[family].push(t);
+      });
+
+      tree.innerHTML = '';
+
+      // Keep established category order, then include any new families.
+      const families = [
+        ...FAMILY_ORDER.filter(family => byFamily[family]?.length),
+        ...Object.keys(byFamily)
+          .filter(family => !FAMILY_ORDER.includes(family))
+          .sort((a, b) => a.localeCompare(b))
+      ];
+
+      families.forEach(family => {
+        const list = byFamily[family].slice().sort(
+          (a, b) => a.name.localeCompare(b.name)
+        );
+
+        const rawLabel = FAMILY_LABEL[family] || family;
+        const label = String(rawLabel)
+          .replace(/[-_]+/g, ' ')
+          .replace(/^./, char => char.toUpperCase());
+
+        const folder = h('div', { class: 'folder' },
+          h('button', {
+            type: 'button',
+            'aria-expanded': 'true',
+            'aria-label': `${label}, ${list.length} themes`,
+            onclick: e => toggleFolder(e.currentTarget)
+          },
+            h('span', { class: 'chev' }, '▶'),
+            h('span', { class: 'fico' }, '◆'),
+            h('span', {}, label),
+            h('small', {}, String(list.length))
+          ),
+          h('ul', {},
+            list.map(t => h('li', {},
+              h('button', {
+                class: 'leaf',
+                type: 'button',
+                'data-id': t.id,
+                onclick: () => selectTheme(t.id, true)
+              },
+                h('span', {
+                  class: 'sw',
+                  style: `background: linear-gradient(135deg, ${t.accents.primary}, ${t.accents.secondary})`
+                }),
+                h('span', {}, t.name),
+                h('span', { class: 'ext' }, '.json')
+              )
+            ))
+          )
+        );
+
+        tree.appendChild(folder);
+      });
+    }
+
+    function toggleFolder(btn, open) {
+      const list = btn.nextElementSibling;
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(open !== undefined ? open : !isExpanded));
+      list.hidden = btn.getAttribute('aria-expanded') !== 'true';
+    }
+
+    function selectTheme(id, focus = false, applyToPage = true) {
+      selectedTheme = id;
+      const t = themes.find((x) => x.id === id);
+      if (!t) return;
+      $$('.leaf', tree).forEach((l) => l.setAttribute('aria-selected', String(l.dataset.id === id)));
+      const leaf = $(`.leaf[data-id="${CSS.escape(id)}"]`, tree);
+      const list = leaf?.closest('ul');
+      if (list?.hidden) toggleFolder(list.previousElementSibling, true);
+      if (focus) leaf?.focus();
+      renderPreview(t);
+      
+      // Apply to the page through the universal Cybercore chooser, so the
+      // header menu and every Cybercore site stay in step.
+      if (!applyToPage) return;
+      if (window.CybercoreThemes?.known(t.id)) window.CybercoreThemes.apply(t.id);
+      else applyThemeToPage(t);
+    }
+    
+    function applyThemeToPage(theme) {
+      if (!theme) return;
       const root = document.documentElement;
-      const pick = (...values) => values.find(
-        value => typeof value === 'string' && value.trim()
+      root.style.setProperty('--bg', theme.surfaces.window);
+      root.style.setProperty('--panel', theme.surfaces.shell);
+      root.style.setProperty('--panel-2', theme.surfaces.raised);
+      root.style.setProperty('--line', theme.surfaces.border);
+      root.style.setProperty('--line-hi', theme.surfaces.border);
+      root.style.setProperty('--fg', theme.text.primary);
+      root.style.setProperty('--white', theme.text.primary);
+      root.style.setProperty('--muted', theme.text.muted);
+      root.style.setProperty('--dim', theme.text.muted);
+      root.style.setProperty('--cyan', theme.accents.primary);
+      root.style.setProperty('--pink', theme.accents.secondary);
+      root.style.setProperty('--acid', theme.accents.success);
+      root.style.setProperty('--orange', theme.accents.warning);
+      root.style.setProperty('--purple', theme.accents.secondary);
+      root.style.setProperty('--green', theme.accents.success);
+    }
+
+    function renderPreview(t) {
+      const s = t.surfaces, tx = t.text, sx = t.syntax;
+      const color = (role) => role === 'punct' ? tx.primary : (sx[role] || tx.primary);
+      preview.style.background = s.editor;
+      preview.replaceChildren(
+        h('div', { class: 'pv-title', style: `background:${s.shell};color:${tx.muted};border-color:${s.border}` },
+          h('span', {}, h('b', { style: `color:${tx.primary}` }, t.name), `  ·  ${FAMILY_LABEL[t.family] || t.family} · ${t.appearance}`), h('span', {}, `${t.id}.json`)),
+        h('div', { class: 'pv-tabs', style: `background:${s.shell};border-color:${s.border}` },
+          h('span', { class: 'pv-tab', style: `background:${s.editor};color:${tx.primary};border-color:${s.border};box-shadow:inset 0 2px 0 ${t.accents.primary}` }, 'kinetic.css'),
+          h('span', { class: 'pv-tab', style: `color:${tx.muted};border-color:transparent` }, 'kinetic-theme.css')),
+        h('pre', { class: 'pv-code', style: `color:${tx.primary}` }, [
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '1'), h('span', {}, '<span style="color:', sx.keyword, '">.k-stack</span> { ')),
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '2'), h('span', {}, '  display: ')),
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '3'), h('span', {}, '    grid-template-rows: ')),
+          h('div', { class: 'row cur' }, h('span', { class: 'num' }, '4'), h('span', {}, '      ')),
+          h('div', { class: 'row' }, h('span', { class: 'num' }, '5'), h('span', {}, '}')),
+        ]),
+        h('div', { class: 'pv-meta' },
+          [['primary', t.accents.primary], ['secondary', t.accents.secondary], ['success', t.accents.success]]
+            .map(([l, c]) => h('span', { class: 'chip', title: c }, h('i', { style: `background:${c}` }), `${l} ${c.toLowerCase()}`)))
       );
-      const color = value => {
-        const raw = value.trim();
-        if (raw.startsWith('#')) return raw;
-        return /^[\da-f]{3,8}$/i.test(raw) ? `#${raw}` : raw;
-      };
-      const set = (name, ...values) => {
-        const value = pick(...values);
-        if (value) root.style.setProperty(name, color(value));
-      };
-
-      set('--bg', palette.bg);
-      set('--panel', palette.panel);
-      set('--panel-2', palette.surface, palette.panel);
-      set('--line', palette.border);
-      set('--line-hi', palette.border);
-      set('--fg', palette.text_primary, palette.white);
-      set('--white', palette.white, palette.text_primary);
-      set('--muted', palette.muted);
-      set('--dim', palette.muted);
-      set('--cyan', palette.cyan, palette.accent_alt, palette.accent_hot);
-      set('--pink', palette.hot_pink, palette.accent_hot);
-      set('--acid', palette.acid_green, palette.success);
-      set('--orange', palette.orange, palette.warning);
-      set('--purple', palette.purple, palette.accent_alt);
-      set('--green', palette.success, palette.acid_green);
-
-      if (event.detail?.id) root.dataset.cybercoreTheme = event.detail.id;
-    });
-
-    document.addEventListener('cc:theme-chooser-ready', (event) => {
-      const detail = event.detail || {};
-      const total = document.querySelector('#theme-total');
-      const families = document.querySelector('#family-total');
-
-      if (total && Number.isFinite(Number(detail.totalCount))) {
-        total.textContent = String(detail.totalCount);
-      }
-      if (families && Number.isFinite(Number(detail.familyCount))) {
-        families.textContent = String(detail.familyCount);
-      }
-    });
+    }
 
     // KINETIC PRINCIPLES POPUPS
     const principleDialog = $('#kinetic-principle-dialog');
@@ -191,6 +310,7 @@
       if (event.target === principleDialog) principleDialog.close();
     });
 
+    loadThemes();
 
 // KINETIC ECOSYSTEM INTERACTIONS
 (() => {
