@@ -35,6 +35,49 @@
       r.style.setProperty('--panel-2', '#' + p.panel); r.style.setProperty('--line-hi', '#' + p.line); r.style.setProperty('--dim', '#' + p.muted);
     });
   </script>
+  <style id="cc-mobile-first">
+/* Mobile floor (phones + tablets): readable text and finger-sized targets.
+   Generated per range from what renders under 11px / 24px; desktop untouched. */
+@media (max-width: 600px) {
+  button > small { font-size: 11px !important; }
+}
+@media (min-width: 601px) and (max-width: 860px) {
+  button > small { font-size: 11px !important; }
+}
+@media (min-width: 861px) and (max-width: 1024px) {
+  button > small { font-size: 11px !important; }
+}
+@media (pointer: coarse) {
+  nav.bar-nav > a { min-height: 24px; min-width: 24px; }
+}
+/* Mobile floor (phones + tablets): readable text and finger-sized targets.
+   Generated per range from what renders under 11px / 24px; desktop untouched. */
+@media (max-width: 600px) {
+  kbd { font-size: 11px !important; }
+}
+@media (min-width: 601px) and (max-width: 860px) {
+  kbd { font-size: 11px !important; }
+}
+@media (min-width: 861px) and (max-width: 1024px) {
+  kbd { font-size: 11px !important; }
+}
+/* Layout fixes: phones and tablets only; laptops and desktops untouched. */
+@media (max-width: 1024px) {
+  /* Mobile first: nothing may make the page wider than the screen.
+     Grid/flex columns may shrink below their widest line; code scrolls in place. */
+  pre { max-width: 100%; overflow-x: auto; }
+  img, video { max-width: 100%; height: auto; }
+  #drawer > * { min-width: 0; }
+  div.drawer-head > * { min-width: 0; }
+  a > * { min-width: 0; }
+  div.row > * { min-width: 0; }
+  /* Long paths and URLs in inline code may break anywhere instead of widening the page. */
+  :not(pre) > code { overflow-wrap: anywhere; }
+  /* Touch: the showcase slider is a finger-sized target; its scale labels are readable. */
+  #showcase-slider { min-height: 24px; }
+  [style*="font-size: 10.5px"] { font-size: 11px !important; }
+}
+  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
