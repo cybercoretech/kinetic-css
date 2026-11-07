@@ -528,3 +528,8 @@
     .cyber-toast.hiding { animation: cyber-toast-out .2s ease-in forwards; }
     @keyframes cyber-toast-out { to { opacity: 0; transform: translateY(0.5rem) scale(0.95); } }
     .cyber-toast-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 10px var(--acid); }
+
+/* Phones: the header row must fit. GitHub is in the drawer; the shortcut
+   hint is for keyboards; the path label is decoration; the theme chooser
+   shows its swatch. */
+@media (max-width: 600px) { .bar-gh, .bar-search-btn kbd, .bar-path { display: none; } .bar-title { white-space: nowrap; } .bar { gap: 10px; } .bar-right { gap: 6px; } }
